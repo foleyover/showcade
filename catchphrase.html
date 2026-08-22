@@ -59,11 +59,11 @@
         .score-value:hover { background: #333; }
         .score-hint { font-size: 0.6em; color: #bdc3c7; text-align: center; font-weight: normal; margin-top: -3px; }
 
-        /* The Main Game Board (Catchphrase Grid) - Auto-sized with Safety Clamping */
+        /* The Main Game Board (Catchphrase Grid) */
         #game-board {
-            width: min(92vw, 800px);
-            max-height: 70vh;
-            min-height: 300px;
+            width: min(85vw, 800px);
+            max-height: 68vh;
+            min-height: 320px;
             background-color: #000;
             background-size: cover;
             background-position: center;
@@ -78,20 +78,22 @@
         }
 
         .grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+            display: grid;
             width: 100%; height: 100%; position: absolute; top: 0; left: 0; gap: 0px; background: transparent; padding: 0px; box-sizing: border-box; border-radius: 6px;
         }
 
         .tile {
             background: linear-gradient(135deg, #1e3799, #0c2461); background-size: cover; background-position: center;
-            border: 1px solid rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; user-select: none;
+            /* Theme-appropriate visible borders to clearly distinguish tiles */
+            border: 2px solid #D9B036; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; user-select: none;
             transition: opacity 0.6s ease-in-out, filter 0.2s, box-shadow 0.2s; box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            box-sizing: border-box;
         }
-        /* Inset glow ensures hover outlines never bleed past tile borders into gaps */
-        .tile:hover { filter: brightness(1.2); z-index: 2; box-shadow: inset 0 0 0 3px #D9B036, inset 0 0 15px rgba(0,0,0,0.5); }
+        .tile:hover { filter: brightness(1.2); z-index: 2; box-shadow: inset 0 0 0 3px #FFF, inset 0 0 15px rgba(0,0,0,0.5); }
         .tile.hidden { opacity: 0; pointer-events: none; }
 
-        .tile-number { color: #D9B036; font-size: clamp(2.2em, 6vw, 4.5em); font-family: 'Arial Black', Impact, sans-serif; text-shadow: 3px 3px 0 #000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+        .tile-number { color: #D9B036; font-size: clamp(1.5em, 4vw, 3em); font-family: 'Arial Black', Impact, sans-serif; text-shadow: 3px 3px 0 #000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 
         /* --- ADMIN SECTIONS --- */
         .admin-section { background: #2c3e50; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #34495e; box-sizing: border-box; }
@@ -298,7 +300,7 @@
             </div>
         </div>
 
-        <!-- 3-Column Settings Block -->
+        <!-- 3-Column Settings Block with Custom Tile Amount Dropdown -->
         <div class="admin-section" style="border-left: 5px solid #3498db;">
             <h3 style="color: #3498db;">⚙️ Game Rules & Settings</h3>
             <div style="display: flex; flex-wrap: wrap; gap: 30px;">
@@ -307,16 +309,21 @@
                 <div style="flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 15px;">
                     <h4 style="color: #bdc3c7; margin: 0 0 5px 0; border-bottom: 1px solid #444; padding-bottom: 8px;">Config & Values</h4>
                     <div>
+                        <label style="color: #FFCC00; font-weight: bold; display: block; margin-bottom: 5px;">Tile Grid Size:</label>
+                        <select id="input-grid-size" style="width: 100%; padding: 10px; border-radius: 4px; background: #ecf0f1; color: #2c3e50; font-size: 1em; font-weight: bold;" onchange="changeGridSize()">
+                            <option value="2">2 x 2 (4 Tiles)</option>
+                            <option value="3" selected>3 x 3 (9 Tiles)</option>
+                            <option value="4">4 x 4 (16 Tiles)</option>
+                            <option value="5">5 x 5 (25 Tiles)</option>
+                        </select>
+                    </div>
+                    <div>
                         <label style="color: #FFCC00; font-weight: bold; display: block; margin-bottom: 5px;">Points per Tile Guess:</label>
                         <input type="number" id="input-tile-points" value="10" min="1" style="width: 100%; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; font-size: 1em; box-sizing: border-box;">
                     </div>
                     <div>
                         <label style="color: #FFCC00; font-weight: bold; display: block; margin-bottom: 5px;">Points for Guessing Board:</label>
                         <input type="number" id="input-board-points" value="50" min="1" style="width: 100%; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; font-size: 1em; box-sizing: border-box;">
-                    </div>
-                    <div id="timer-settings-container">
-                        <label style="color: #bdc3c7; font-size: 0.95em; display: block; margin-bottom: 5px;">Timer Duration (Seconds):</label>
-                        <input type="number" id="timer-duration" value="30" min="5" max="300" style="width: 100%; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; font-size: 1em; box-sizing: border-box;" onchange="saveAdminData()">
                     </div>
                 </div>
 
@@ -377,7 +384,7 @@
         <!-- Round Graphics & Layout Card -->
         <div class="admin-section" style="border-left: 5px solid #2ecc71;">
             <h3 style="color: #2ecc71;">🏆 Round Graphics & Board Format</h3>
-            <p style="color: #bdc3c7; font-size: 0.95em; margin-top: -15px; margin-bottom: 15px;">Upload a local image to hide beneath the tiles, or paste a video URL. Drag & Drop is supported!</p>
+            <p style="color: #bdc3c7; font-size: 0.95em; margin-top: -15px; margin-bottom: 15px;">Upload a local image or paste a URL below. The board shape will automatically conform to your image!</p>
             
             <div class="admin-category-block" style="margin-bottom: 15px;">
                 <div id="drop-box-bg" class="question-cell" style="margin-bottom: 15px;">
@@ -391,16 +398,16 @@
 
                 <div id="drop-box-global" class="question-cell">
                     <label style="font-weight: bold; color: #FFCC00; display:block; margin-bottom: 8px;">🧩 Global Tile Cover (Optional):</label>
-                    <p style="color: #8FA0A1; font-size: 0.85em; margin-top: 0;">Upload an image here to apply it to all 9 tiles on this puzzle instantly.</p>
+                    <p style="color: #8FA0A1; font-size: 0.85em; margin-top: 0;">Upload an image here to apply it to all tiles on this puzzle instantly.</p>
                     <input type="file" id="global-tile-upload" accept="image/*" style="color: white; font-size: 1em; cursor: pointer; width: 100%;">
                     <div id="global-tile-upload-status" style="margin-top: 6px; font-size: 0.85em; color: #f39c12; font-weight: bold;"></div>
                 </div>
             </div>
         </div>
         
-        <!-- Individual Tile Questions Section -->
+        <!-- Individual Tile Questions Section (Kept at a clean 3-column layout that expands vertically) -->
         <div class="admin-section" style="border-left: 5px solid #f39c12;">
-            <h3 style="color: #f39c12;">🧩 Round Tiles (9 Individual Questions)</h3>
+            <h3 style="color: #f39c12;">🧩 Round Tiles (<span id="tile-count-label">9</span> Individual Questions)</h3>
             <p style="color: #bdc3c7; font-size: 0.95em; margin-top: -15px; margin-bottom: 15px;">Click or drag & drop media into each cell to configure tile questions, custom audio clues, or pop-up images.</p>
             <div id="admin-questions-container" class="questions-grid"></div>
         </div>
@@ -519,10 +526,11 @@
 
         function createEmptyRound() {
             return {
+                gridSize: 3, // Default 3x3 (9 tiles)
                 bgImage: 'https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=600&h=600&auto=format&fit=crop',
                 mediaUrl: '',
                 globalTileCover: DEFAULT_BAKED_IN_TILE_COVER, 
-                aspectRatio: '1 / 1', // Defaults to 1:1 square
+                aspectRatio: '1 / 1', 
                 questions: Array(9).fill(""),
                 tileImages: Array(9).fill(null),    
                 modalImages: Array(9).fill(null),   
@@ -877,8 +885,26 @@
             updateScoreboard();
         }
 
+        function changeGridSize() {
+            const newSize = parseInt(document.getElementById('input-grid-size').value, 10);
+            const totalTiles = newSize * newSize;
+            const r = gameData.rounds[currentEditRound];
+            
+            r.gridSize = newSize;
+            r.questions = Array(totalTiles).fill("").map((_, i) => r.questions[i] || "");
+            r.tileImages = Array(totalTiles).fill(null).map((_, i) => r.tileImages[i] || null);
+            r.modalImages = Array(totalTiles).fill(null).map((_, i) => r.modalImages[i] || null);
+            r.tileAudio = Array(totalTiles).fill(null).map((_, i) => r.tileAudio[i] || null);
+            r.revealed = Array(totalTiles).fill(false).map((_, i) => r.revealed[i] || false);
+
+            renderAdminRound();
+        }
+
         function renderAdminRound() {
             const r = gameData.rounds[currentEditRound];
+            if (!r.gridSize) r.gridSize = 3;
+
+            document.getElementById('input-grid-size').value = r.gridSize;
             document.getElementById('admin-round-text').innerText = `${currentEditRound + 1} / ${gameData.rounds.length}`;
             
             document.getElementById('btn-admin-prev').disabled = (currentEditRound === 0);
@@ -898,10 +924,13 @@
             const globalDropBox = document.getElementById('drop-box-global');
             if(globalDropBox) attachDropListeners(globalDropBox, 'global-tile-upload', 'global-tile-upload-status');
 
+            const totalTiles = r.gridSize * r.gridSize;
+            document.getElementById('tile-count-label').innerText = totalTiles;
+
             const container = document.getElementById('admin-questions-container');
             container.innerHTML = '';
             
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < totalTiles; i++) {
                 const hasCustomImg = r.tileImages[i] !== null ? '<span>🖼️ Cover</span>' : '';
                 const hasModalImg = r.modalImages[i] !== null ? '<span>🖼️ Pop-up</span>' : '';
                 const hasCustomAudio = r.tileAudio[i] !== null ? '<span>🎵 Audio</span>' : '';
@@ -909,7 +938,7 @@
                 container.innerHTML += `
                     <div class="question-cell" id="tile-form-group-${i}">
                         <span class="q-label">Tile ${i + 1} Question</span>
-                        <input type="text" id="input-q-${i}" value="${r.questions[i].replace(/"/g, '&quot;')}" placeholder="Text question...">
+                        <input type="text" id="input-q-${i}" value="${(r.questions[i] || '').replace(/"/g, '&quot;')}" placeholder="Text question...">
                         
                         <div class="file-inputs">
                             <label>🖼️ Tile Cover: <input type="file" id="input-img-${i}" accept="image/*"></label>
@@ -924,7 +953,7 @@
                 `;
             }
 
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < totalTiles; i++) {
                 const group = document.getElementById(`tile-form-group-${i}`);
                 if (group) attachDropListeners(group, `input-modal-img-${i}`, `tile-upload-status-${i}`);
             }
@@ -945,6 +974,8 @@
             gameData.wrongPenalty = document.getElementById('wrong-penalty-enabled').checked;
 
             const r = gameData.rounds[currentEditRound];
+            r.gridSize = parseInt(document.getElementById('input-grid-size').value, 10) || 3;
+            const totalTiles = r.gridSize * r.gridSize;
             
             const bgInput = document.getElementById('bg-upload');
             if (bgInput.files && bgInput.files[0]) {
@@ -959,7 +990,7 @@
                 r.globalTileCover = await fileToBase64(globalTileInput.files[0]);
             }
 
-            // Automatically calculate exact aspect ratio from the background image source
+            // Automatically compute exact aspect ratio from background image source
             let checkSrc = r.mediaUrl && !r.mediaUrl.match(/(youtube|mp4|webm|ogg)/i) ? r.mediaUrl : r.bgImage;
             if (checkSrc) {
                 await new Promise((resolve) => {
@@ -975,7 +1006,7 @@
                 });
             }
 
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < totalTiles; i++) {
                 const qInput = document.getElementById(`input-q-${i}`);
                 if (qInput) r.questions[i] = qInput.value;
 
@@ -1055,17 +1086,22 @@
                         gameData.timer = importedData.timer || { enabled: true, duration: 30 };
                         gameData.sfx = importedData.sfx || { enabled: true, volume: 50 };
 
-                        gameData.rounds = importedData.rounds.map(r => ({
-                            ...r,
-                            mediaUrl: r.mediaUrl || '',
-                            globalTileCover: r.globalTileCover || DEFAULT_BAKED_IN_TILE_COVER,
-                            aspectRatio: r.aspectRatio || '1 / 1', 
-                            questions: [...(r.questions || []), ...Array(9).fill("")].slice(0, 9),
-                            tileImages: [...(r.tileImages || []), ...Array(9).fill(null)].slice(0, 9),
-                            modalImages: [...(r.modalImages || []), ...Array(9).fill(null)].slice(0, 9),
-                            tileAudio: [...(r.tileAudio || []), ...Array(9).fill(null)].slice(0, 9),
-                            revealed: [...(r.revealed || []), ...Array(9).fill(false)].slice(0, 9)
-                        }));
+                        gameData.rounds = importedData.rounds.map(r => {
+                            let gs = r.gridSize || 3;
+                            let totalT = gs * gs;
+                            return {
+                                ...r,
+                                gridSize: gs,
+                                mediaUrl: r.mediaUrl || '',
+                                globalTileCover: r.globalTileCover || DEFAULT_BAKED_IN_TILE_COVER,
+                                aspectRatio: r.aspectRatio || '1 / 1', 
+                                questions: [...(r.questions || []), ...Array(totalT).fill("")].slice(0, totalT),
+                                tileImages: [...(r.tileImages || []), ...Array(totalT).fill(null)].slice(0, totalT),
+                                modalImages: [...(r.modalImages || []), ...Array(totalT).fill(null)].slice(0, totalT),
+                                tileAudio: [...(r.tileAudio || []), ...Array(totalT).fill(null)].slice(0, totalT),
+                                revealed: [...(r.revealed || []), ...Array(totalT).fill(false)].slice(0, totalT)
+                            };
+                        });
 
                         currentEditRound = 0;
                         currentPlayRound = 0;
@@ -1180,14 +1216,18 @@
 
             board.style.aspectRatio = r.aspectRatio || '1 / 1';
 
+            let gs = r.gridSize || 3;
+            let totalTiles = gs * gs;
+            grid.style.gridTemplateColumns = `repeat(${gs}, 1fr)`;
+            grid.style.gridTemplateRows = `repeat(${gs}, 1fr)`;
+
             grid.style.zIndex = "1";
             grid.innerHTML = '';
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < totalTiles; i++) {
                 const tile = document.createElement('div');
                 tile.classList.add('tile');
                 tile.id = `tile-${i}`;
                 
-                // HIERARCHY: Individual > Custom Global > Baked-in default
                 if (r.tileImages[i]) {
                     tile.style.backgroundImage = `url('${r.tileImages[i]}')`;
                 } else if (r.globalTileCover) {
@@ -1200,7 +1240,7 @@
                     tile.classList.add('hidden');
                 }
 
-                const audioHint = r.tileAudio[i] ? '<div style="position: absolute; top: 5px; right: 10px; font-size: 1.5em; text-shadow: 2px 2px #000;">🎵</div>' : '';
+                const audioHint = r.tileAudio[i] ? '<div style="position: absolute; top: 5px; right: 10px; font-size: 1.2em; text-shadow: 2px 2px #000;">🎵</div>' : '';
 
                 tile.innerHTML = `${audioHint}<div class="tile-number">${i + 1}</div>`;
                 tile.onclick = () => openModal(i);
@@ -1221,7 +1261,8 @@
             if (confirm("Are you sure you want to restore and hide all tiles for this round? (Scores will not be reset)")) {
                 saveStateToHistory("Reset Tiles");
                 const r = gameData.rounds[currentPlayRound];
-                for (let i = 0; i < 9; i++) {
+                let totalTiles = (r.gridSize || 3) * (r.gridSize || 3);
+                for (let i = 0; i < totalTiles; i++) {
                     r.revealed[i] = false; 
                 }
                 renderGameBoard();
@@ -1534,7 +1575,8 @@
             closeGuessBoardModal();
             
             const r = gameData.rounds[currentPlayRound];
-            for (let i = 0; i < 9; i++) {
+            let totalTiles = (r.gridSize || 3) * (r.gridSize || 3);
+            for (let i = 0; i < totalTiles; i++) {
                 if(!r.revealed[i]) {
                     r.revealed[i] = true;
                     const tile = document.getElementById(`tile-${i}`);
