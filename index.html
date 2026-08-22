@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Party Game Show Arcade</title>
+    <title>ShowCade</title>
     <style>
         * { box-sizing: border-box; }
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: #080a0f;
             background-image: radial-gradient(#1a2234 1px, transparent 1px);
             background-size: 24px 24px;
@@ -26,13 +26,13 @@
             margin-bottom: 50px;
         }
         h1 {
-            font-family: 'Showcard Gothic', Impact, sans-serif;
             color: #FFCC00;
-            font-size: clamp(2.8em, 6vw, 4.8em);
+            font-size: clamp(2.8em, 6vw, 4.5em);
+            font-weight: 900;
             margin: 0 0 10px 0;
             text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 0 0 25px rgba(255, 204, 0, 0.4), 4px 4px #000;
+            text-shadow: 0 0 25px rgba(255, 204, 0, 0.4), 3px 3px #000;
         }
         p.subtitle {
             color: #8b949e;
@@ -95,6 +95,7 @@
         .game-title {
             margin: 0;
             font-size: 2.2em;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -126,7 +127,6 @@
             border-bottom: 3px solid #FFCC00;
         }
         .banner-jeopardy .game-title {
-            font-family: 'Showcard Gothic', Impact, sans-serif;
             color: #FFCC00;
         }
         .btn-jeopardy {
@@ -152,7 +152,6 @@
             border-bottom: 3px solid #2ecc71;
         }
         .banner-catchphrase .game-title {
-            font-family: 'Arial Black', Impact, sans-serif;
             color: #ffffff;
             letter-spacing: 1px;
         }
@@ -170,7 +169,7 @@
 <body>
 
     <div class="arcade-header">
-        <h1>🎮 Game Show Arcade</h1>
+        <h1>🎮 ShowCade</h1>
         <p class="subtitle">Select a game show to start playing, or create custom boards to host with friends!</p>
     </div>
 
