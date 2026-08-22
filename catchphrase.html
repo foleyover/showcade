@@ -244,10 +244,9 @@
         </div>
     </div>
 
-    <!-- ADMIN SCREEN (Overhauled to Match Jeopardy V51 Setup) -->
+    <!-- ADMIN SCREEN -->
     <div id="admin-screen">
         
-        <!-- ADMIN TOP TOOLBAR -->
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
             <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
             <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">🎮 Play Game</button>
@@ -361,6 +360,8 @@
             <button class="btn btn-info" id="btn-admin-prev" onclick="changeAdminRound(-1)">◀ Prev Round</button>
             <span style="font-size: 1.4em; font-weight: bold; color: #FFCC00;" class="retro-title">Editing Puzzle <span id="admin-round-text">1 / 1</span></span>
             <div style="display: flex; gap: 10px;">
+                <!-- NEW DELETE BUTTON -->
+                <button class="btn btn-danger" id="btn-admin-delete" onclick="deleteCurrentRound()">🗑️ Delete</button>
                 <button class="btn btn-info" id="btn-admin-next" onclick="changeAdminRound(1)">Next Round ▶</button>
                 <button class="btn btn-success" onclick="addNewRound()">+ Add New Round</button>
             </div>
@@ -516,25 +517,6 @@
         </div>
     </div>
 
-    <!-- CHANGELOG MODAL -->
-    <div id="changelog-modal" class="modal-overlay" style="z-index: 200;">
-        <div class="modal-content info-modal-content" style="max-width: 800px;">
-            <h2>📜 Version History</h2>
-            <div style="max-height: 60vh; overflow-y: auto; padding-right: 15px; color: #c9d1d9; font-size: 1.1em; line-height: 1.6;">
-                <h3 style="color: #58a6ff; margin-bottom: 5px;">Catchphrase v1.6</h3>
-                <ul style="margin-top: 0;">
-                    <li><strong>Unified Setup Interface:</strong> Restructured Setup UI to share identical aesthetics, responsive 3-column game rule settings, and layout styling with Jeopardy V51.</li>
-                    <li><strong>Mobile Board Scaling:</strong> Redesigned responsive grid constraints so the puzzle board fills phone and tablet screens seamlessly.</li>
-                    <li>Integrated ShowCade hub quick-launch buttons.</li>
-                    <li>Integrated automatic canvas client-side image compression & drag/drop support.</li>
-                </ul>
-            </div>
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 35px;" onclick="closeChangelog()">Close</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         function createEmptyRound() {
             return {
@@ -550,7 +532,7 @@
             };
         }
 
-        let gameData = {
+        var gameData = {
             hostName: "",
             tilePoints: 10,
             boardPoints: 50,
@@ -563,14 +545,14 @@
             rounds: [createEmptyRound()]
         };
 
-        let players = [];
-        let currentPlayRound = 0;
-        let currentEditRound = 0;
-        let activeTileIndex = null;
-        let questionTimerInterval = null;
+        var players = [];
+        var currentPlayRound = 0;
+        var currentEditRound = 0;
+        var activeTileIndex = null;
+        var questionTimerInterval = null;
         
-        let historyStack = [];
-        let debugLogVisible = true;
+        var historyStack = [];
+        var debugLogVisible = true;
 
         // --- DEBUG LOGGING ---
         function toggleDebugMode() {
@@ -604,7 +586,7 @@
         }
 
         // --- WEB AUDIO API (Synthesizer) ---
-        let audioCtx;
+        var audioCtx;
         function initAudio() {
             if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
@@ -736,8 +718,6 @@
         function closeRules() { document.getElementById('rules-modal').style.display = 'none'; }
         function openHowTo() { document.getElementById('how-to-modal').style.display = 'flex'; }
         function closeHowTo() { document.getElementById('how-to-modal').style.display = 'none'; }
-        function openChangelog() { document.getElementById('changelog-modal').style.display = 'flex'; }
-        function closeChangelog() { document.getElementById('changelog-modal').style.display = 'none'; }
 
         function toggleTimerSettings() {
             const isEnabled = document.getElementById('timer-enabled').checked;
@@ -1006,6 +986,24 @@
             logDebug("ADMIN", "Added new puzzle round");
         }
 
+        // DELETES CURRENT ROUND WITH SAFETY CATCH
+        async function deleteCurrentRound() {
+            if(gameData.rounds.length <= 1) {
+                alert("You must have at least one puzzle round in your game.");
+                return;
+            }
+            if(confirm("Are you sure you want to completely DELETE this puzzle? All images and questions on this round will be lost permanently.")) {
+                logDebug("ADMIN", `Deleted round ${currentEditRound + 1}`);
+                gameData.rounds.splice(currentEditRound, 1);
+                
+                // Adjust indices safely if we delete the end of the array
+                if(currentEditRound >= gameData.rounds.length) currentEditRound = gameData.rounds.length - 1;
+                if(currentPlayRound >= gameData.rounds.length) currentPlayRound = gameData.rounds.length - 1;
+                
+                renderAdminRound();
+            }
+        }
+
         async function exportGame() {
             await saveAdminData();
             const blob = new Blob([JSON.stringify(gameData)], { type: "application/json" });
@@ -1013,7 +1011,7 @@
             const a = document.createElement('a'); a.href = url;
             a.download = "catchphrase_custom_game.json";
             document.body.appendChild(a); a.click(); document.body.removeChild(a);
-            URL.revokeObjectURL(a.href);
+            URL.revokeObjectURL(url);
             logDebug("SYSTEM", "Exported JSON");
         }
 
@@ -1144,16 +1142,22 @@
             let board = document.getElementById('game-board');
             let grid = document.getElementById('grid');
 
-            let mediaHTML = generateMediaHTML(r.mediaUrl);
-            if(mediaHTML) {
+            // --- BUG FIX: Properly apply image URLs to the board background ---
+            let mediaUrlStr = r.mediaUrl ? r.mediaUrl.trim() : "";
+            let existingMedia = document.getElementById('bg-media-element');
+            if (existingMedia) existingMedia.remove();
+
+            let isVideo = mediaUrlStr.match(/(?:youtube\.com|youtu\.be|\.(?:mp4|webm|ogg))/i);
+
+            if (isVideo) {
+                // Render as video frame
                 board.style.backgroundImage = 'none';
-                let existingMedia = document.getElementById('bg-media-element');
-                if(existingMedia) existingMedia.remove();
-                board.insertAdjacentHTML('afterbegin', `<div id="bg-media-element" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;">${mediaHTML}</div>`);
+                let mediaHTML = generateMediaHTML(mediaUrlStr);
+                board.insertAdjacentHTML('afterbegin', `<div id="bg-media-element" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;">${mediaHTML}</div>`);
             } else {
-                let existingMedia = document.getElementById('bg-media-element');
-                if(existingMedia) existingMedia.remove();
-                board.style.backgroundImage = `url('${r.bgImage}')`;
+                // Render as CSS background (supports legacy JSON image URLs & standard URLs!)
+                let finalBg = mediaUrlStr !== "" ? mediaUrlStr : r.bgImage;
+                board.style.backgroundImage = finalBg ? `url('${finalBg}')` : 'none';
             }
 
             board.style.aspectRatio = r.aspectRatio || '4 / 3';
