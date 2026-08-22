@@ -59,10 +59,11 @@
         .score-value:hover { background: #333; }
         .score-hint { font-size: 0.6em; color: #bdc3c7; text-align: center; font-weight: normal; margin-top: -3px; }
 
-        /* The Main Game Board (Catchphrase Grid) - Seamless Tiles */
+        /* The Main Game Board (Catchphrase Grid) - Auto-sized with Safety Clamping */
         #game-board {
-            width: min(94vw, 850px);
-            max-height: 75vh;
+            width: min(92vw, 800px);
+            max-height: 70vh;
+            min-height: 300px;
             background-color: #000;
             background-size: cover;
             background-position: center;
@@ -83,10 +84,10 @@
 
         .tile {
             background: linear-gradient(135deg, #1e3799, #0c2461); background-size: cover; background-position: center;
-            border: 1px solid rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; user-select: none;
+            border: 1px solid rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; user-select: none;
             transition: opacity 0.6s ease-in-out, filter 0.2s, box-shadow 0.2s; box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
-        /* Inset glow keeps highlight contained inside the tile so it doesn't leak into gaps */
+        /* Inset glow ensures hover outlines never bleed past tile borders into gaps */
         .tile:hover { filter: brightness(1.2); z-index: 2; box-shadow: inset 0 0 0 3px #D9B036, inset 0 0 15px rgba(0,0,0,0.5); }
         .tile.hidden { opacity: 0; pointer-events: none; }
 
@@ -395,17 +396,6 @@
                     <div id="global-tile-upload-status" style="margin-top: 6px; font-size: 0.85em; color: #f39c12; font-weight: bold;"></div>
                 </div>
             </div>
-            
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <label style="font-weight: bold; color: #FFCC00;">Board Shape (Aspect Ratio):</label>
-                <select id="board-aspect-ratio" style="padding: 10px; border-radius: 4px; border: none; font-size: 1em; font-weight:bold; background: #ecf0f1; color: #2c3e50;">
-                    <option value="1 / 1">1:1 (Square)</option>
-                    <option value="4 / 3" selected>4:3 (Landscape)</option>
-                    <option value="3 / 4">3:4 (Portrait / Movie Poster)</option>
-                    <option value="16 / 9">16:9 (Widescreen)</option>
-                    <option value="auto">Auto-detect from Background Image</option>
-                </select>
-            </div>
         </div>
         
         <!-- Individual Tile Questions Section -->
@@ -532,7 +522,7 @@
                 bgImage: 'https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=600&h=600&auto=format&fit=crop',
                 mediaUrl: '',
                 globalTileCover: DEFAULT_BAKED_IN_TILE_COVER, 
-                aspectRatio: '4 / 3', 
+                aspectRatio: '1 / 1', // Defaults to 1:1 square
                 questions: Array(9).fill(""),
                 tileImages: Array(9).fill(null),    
                 modalImages: Array(9).fill(null),   
@@ -902,8 +892,6 @@
             document.getElementById('global-tile-upload').value = '';
             const isCustomGlobal = r.globalTileCover && r.globalTileCover !== DEFAULT_BAKED_IN_TILE_COVER;
             document.getElementById('global-tile-upload-status').innerText = isCustomGlobal ? '✅ Global tile cover saved' : '';
-            
-            document.getElementById('board-aspect-ratio').value = r.aspectRatio || '4 / 3';
 
             const bgDropBox = document.getElementById('drop-box-bg');
             if(bgDropBox) attachDropListeners(bgDropBox, 'bg-upload', 'bg-upload-status');
@@ -970,28 +958,21 @@
             if (globalTileInput && globalTileInput.files && globalTileInput.files[0]) {
                 r.globalTileCover = await fileToBase64(globalTileInput.files[0]);
             }
-            
-            r.aspectRatio = document.getElementById('board-aspect-ratio').value;
 
-            // Fully functional Auto-Aspect Ratio calculation based on uploaded background image dimensions
-            if (r.aspectRatio === 'auto') {
-                let checkSrc = r.bgImage;
-                if (r.mediaUrl && !r.mediaUrl.match(/(youtube|mp4|webm|ogg)/i)) {
-                    checkSrc = r.mediaUrl;
-                }
-                if (checkSrc) {
-                    await new Promise((resolve) => {
-                        const tempImg = new Image();
-                        tempImg.onload = function() {
-                            if (tempImg.width && tempImg.height) {
-                                r.aspectRatio = `${tempImg.width} / ${tempImg.height}`;
-                            }
-                            resolve();
-                        };
-                        tempImg.onerror = () => resolve();
-                        tempImg.src = checkSrc;
-                    });
-                }
+            // Automatically calculate exact aspect ratio from the background image source
+            let checkSrc = r.mediaUrl && !r.mediaUrl.match(/(youtube|mp4|webm|ogg)/i) ? r.mediaUrl : r.bgImage;
+            if (checkSrc) {
+                await new Promise((resolve) => {
+                    const tempImg = new Image();
+                    tempImg.onload = function() {
+                        if (tempImg.width && tempImg.height) {
+                            r.aspectRatio = `${tempImg.width} / ${tempImg.height}`;
+                        }
+                        resolve();
+                    };
+                    tempImg.onerror = () => resolve();
+                    tempImg.src = checkSrc;
+                });
             }
 
             for (let i = 0; i < 9; i++) {
@@ -1078,7 +1059,7 @@
                             ...r,
                             mediaUrl: r.mediaUrl || '',
                             globalTileCover: r.globalTileCover || DEFAULT_BAKED_IN_TILE_COVER,
-                            aspectRatio: r.aspectRatio || '4 / 3', 
+                            aspectRatio: r.aspectRatio || '1 / 1', 
                             questions: [...(r.questions || []), ...Array(9).fill("")].slice(0, 9),
                             tileImages: [...(r.tileImages || []), ...Array(9).fill(null)].slice(0, 9),
                             modalImages: [...(r.modalImages || []), ...Array(9).fill(null)].slice(0, 9),
@@ -1197,7 +1178,7 @@
                 board.style.backgroundImage = finalBg ? `url('${finalBg}')` : 'none';
             }
 
-            board.style.aspectRatio = r.aspectRatio || '4 / 3';
+            board.style.aspectRatio = r.aspectRatio || '1 / 1';
 
             grid.style.zIndex = "1";
             grid.innerHTML = '';
