@@ -59,7 +59,7 @@
         .score-value:hover { background: #333; }
         .score-hint { font-size: 0.6em; color: #bdc3c7; text-align: center; font-weight: normal; margin-top: -3px; }
 
-        /* The Main Game Board (Catchphrase Grid) */
+        /* The Main Game Board (Catchphrase Grid) - Seamless Tiles */
         #game-board {
             width: min(94vw, 850px);
             max-height: 75vh;
@@ -78,15 +78,16 @@
 
         .grid {
             display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-            width: 100%; height: 100%; position: absolute; top: 0; left: 0; gap: 4px; background: #000; padding: 4px; box-sizing: border-box; border-radius: 6px;
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0; gap: 0px; background: transparent; padding: 0px; box-sizing: border-box; border-radius: 6px;
         }
 
         .tile {
             background: linear-gradient(135deg, #1e3799, #0c2461); background-size: cover; background-position: center;
-            border: 2px solid #111; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; border-radius: 4px; user-select: none;
-            transition: opacity 0.6s ease-in-out, border-color 0.2s, box-shadow 0.2s; box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; user-select: none;
+            transition: opacity 0.6s ease-in-out, filter 0.2s, box-shadow 0.2s; box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
-        .tile:hover { filter: brightness(1.2); z-index: 2; border-color: #D9B036; }
+        /* Inset glow keeps highlight contained inside the tile so it doesn't leak into gaps */
+        .tile:hover { filter: brightness(1.2); z-index: 2; box-shadow: inset 0 0 0 3px #D9B036, inset 0 0 15px rgba(0,0,0,0.5); }
         .tile.hidden { opacity: 0; pointer-events: none; }
 
         .tile-number { color: #D9B036; font-size: clamp(2.2em, 6vw, 4.5em); font-family: 'Arial Black', Impact, sans-serif; text-shadow: 3px 3px 0 #000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
@@ -743,7 +744,7 @@
             logDebug("SETTINGS", "Audio enabled: " + isEnabled);
         }
 
-        // --- CLIENT-SIDE IMAGE COMPRESSION & AUTO ASPECT RATIO ---
+        // --- CLIENT-SIDE IMAGE COMPRESSION ---
         function fileToBase64(file) {
             return new Promise((resolve, reject) => {
                 if (!file.type.startsWith('image/') || file.type.includes('svg')) {
@@ -972,19 +973,25 @@
             
             r.aspectRatio = document.getElementById('board-aspect-ratio').value;
 
-            // If 'auto' aspect ratio is selected, measure the uploaded image's native dimension!
-            if (r.aspectRatio === 'auto' && r.bgImage) {
-                await new Promise((resolve) => {
-                    const tempImg = new Image();
-                    tempImg.onload = function() {
-                        if (tempImg.width && tempImg.height) {
-                            r.aspectRatio = `${tempImg.width} / ${tempImg.height}`;
-                        }
-                        resolve();
-                    };
-                    tempImg.onerror = () => resolve();
-                    tempImg.src = r.bgImage;
-                });
+            // Fully functional Auto-Aspect Ratio calculation based on uploaded background image dimensions
+            if (r.aspectRatio === 'auto') {
+                let checkSrc = r.bgImage;
+                if (r.mediaUrl && !r.mediaUrl.match(/(youtube|mp4|webm|ogg)/i)) {
+                    checkSrc = r.mediaUrl;
+                }
+                if (checkSrc) {
+                    await new Promise((resolve) => {
+                        const tempImg = new Image();
+                        tempImg.onload = function() {
+                            if (tempImg.width && tempImg.height) {
+                                r.aspectRatio = `${tempImg.width} / ${tempImg.height}`;
+                            }
+                            resolve();
+                        };
+                        tempImg.onerror = () => resolve();
+                        tempImg.src = checkSrc;
+                    });
+                }
             }
 
             for (let i = 0; i < 9; i++) {
@@ -1199,6 +1206,7 @@
                 tile.classList.add('tile');
                 tile.id = `tile-${i}`;
                 
+                // HIERARCHY: Individual > Custom Global > Baked-in default
                 if (r.tileImages[i]) {
                     tile.style.backgroundImage = `url('${r.tileImages[i]}')`;
                 } else if (r.globalTileCover) {
