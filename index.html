@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Game Show Arcade</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #080a0f;
+            background-image: radial-gradient(#1a2234 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: #f0f6fc;
+            margin: 0;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Top Header */
+        .arcade-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-family: 'Showcard Gothic', Impact, sans-serif;
+            color: #FFCC00;
+            font-size: clamp(2.8em, 6vw, 4.8em);
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 25px rgba(255, 204, 0, 0.4), 4px 4px #000;
+        }
+        p.subtitle {
+            color: #8b949e;
+            font-size: 1.2em;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 35px;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        /* Base Card Styling */
+        .game-card {
+            background: #12161f;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s, border-color 0.25s;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.01);
+        }
+
+        /* Card Content Area */
+        .card-body {
+            padding: 25px 30px 30px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+        .game-desc {
+            color: #c9d1d9;
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Banner Accent Headers */
+        .card-banner {
+            padding: 24px 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .game-title {
+            margin: 0;
+            font-size: 2.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Button Common */
+        .play-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: filter 0.2s, background-color 0.2s;
+        }
+
+        /* --- 🛎️ THEME 1: JEOPARDY! --- */
+        .card-jeopardy {
+            border: 3px solid #060CE9;
+        }
+        .card-jeopardy:hover {
+            border-color: #FFCC00;
+            box-shadow: 0 15px 35px rgba(6, 12, 233, 0.4), 0 0 20px rgba(255, 204, 0, 0.3);
+        }
+        .banner-jeopardy {
+            background: linear-gradient(135deg, #040880, #060CE9);
+            border-bottom: 3px solid #FFCC00;
+        }
+        .banner-jeopardy .game-title {
+            font-family: 'Showcard Gothic', Impact, sans-serif;
+            color: #FFCC00;
+        }
+        .btn-jeopardy {
+            background-color: #f39c12;
+            color: #000;
+            border: 2px solid #FFCC00;
+        }
+        .game-card:hover .btn-jeopardy {
+            background-color: #FFCC00;
+            filter: brightness(1.1);
+        }
+
+        /* --- 🧩 THEME 2: CATCHPHRASE --- */
+        .card-catchphrase {
+            border: 3px solid #e74c3c;
+        }
+        .card-catchphrase:hover {
+            border-color: #2ecc71;
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.3), 0 0 20px rgba(46, 204, 113, 0.3);
+        }
+        .banner-catchphrase {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            border-bottom: 3px solid #2ecc71;
+        }
+        .banner-catchphrase .game-title {
+            font-family: 'Arial Black', Impact, sans-serif;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        .btn-catchphrase {
+            background-color: #27ae60;
+            color: #fff;
+            border: 2px solid #2ecc71;
+        }
+        .game-card:hover .btn-catchphrase {
+            background-color: #2ecc71;
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="arcade-header">
+        <h1>🎮 Game Show Arcade</h1>
+        <p class="subtitle">Select a game show to start playing, or create custom boards to host with friends!</p>
+    </div>
+
+    <div class="games-grid">
+
+        <!-- Jeopardy! Card -->
+        <a href="jeopardy.html" class="game-card card-jeopardy">
+            <div class="card-banner banner-jeopardy">
+                <span style="font-size: 2.2em;">🛎️</span>
+                <h2 class="game-title">JEOPARDY!</h2>
+            </div>
+            <div class="card-body">
+                <p class="game-desc">
+                    Trivia board with customizable categories, Daily Doubles, Final Jeopardy wagers, YouTube media embeds, and instant score recap exports.
+                </p>
+                <div class="play-btn btn-jeopardy">Play Jeopardy →</div>
+            </div>
+        </a>
+
+        <!-- Catchphrase Card -->
+        <a href="catchphrase.html" class="game-card card-catchphrase">
+            <div class="card-banner banner-catchphrase">
+                <span style="font-size: 2.2em;">🧩</span>
+                <h2 class="game-title">CATCHPHRASE</h2>
+            </div>
+            <div class="card-body">
+                <p class="game-desc">
+                    Reveal the mystery image tile-by-tile, race to buzz in and "Say what you see!", and track points on a live scoreboard.
+                </p>
+                <div class="play-btn btn-catchphrase">Play Catchphrase →</div>
+            </div>
+        </a>
+
+    </div>
+
+</body>
+</html>
