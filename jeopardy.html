@@ -93,7 +93,8 @@
             font-weight: bold; text-align: center; padding: 15px 5px;
             text-transform: uppercase; border: 3px solid #000;
             display: flex; align-items: center; justify-content: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); word-wrap: break-word;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); 
+            word-break: normal; overflow-wrap: break-word; text-align: center; line-height: 1.2;
         }
 
         .jeopardy-tile {
@@ -278,7 +279,8 @@
         #modal-question, .dynamic-title { 
             font-size: clamp(1.5em, 3vw, 3.5em); 
             font-weight: bold; text-transform: uppercase; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin-bottom: 20px; word-wrap: break-word; width: 100%;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); margin-bottom: 20px; 
+            word-break: normal; overflow-wrap: break-word; width: 100%;
         }
         
         .answer-box { font-size: clamp(1.2em, 2vw, 2em); color: #2ecc71; font-weight: bold; margin-bottom: 20px; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 5px; display: none; border: 2px dashed #2ecc71; width: 100%; box-sizing: border-box;}
@@ -365,13 +367,13 @@
             <!-- RIGHT PANEL (Main Gameplay Actions) -->
             <div class="right-panel">
                 <button id="btn-play-game-side" class="btn btn-primary side-btn" onclick="switchToGame()" disabled style="display: none;">🎮 Play Game</button>
-                <button id="btn-toggle-round" class="btn btn-info side-btn" style="background-color: #8e44ad; display: none;" onclick="toggleRound()">🔄 Switch to Round 2</button>
-                
-                <!-- Undo Button (appears dynamically) -->
-                <button id="btn-undo-question" class="btn btn-dark side-btn" style="background-color: #d35400; border-color: #e67e22; display: none;" onclick="undoLastQuestion()">↩️ Undo Last Move</button>
+                <button id="btn-toggle-round" class="btn btn-info side-btn" style="background-color: #8e44ad; display: none;" onclick="toggleRound()">🔄 Double Jeopardy</button>
                 
                 <button id="btn-final-jeopardy-trigger" class="btn btn-fj side-btn" onclick="openFinalJeopardy()">🚨 Final Jeopardy</button>
                 <button id="btn-end-game-trigger" class="btn btn-fj side-btn" style="background-color: #f39c12; border-color: #e67e22; display: none;" onclick="triggerEndGameEarly()">🏆 Finish Game</button>
+                
+                <!-- Undo Button (moved dynamically below FJ buttons) -->
+                <button id="btn-undo-question" class="btn btn-dark side-btn" style="background-color: #d35400; border-color: #e67e22; display: none;" onclick="undoLastQuestion()">↩️ Undo Last Move</button>
             </div>
 
         </div>
@@ -392,8 +394,8 @@
     <div id="admin-screen">
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-            <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
             <button id="btn-play-game-admin" class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">🎮 Play Game</button>
+            <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade Hub</a>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px;" onclick="openHowTo()">💻 Technical Guide</button>
         </div>
@@ -1709,7 +1711,7 @@
             } else {
                 titleElem.innerText = "JEOPARDY!";
                 indicatorElem.innerText = gameData.round2Enabled ? "Round 1" : "";
-                toggleRoundBtn.innerText = "🔄 Switch to Round 2";
+                toggleRoundBtn.innerText = "🔄 Double Jeopardy";
             }
 
             const fjTrigger = document.getElementById('btn-final-jeopardy-trigger');
