@@ -15,7 +15,7 @@
         .btn {
             padding: 10px 20px; font-size: 1.1em; border: none;
             border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: filter 0.2s, transform 0.1s;
+            transition: filter 0.2s, transform 0.1s; box-sizing: border-box;
         }
         .btn:active { transform: scale(0.95); }
         .btn-primary { background-color: #f39c12; color: white; }
@@ -46,11 +46,14 @@
         .center-panel { flex: 1; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
         
         .side-btn { width: 100%; padding: 15px 10px; font-size: 1.1em; text-align: center; }
+        
+        .admin-controls-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 2px dashed #333; }
 
         @media (max-width: 1100px) {
             .game-layout { flex-direction: column; align-items: center; }
             .left-panel, .right-panel { width: 100%; max-width: 600px; flex-direction: row; flex-wrap: wrap; justify-content: center; margin-top: 0; }
             .side-btn { width: auto; flex: 1; min-width: 150px; }
+            .admin-controls-group { flex-direction: row; width: 100%; border-top: none; padding-top: 0; }
         }
 
         /* Leaderboard Sidebar */
@@ -335,17 +338,25 @@
         
         <div class="game-layout">
             
-            <!-- LEFT PANEL -->
+            <!-- LEFT PANEL (Host Controls) -->
             <div class="left-panel">
                 <button id="btn-show-sidebar" class="btn btn-info side-btn" onclick="toggleLeaderboard()">🏆 Show Leaderboard</button>
                 
-                <!-- Persistent Leaderboard Box -->
                 <div id="persistent-leaderboard-container" style="display: none; background: #111; border: 2px solid #FFCC00; border-radius: 8px; padding: 15px; width: 100%; box-sizing: border-box; flex-direction: column;">
                     <h3 style="margin-top: 0; color: #FFCC00; text-align: center; margin-bottom: 15px; font-size: 1.2em; text-transform: uppercase;">🏆 Scores</h3>
                     <div id="persistent-scoreboard-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
                 </div>
 
-                <a href="index.html" class="btn btn-home side-btn" style="margin-top: auto;">🏠 ShowCade Hub</a>
+                <!-- Admin settings moved to bottom of left panel to reduce right-panel clutter -->
+                <div class="admin-controls-group">
+                    <button class="btn btn-dark side-btn" style="background-color: #34495e; font-size: 0.95em; padding: 10px;" onclick="switchToAdmin()">⚙️ Setup Mode</button>
+                    <div style="display: flex; gap: 5px;">
+                        <button class="btn btn-danger" style="flex: 1; font-size: 0.85em; padding: 8px;" onclick="resetBoard()" title="Hide tiles">🔄 Board</button>
+                        <button class="btn btn-danger" style="flex: 1; font-size: 0.85em; padding: 8px; background-color: #c0392b;" onclick="resetScores()" title="Zero scores">🔄 Scores</button>
+                    </div>
+                </div>
+
+                <a href="index.html" class="btn btn-home side-btn" style="margin-top: 10px;">🏠 ShowCade Hub</a>
             </div>
             
             <!-- CENTER PANEL (Board) -->
@@ -353,19 +364,12 @@
                 <div id="jeopardy-board"></div>
             </div>
 
-            <!-- RIGHT PANEL -->
+            <!-- RIGHT PANEL (Game Flow Actions) -->
             <div class="right-panel">
-                <button id="btn-play-game-side" class="btn btn-primary side-btn" onclick="switchToGame()" disabled style="display: none;">🎮 Play Game</button>
                 <button id="btn-toggle-round" class="btn btn-info side-btn" style="background-color: #8e44ad; display: none;" onclick="toggleRound()">🔄 Switch to Round 2</button>
-                
+                <button id="btn-undo-question" class="btn btn-dark side-btn" style="background-color: #d35400; border-color: #e67e22; display: none;" onclick="undoLastQuestion()">↩️ Undo Last Move</button>
                 <button id="btn-final-jeopardy-trigger" class="btn btn-fj side-btn" onclick="openFinalJeopardy()">🚨 Final Jeopardy</button>
                 <button id="btn-end-game-trigger" class="btn btn-fj side-btn" style="background-color: #f39c12; border-color: #e67e22; display: none;" onclick="triggerEndGameEarly()">🏆 Finish Game</button>
-                
-                <button id="btn-undo-question" class="btn btn-dark side-btn" style="background-color: #d35400; border-color: #e67e22; display: none;" onclick="undoLastQuestion()">↩️ Undo Last Question</button>
-                
-                <button class="btn btn-dark side-btn" style="background-color: #7f8c8d;" onclick="switchToAdmin()">⚙️ Setup Mode</button>
-                <button class="btn btn-danger side-btn" onclick="resetBoard()">🔄 Reset Board</button>
-                <button class="btn btn-danger side-btn" style="background-color: #c0392b;" onclick="resetScores()">🔄 Reset Scores</button>
             </div>
 
         </div>
@@ -386,10 +390,9 @@
     <div id="admin-screen">
         
         <!-- ADMIN TOP TOOLBAR -->
-            <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
             <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
             <button id="btn-play-game-admin" class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">🎮 Play Game</button>
-            <button class="btn btn-dark" style="font-size: 1.2em; padding: 12px 20px; background-color: #7f8c8d; cursor: default;">⚙️ Setup Mode</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px;" onclick="openHowTo()">💻 Technical Guide</button>
         </div>
@@ -629,25 +632,6 @@
         </div>
     </div>
 
-    <!-- CHANGELOG MODAL -->
-    <div id="changelog-modal" class="modal-overlay" style="z-index: 200;">
-        <div class="modal-content info-modal-content" style="max-width: 800px;">
-            <h2>📜 Version History</h2>
-            <div style="max-height: 60vh; overflow-y: auto; padding-right: 15px; color: #c9d1d9; font-size: 1.1em; line-height: 1.6;">
-                <h3 style="color: #58a6ff; margin-bottom: 5px;">Version 51</h3>
-                <ul style="margin-top: 0;">
-                    <li>Added ShowCade arcade hub link navigation directly inside setup and in-game side panels.</li>
-                    <li><strong>Smart Drag & Drop Uploads:</strong> Drag image/audio files or web links directly into question cells in Setup Mode.</li>
-                    <li><strong>Clipboard Paste Support:</strong> Paste clipboard screenshots directly into question boxes with <code>Ctrl+V</code> / <code>Cmd+V</code>.</li>
-                    <li><strong>Canvas Client-Side Image Compression:</strong> Uploaded images are automatically scaled down (max 1200px) and compressed to JPEG, shrinking exported JSON file sizes by up to 90%.</li>
-                </ul>
-            </div>
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 35px;" onclick="closeChangelog()">Close</button>
-            </div>
-        </div>
-    </div>
-
     <!-- STANDARD TILE MODAL (SPLIT LAYOUT) -->
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal-content" style="padding: 0; min-height: 85vh; display: flex; flex-direction: column;">
@@ -754,15 +738,16 @@
     </div>
 
     <script>
-        const standardBasePoints = [100, 200, 300, 400, 500, 600];
-        const doubleBasePoints = [200, 400, 600, 800, 1000, 1200];
+        // Changed top level let/const to var to support hot-reloading dev servers without syntax errors
+        var standardBasePoints = [100, 200, 300, 400, 500, 600];
+        var doubleBasePoints = [200, 400, 600, 800, 1000, 1200];
 
         function getPointValues(numRows, isDouble) {
             let base = isDouble ? doubleBasePoints : standardBasePoints;
             return base.slice(0, numRows);
         }
 
-        let gameData = {
+        var gameData = {
             hostName: "",
             numCategories: 6,
             numQuestions: 5,
@@ -787,16 +772,16 @@
             finalJeopardy: { enabled: true, wagersEnabled: true, category: "", rule: "", q: "", a: "", img: null, audio: null, mediaUrl: "", hasAnswer: true }
         };
 
-        let players = [];
-        let activeTile = { col: null, row: null, points: 0, originalPoints: 0, wrongGuesses: {}, isDD: false, ddPercent: 100 };
-        let currentAdminRound = 1;
-        let questionTimerInterval = null;
-        let fjOscillators = []; 
-        let fjWagers = {}; 
+        var players = [];
+        var activeTile = { col: null, row: null, points: 0, originalPoints: 0, wrongGuesses: {}, isDD: false, ddPercent: 100 };
+        var currentAdminRound = 1;
+        var questionTimerInterval = null;
+        var fjOscillators = []; 
+        var fjWagers = {}; 
         
-        let tempUndoState = null;
-        let lastUndoState = null;
-        let debugLogVisible = true;
+        var tempUndoState = null;
+        var lastUndoState = null;
+        var debugLogVisible = true;
 
         // --- DEBUG LOGGING ---
         function toggleDebugMode() {
@@ -830,7 +815,7 @@
         }
 
         // --- WEB AUDIO API ---
-        let audioCtx;
+        var audioCtx;
         function initAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1077,12 +1062,6 @@
         }
         function closeHowTo() {
             document.getElementById('how-to-modal').style.display = 'none';
-        }
-        function openChangelog() {
-            document.getElementById('changelog-modal').style.display = 'flex';
-        }
-        function closeChangelog() {
-            document.getElementById('changelog-modal').style.display = 'none';
         }
 
         function toggleTimerSettings() {
