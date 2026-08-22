@@ -62,7 +62,6 @@
         /* The Main Game Board (Catchphrase Grid) - Optimized for Mobile */
         #game-board {
             width: min(94vw, 850px);
-            max-height: 65vh;
             aspect-ratio: 4/3;
             background-color: #222;
             background-size: contain;
@@ -79,7 +78,7 @@
 
         .grid {
             display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-            width: 100%; height: 100%; position: absolute; top: 0; left: 0; gap: 4px; background: #000; padding: 4px; box-sizing: border-box; border-radius: 6px;
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0; gap: 4px; background: transparent; padding: 4px; box-sizing: border-box; border-radius: 6px;
         }
 
         .tile {
@@ -92,32 +91,33 @@
 
         .tile-number { color: #D9B036; font-size: clamp(2.2em, 6vw, 4.5em); font-family: 'Arial Black', Impact, sans-serif; text-shadow: 3px 3px 0 #000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 
-        /* --- ADMIN SECTIONS (MATCHING JEOPARDY DESIGN) --- */
+        /* --- ADMIN SECTIONS --- */
         .admin-section { background: #2c3e50; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #34495e; box-sizing: border-box; }
         .admin-section h3 { margin-top: 0; border-bottom: 2px solid #7f8c8d; padding-bottom: 10px; margin-bottom: 20px; color: #FFCC00; font-family: 'Helvetica Neue', Arial, sans-serif; text-transform: none; letter-spacing: normal; }
         
         .admin-category-block { background: #1a1a1a; padding: 20px; border-radius: 8px; border: 2px solid #333; margin-bottom: 25px; }
-        .questions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+        .questions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 15px; }
         
         @media (max-width: 850px) {
             .questions-grid { grid-template-columns: 1fr; }
         }
 
-        .question-cell, .drop-target-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 6px; border: 1px solid #444; transition: background 0.2s, border-color 0.2s; box-sizing: border-box;}
+        .question-cell, .drop-target-box { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; border: 1px solid #444; transition: background 0.2s, border-color 0.2s; box-sizing: border-box;}
         .question-cell.drag-over, .drop-target-box.drag-over { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.2) !important; }
 
         .question-cell input[type="text"], .question-cell textarea {
-            width: 100%; padding: 10px; border-radius: 4px; border: none; box-sizing: border-box;
-            background: #ecf0f1; color: #2c3e50; margin-bottom: 8px; font-size: 0.95em; font-weight: bold;
+            width: 100%; padding: 12px; border-radius: 6px; border: none; box-sizing: border-box;
+            background: #ecf0f1; color: #2c3e50; margin-bottom: 15px; font-size: 0.95em; font-weight: bold;
         }
         
-        .q-label { font-size: 0.95em; color: #FFCC00; font-weight: bold; margin-bottom: 5px; display: block; }
-        .file-inputs { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
-        .file-inputs label { font-size: 0.85em; color: #bdc3c7; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
-        .file-inputs input[type="file"] { font-size: 0.9em; color: #ecf0f1; width: 100%; }
+        .q-label { font-size: 1.05em; color: #FFCC00; font-weight: bold; margin-bottom: 10px; display: block; }
+        
+        .file-inputs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
+        .file-inputs label { font-size: 0.9em; color: #bdc3c7; display: flex; align-items: center; gap: 8px; white-space: nowrap; padding: 4px 0;}
+        .file-inputs input[type="file"] { font-size: 0.95em; color: #ecf0f1; width: 100%; }
 
         .media-input {
-            width: 100%; padding: 8px; border-radius: 4px; border: none; box-sizing: border-box; font-size: 0.85em;
+            width: 100%; padding: 10px; border-radius: 6px; border: none; box-sizing: border-box; font-size: 0.9em;
             background: #34495e; color: #ecf0f1; border: 1px dashed #bdc3c7; margin-bottom: 8px;
         }
         .media-input::placeholder { color: #95a5a6; }
@@ -926,7 +926,7 @@
                         <div class="file-inputs">
                             <label>🖼️ Tile Cover: <input type="file" id="input-img-${i}" accept="image/*"></label>
                             <label>🖼️ Pop-up Img: <input type="file" id="input-modal-img-${i}" accept="image/*"></label>
-                            <label>🎵 Clue Audio: <input type="file" id="input-audio-${i}" accept="audio/*"></label>
+                            <label>🎵 Audio: <input type="file" id="input-audio-${i}" accept="audio/*"></label>
                         </div>
                         
                         <div style="font-size: 0.75em; color: #f39c12; margin-top: 4px;" id="tile-upload-status-${i}">
