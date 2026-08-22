@@ -10,11 +10,11 @@
             align-items: center; background-color: #0d1117; color: white; margin: 0; padding: 20px; overflow-x: hidden;
         }
 
-        /* Titles */
-        h1, h2, h3, .retro-title { font-family: 'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; }
+        /* Titles for the actual game screen */
+        .retro-title { font-family: 'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; }
 
         /* Buttons */
-        .btn { padding: 10px 20px; font-size: 1.1em; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: filter 0.2s, transform 0.1s; }
+        .btn { padding: 10px 20px; font-size: 1.1em; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: filter 0.2s, transform 0.1s; box-sizing: border-box; }
         .btn:active { transform: scale(0.95); }
         .btn-primary { background-color: #f39c12; color: white; } 
         .btn-success { background-color: #2ecc71; color: white; } 
@@ -34,12 +34,15 @@
         .game-layout { display: flex; width: 100%; gap: 20px; justify-content: center; align-items: flex-start; }
         .left-panel, .right-panel { display: flex; flex-direction: column; width: 220px; gap: 15px; flex-shrink: 0; margin-top: 10px; }
         .center-panel { flex: 1; width: 100%; max-width: 950px; display: flex; flex-direction: column; align-items: center; position: relative; }
+        
         .side-btn { width: 100%; padding: 15px 10px; font-size: 1.1em; text-align: center; }
+        .admin-controls-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 2px dashed #333; }
 
         @media (max-width: 1100px) {
             .game-layout { flex-direction: column; align-items: center; }
             .left-panel, .right-panel { width: 100%; max-width: 600px; flex-direction: row; flex-wrap: wrap; justify-content: center; margin-top: 0; }
             .side-btn { width: auto; flex: 1; min-width: 150px; }
+            .admin-controls-group { flex-direction: row; width: 100%; border-top: none; padding-top: 0; }
         }
 
         /* Leaderboard Sidebar */
@@ -89,13 +92,9 @@
 
         .tile-number { color: #D9B036; font-size: clamp(2.2em, 6vw, 4.5em); font-family: 'Arial Black', Impact, sans-serif; text-shadow: 3px 3px 0 #000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 
-        /* Guess the Board Button */
-        #btn-guess-board { background-color: #8e44ad; color: white; padding: 15px 10px; font-size: 1.1em; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); text-align: center; border: 2px solid #9b59b6; text-transform: uppercase; width: 100%; box-sizing: border-box; cursor: pointer; font-weight: bold; }
-        #btn-guess-board:hover { filter: brightness(1.15); transform: scale(0.98); }
-
         /* --- ADMIN SECTIONS (MATCHING JEOPARDY DESIGN) --- */
         .admin-section { background: #2c3e50; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #34495e; box-sizing: border-box; }
-        .admin-section h3 { margin-top: 0; border-bottom: 2px solid #7f8c8d; padding-bottom: 10px; margin-bottom: 20px; color: #FFCC00; }
+        .admin-section h3 { margin-top: 0; border-bottom: 2px solid #7f8c8d; padding-bottom: 10px; margin-bottom: 20px; color: #FFCC00; font-family: 'Helvetica Neue', Arial, sans-serif; text-transform: none; letter-spacing: normal; }
         
         .admin-category-block { background: #1a1a1a; padding: 20px; border-radius: 8px; border: 2px solid #333; margin-bottom: 25px; }
         .questions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
@@ -104,7 +103,7 @@
             .questions-grid { grid-template-columns: 1fr; }
         }
 
-        .question-cell, .drop-target-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 6px; border: 1px solid #444; transition: background 0.2s, border-color 0.2s; }
+        .question-cell, .drop-target-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 6px; border: 1px solid #444; transition: background 0.2s, border-color 0.2s; box-sizing: border-box;}
         .question-cell.drag-over, .drop-target-box.drag-over { border: 2px dashed #f39c12 !important; background: rgba(243, 156, 18, 0.2) !important; }
 
         .question-cell input[type="text"], .question-cell textarea {
@@ -152,10 +151,10 @@
 
         /* Info Modals */
         .info-modal-content { background: #24292e; border: 2px solid #444d56; color: #f6f8fa; padding: 40px; text-align: left; max-width: 1000px; border-radius: 12px; margin: auto; display: block; max-height: 85vh; overflow-y: auto; box-sizing: border-box; }
-        .info-modal-content h2 { color: #58a6ff; margin-top: 0; font-size: 2.2em; text-align: center; border-bottom: 2px solid #30363d; padding-bottom: 20px; letter-spacing: 1px; }
+        .info-modal-content h2 { color: #58a6ff; margin-top: 0; font-size: 2.2em; text-align: center; border-bottom: 2px solid #30363d; padding-bottom: 20px; letter-spacing: 1px; font-family: 'Helvetica Neue', Arial, sans-serif; text-transform: none; }
         .how-to-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
         .how-to-card { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; }
-        .how-to-card h4 { color: #7ee787; font-size: 1.2em; margin-top: 0; margin-bottom: 12px; }
+        .how-to-card h4 { color: #7ee787; font-size: 1.2em; margin-top: 0; margin-bottom: 12px; font-family: 'Helvetica Neue', Arial, sans-serif; text-transform: none; letter-spacing: normal;}
         .how-to-card p, .how-to-card li { color: #c9d1d9; font-size: 0.95em; line-height: 1.5; margin-bottom: 8px; }
         .how-to-card ul { padding-left: 20px; margin: 0; }
         .how-to-card.warning-card { border-color: #d29922; background: rgba(210, 153, 34, 0.05); grid-column: 1 / -1; }
@@ -167,19 +166,19 @@
     <!-- Leaderboard Sidebar -->
     <div id="leaderboard-sidebar">
         <button class="close-sidebar" onclick="toggleLeaderboard()">×</button>
-        <h2>🏆 Leaderboard</h2>
+        <h2 class="retro-title">🏆 Leaderboard</h2>
         <div id="scoreboard-list"></div>
     </div>
 
     <!-- DEBUG UI OVERLAYS -->
     <div id="debug-scores-container" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 10000; background: rgba(0,0,0,0.85); border: 2px solid #e74c3c; border-radius: 8px; padding: 15px; box-shadow: 0 0 15px rgba(231,76,60,0.5); pointer-events: none;">
-        <h4 style="margin: 0 0 10px 0; color: #e74c3c; text-align: center; font-size: 0.9em; letter-spacing: 1px;" class="retro-title">Debug Scores</h4>
+        <h4 style="margin: 0 0 10px 0; color: #e74c3c; text-align: center; font-size: 0.9em; letter-spacing: 1px; text-transform: uppercase;">Debug Scores</h4>
         <div id="debug-scores-list" style="display: flex; flex-direction: column; gap: 8px; min-width: 150px;"></div>
         <button onclick="document.getElementById('debug-log-container').style.display='flex'; debugLogVisible=true;" style="pointer-events: auto; background: #34495e; border: 1px solid #7f8c8d; color: white; width: 100%; border-radius: 4px; padding: 4px; font-size: 0.8em; margin-top: 10px; cursor: pointer; font-weight:bold;">Show Log</button>
     </div>
     <div id="debug-log-container" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 10000; background: rgba(0,0,0,0.9); border: 2px solid #e74c3c; border-radius: 8px; width: 350px; flex-direction: column; overflow: hidden; box-shadow: 0 0 15px rgba(231,76,60,0.5);">
         <div style="background: #e74c3c; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.9em;">
-            <span class="retro-title">⚙️ SYSTEM LOG</span>
+            <span style="text-transform: uppercase;">⚙️ SYSTEM LOG</span>
             <span style="cursor: pointer; color: white; font-size: 1.2em; line-height: 1;" onclick="closeDebugLog()">×</span>
         </div>
         <div id="debug-log-content" style="padding: 10px; max-height: 250px; overflow-y: auto; font-family: monospace; font-size: 0.85em; color: #ecf0f1; display: flex; flex-direction: column; gap: 6px;"></div>
@@ -188,7 +187,7 @@
     <!-- GAME SCREEN -->
     <div id="game-screen">
         <h1 style="margin: 0 0 5px 0; color: #FFCC00; font-size: 4em; text-shadow: 3px 3px #000; text-align: center; letter-spacing: 2px;" class="retro-title">CATCHPHRASE!</h1>
-        <div id="round-indicator" class="retro-title" style="color: #3498db; font-size: 1.3em; margin-bottom: 20px;">Puzzle 1</div>
+        <div id="round-indicator" class="retro-title" style="color: #3498db; font-size: 1.5em; margin-bottom: 20px;">Puzzle 1</div>
         
         <div class="game-layout">
             <!-- LEFT PANEL -->
@@ -198,11 +197,21 @@
                     <h3 class="retro-title" style="margin-top: 0; color: #FFCC00; text-align: center; margin-bottom: 15px; font-size: 1.2em;">🏆 Scores</h3>
                     <div id="persistent-scoreboard-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
                 </div>
-                <a href="index.html" class="btn btn-home side-btn" style="margin-top: auto;">🏠 ShowCade Hub</a>
+
+                <div class="admin-controls-group">
+                    <button class="btn btn-dark side-btn" style="background-color: #34495e; font-size: 0.95em; padding: 10px;" onclick="switchToAdmin()">⚙️ Setup Mode</button>
+                    <div style="display: flex; gap: 5px;">
+                        <button class="btn btn-danger" style="flex: 1; font-size: 0.85em; padding: 8px; background-color: #e67e22;" onclick="resetTiles()" title="Hide tiles">🔄 Board</button>
+                        <button class="btn btn-danger" style="flex: 1; font-size: 0.85em; padding: 8px; background-color: #c0392b;" onclick="resetScores()" title="Zero scores">🔄 Scores</button>
+                    </div>
+                </div>
+
+                <a href="index.html" class="btn btn-home side-btn" style="margin-top: 10px;">🏠 ShowCade Hub</a>
             </div>
             
             <!-- CENTER PANEL (Board) -->
             <div class="center-panel">
+                <!-- Auto-Advance Cinematic Overlay -->
                 <div id="auto-advance-overlay" style="display: none; position: absolute; bottom: 0; left: 0; width: 100%; height: 15%; background: rgba(0,0,0,0.85); z-index: 10; flex-direction: column; justify-content: center; align-items: center; border-top: 2px solid #2ecc71;">
                     <h3 style="margin: 0 0 5px 0; color: #2ecc71; font-family: 'Arial Black', Impact, sans-serif; text-transform: uppercase;">Round Complete! Advancing...</h3>
                     <div style="width: 80%; height: 10px; background: #222; border-radius: 5px; overflow: hidden; border: 1px solid #444;">
@@ -211,7 +220,9 @@
                 </div>
 
                 <div id="game-board">
-                    <div class="grid" id="grid"></div>
+                    <div class="grid" id="grid">
+                        <!-- Tiles generated by JS -->
+                    </div>
                 </div>
             </div>
 
@@ -222,13 +233,9 @@
                 
                 <button id="btn-undo-action" class="btn btn-dark side-btn" style="background-color: #d35400; border-color: #e67e22; display: none;" onclick="undoAction()">↩️ Undo Last Move</button>
                 
-                <button id="btn-guess-board" class="retro-title" onclick="openGuessBoardModal()">🎯 Guess the Board!</button>
+                <button id="btn-guess-board" class="btn side-btn retro-title" style="background-color: #8e44ad; color: white; border: 2px solid #9b59b6; margin-top: 10px;" onclick="openGuessBoardModal()">🎯 Guess the Board!</button>
                 
-                <button id="btn-end-game-trigger" class="btn btn-danger side-btn" style="margin-top: 5px;" onclick="triggerEndGameEarly(false)">🏆 Finish Game</button>
-                
-                <button class="btn btn-dark side-btn" style="background-color: #7f8c8d; margin-top: 15px;" onclick="switchToAdmin()">⚙️ Setup Mode</button>
-                <button class="btn btn-danger side-btn" style="background-color: #e67e22;" onclick="resetTiles()">🔄 Reset Tiles</button>
-                <button class="btn btn-danger side-btn" style="background-color: #c0392b;" onclick="resetScores()">🔄 Reset Scores</button>
+                <button id="btn-end-game-trigger" class="btn btn-danger side-btn" style="margin-top: 5px; background-color: #f39c12; border-color: #e67e22;" onclick="triggerEndGameEarly(false)">🏆 Finish Game</button>
             </div>
         </div>
     </div>
@@ -244,13 +251,12 @@
         </div>
     </div>
 
-    <!-- ADMIN SCREEN -->
+    <!-- ADMIN SCREEN (Unified to Jeopardy V51 Theme) -->
     <div id="admin-screen">
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
             <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
             <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">🎮 Play Game</button>
-            <button class="btn btn-dark" style="font-size: 1.2em; padding: 12px 20px; background-color: #7f8c8d; cursor: default;">⚙️ Setup Mode</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px;" onclick="openHowTo()">💻 Technical Guide</button>
         </div>
@@ -349,18 +355,17 @@
                             <input type="checkbox" id="debug-mode-enabled" style="width: 20px; height: 20px;" onchange="toggleDebugMode()">
                             Enable Debug Mode
                         </label>
-                        <p style="font-size: 0.85em; color: #bdc3c7; margin: 8px 0 0 0; line-height: 1.4;">Shows a live score overlay and diagnostic system action log.</p>
+                        <p style="font-size: 0.85em; color: #bdc3c7; margin: 8px 0 0 0; line-height: 1.4;">Shows a live score overlay and diagnostic log.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Round Switcher Navigation Bar -->
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: #2c3e50; padding: 15px 20px; border-radius: 8px; margin-bottom: 25px; box-sizing: border-box; border: 1px solid #34495e;">
+        <!-- Admin Round Controls -->
+        <div class="round-controls" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: #2c3e50; padding: 15px 20px; border-radius: 8px; margin-bottom: 25px; box-sizing: border-box; border: 1px solid #34495e;">
             <button class="btn btn-info" id="btn-admin-prev" onclick="changeAdminRound(-1)">◀ Prev Round</button>
-            <span style="font-size: 1.4em; font-weight: bold; color: #FFCC00;" class="retro-title">Editing Puzzle <span id="admin-round-text">1 / 1</span></span>
+            <span style="font-size: 1.4em; font-weight: bold; color: #FFCC00;">Editing Puzzle <span id="admin-round-text">1 / 1</span></span>
             <div style="display: flex; gap: 10px;">
-                <!-- NEW DELETE BUTTON -->
                 <button class="btn btn-danger" id="btn-admin-delete" onclick="deleteCurrentRound()">🗑️ Delete</button>
                 <button class="btn btn-info" id="btn-admin-next" onclick="changeAdminRound(1)">Next Round ▶</button>
                 <button class="btn btn-success" onclick="addNewRound()">+ Add New Round</button>
@@ -797,6 +802,8 @@
             elem.addEventListener('drop', (e) => {
                 elem.classList.remove('drag-over');
                 const dt = e.dataTransfer;
+                
+                // 1. Local File Drop
                 if (dt.files && dt.files.length > 0) {
                     const file = dt.files[0];
                     const fileInput = document.getElementById(inputId);
@@ -807,6 +814,21 @@
                     }
                     const statusEl = document.getElementById(statusId);
                     if (statusEl) statusEl.innerHTML = `✅ Attached: ${file.name}`;
+                    return;
+                }
+                
+                // 2. URL/Image Drop from web
+                const droppedText = dt.getData('text/uri-list') || dt.getData('text/plain');
+                if (droppedText) {
+                    // Assuming the input we want to drop a URL into has a generic selector like 'bg-url-input'
+                    // For specific question tiles, we map media URLs to image URL inputs in Catchphrase context
+                    let possibleMediaInput = document.getElementById(inputId.replace('input-img-', 'media-'));
+                    if (inputId === 'bg-upload') possibleMediaInput = document.getElementById('bg-url-input');
+                    if (possibleMediaInput) {
+                        possibleMediaInput.value = droppedText.trim();
+                        const statusEl = document.getElementById(statusId);
+                        if (statusEl) statusEl.innerHTML = `✅ Attached URL link`;
+                    }
                 }
             });
 
@@ -985,8 +1007,7 @@
             renderAdminRound();
             logDebug("ADMIN", "Added new puzzle round");
         }
-
-        // DELETES CURRENT ROUND WITH SAFETY CATCH
+        
         async function deleteCurrentRound() {
             if(gameData.rounds.length <= 1) {
                 alert("You must have at least one puzzle round in your game.");
@@ -996,7 +1017,6 @@
                 logDebug("ADMIN", `Deleted round ${currentEditRound + 1}`);
                 gameData.rounds.splice(currentEditRound, 1);
                 
-                // Adjust indices safely if we delete the end of the array
                 if(currentEditRound >= gameData.rounds.length) currentEditRound = gameData.rounds.length - 1;
                 if(currentPlayRound >= gameData.rounds.length) currentPlayRound = gameData.rounds.length - 1;
                 
@@ -1142,21 +1162,18 @@
             let board = document.getElementById('game-board');
             let grid = document.getElementById('grid');
 
-            // --- BUG FIX: Properly apply image URLs to the board background ---
-            let mediaUrlStr = r.mediaUrl ? r.mediaUrl.trim() : "";
-            let existingMedia = document.getElementById('bg-media-element');
-            if (existingMedia) existingMedia.remove();
-
-            let isVideo = mediaUrlStr.match(/(?:youtube\.com|youtu\.be|\.(?:mp4|webm|ogg))/i);
-
-            if (isVideo) {
-                // Render as video frame
+            let mediaHTML = generateMediaHTML(r.mediaUrl);
+            if(mediaHTML) {
                 board.style.backgroundImage = 'none';
-                let mediaHTML = generateMediaHTML(mediaUrlStr);
-                board.insertAdjacentHTML('afterbegin', `<div id="bg-media-element" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;">${mediaHTML}</div>`);
+                let existingMedia = document.getElementById('bg-media-element');
+                if(existingMedia) existingMedia.remove();
+                board.insertAdjacentHTML('afterbegin', `<div id="bg-media-element" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;">${mediaHTML}</div>`);
             } else {
-                // Render as CSS background (supports legacy JSON image URLs & standard URLs!)
-                let finalBg = mediaUrlStr !== "" ? mediaUrlStr : r.bgImage;
+                let existingMedia = document.getElementById('bg-media-element');
+                if(existingMedia) existingMedia.remove();
+                
+                // Fix for Background URLs parsing out as generic background images
+                let finalBg = r.mediaUrl ? r.mediaUrl : r.bgImage;
                 board.style.backgroundImage = finalBg ? `url('${finalBg}')` : 'none';
             }
 
@@ -1278,6 +1295,7 @@
             sortedPlayers.forEach((player, index) => {
                 let crown = (index === 0 && player.score > 0) ? '👑 ' : '';
                 
+                // Sidebar List
                 list1.innerHTML += `
                     <div class="scoreboard-item">
                         <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
@@ -1290,6 +1308,7 @@
                     </div>
                 `;
 
+                // Persistent Left-Panel List
                 if (list2) {
                     list2.innerHTML += `
                         <div style="background: #000; padding: 8px 10px; border-radius: 6px; border: 1px solid #FFCC00; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1em;">
@@ -1299,6 +1318,7 @@
                     `;
                 }
 
+                // Top Right Debug Mode List
                 if (listDebug && gameData.debugMode) {
                     listDebug.innerHTML += `
                         <div style="display: flex; justify-content: space-between; font-size: 0.95em; font-family: monospace;">
