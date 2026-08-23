@@ -394,7 +394,7 @@
     <div id="admin-screen">
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-            <button id="btn-play-game-admin" class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">🎮 Play Game</button>
+            <button id="btn-play-game-admin" class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">💾 Save & Play</button>
             <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade Hub</a>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px;" onclick="openHowTo()">💻 Technical Guide</button>
@@ -483,10 +483,6 @@
                             <option value="double">Fixed Double Points</option>
                         </select>
                     </div>
-                    <div id="timer-settings-container">
-                        <label style="color: #bdc3c7; font-size: 0.95em; display: block; margin-bottom: 5px;">Timer Duration (Seconds):</label>
-                        <input type="number" id="timer-duration" value="30" min="5" max="300" style="width: 100%; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; font-size: 1em; box-sizing: border-box;">
-                    </div>
                 </div>
 
                 <!-- Column 2: Toggles -->
@@ -535,6 +531,11 @@
                         <input type="range" id="sfx-volume" min="0" max="100" value="50" style="width: 100%; cursor: pointer;" oninput="document.getElementById('vol-val').innerText = this.value">
                     </div>
 
+                    <div id="timer-settings-container">
+                        <label style="color: #bdc3c7; font-size: 0.95em; display: block; margin-bottom: 8px;">Timer Duration: <span id="timer-val">30</span>s</label>
+                        <input type="range" id="timer-duration" min="5" max="120" value="30" style="width: 100%; cursor: pointer;" oninput="document.getElementById('timer-val').innerText = this.value">
+                    </div>
+
                     <div style="margin-top: auto; background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; border: 1px solid #e74c3c;">
                         <label style="color: #e74c3c; font-weight: bold; display: flex; align-items: center; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="debug-mode-enabled" style="width: 20px; height: 20px;" onchange="toggleDebugMode()">
@@ -581,7 +582,7 @@
                 </div>
                 <div class="how-to-card">
                     <h4>🎲 Daily Doubles</h4>
-                    <p>You can choose between <em>Fixed Double Points</em> or <em>Wager (Standard)</em>.<br><strong>How Wagers Work:</strong> Official rules apply! Players can risk up to their current score OR the highest value on the board, whichever is larger. Just select a percentage and the game does the math automatically.</p>
+                    <p>You can choose between <em>Fixed Double Points</em> or <em>Wager (Standard)</em>.<br><strong>How Wagers Work:</strong> Official rules apply! Players can risk any amount up to their total score. If their score is negative or lower than the highest value on the board, their maximum allowed wager defaults to the highest value on the entire board. Selecting a percentage automatically calculates it for whoever answers!</p>
                 </div>
                 <div class="how-to-card">
                     <h4>🚨 Final Jeopardy & Scores</h4>
@@ -645,7 +646,7 @@
                 
                 <div id="dd-wager-section">
                     <p style="color: #FFCC00; font-size: 1.8em; margin-bottom: 10px; font-weight: bold;">Select Wager Percentage:</p>
-                    <p style="font-size: 1em; color: #bdc3c7; max-width: 600px; margin: 0 auto 30px; line-height: 1.4;">Players can risk any amount up to their total score, or up to the highest value question on the board if their score is lower than that maximum. Selecting a percentage automatically calculates it for whoever answers!</p>
+                    <p style="font-size: 1em; color: #bdc3c7; max-width: 600px; margin: 0 auto 30px; line-height: 1.4;">Players can risk any amount up to their total score. <strong>Official Rule:</strong> If their score is negative or lower than the highest value on the board, their maximum allowed wager defaults to the highest value on the entire board. Selecting a percentage automatically calculates it for whoever answers!</p>
                     
                     <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap;">
                         <button class="btn btn-dark" id="dd-btn-25" onclick="setDDPercent(25)" style="padding: 15px 30px; font-size: 1.5em; min-width: 100px;">25%</button>
@@ -944,6 +945,48 @@
                 try { osc.stop(); } catch(e) {}
             });
             fjOscillators = [];
+        }
+
+        // --- CLEAR MEDIA FUNCTIONS ---
+        async function clearMedia(c, r) {
+            if(confirm("Clear all media (images, audio, URLs) for this question?")) {
+                const imgInput = document.getElementById(`img-${c}-${r}`);
+                if (imgInput) imgInput.value = "";
+                const audioInput = document.getElementById(`audio-${c}-${r}`);
+                if (audioInput) audioInput.value = "";
+                const mediaInput = document.getElementById(`media-${c}-${r}`);
+                if (mediaInput) mediaInput.value = "";
+
+                await saveAdminData(); 
+
+                const activeRoundData = gameData.rounds[currentAdminRound];
+                activeRoundData.board[c][r].img = null;
+                activeRoundData.board[c][r].audio = null;
+                activeRoundData.board[c][r].mediaUrl = "";
+                
+                renderAdminBoard();
+                logDebug("MEDIA", `Cleared media for Cat ${c+1}, Row ${r+1}`);
+            }
+        }
+
+        async function clearFJMedia() {
+            if(confirm("Clear all media for Final Jeopardy?")) {
+                const fjImgInput = document.getElementById('fj-img');
+                if (fjImgInput) fjImgInput.value = "";
+                const fjAudioInput = document.getElementById('fj-audio');
+                if (fjAudioInput) fjAudioInput.value = "";
+                const fjMediaInput = document.getElementById('fj-media');
+                if (fjMediaInput) fjMediaInput.value = "";
+
+                await saveAdminData();
+
+                gameData.finalJeopardy.img = null;
+                gameData.finalJeopardy.audio = null;
+                gameData.finalJeopardy.mediaUrl = "";
+                
+                renderAdminBoard();
+                logDebug("MEDIA", `Cleared media for Final Jeopardy`);
+            }
         }
 
         function downloadStandaloneHTML() {
@@ -1300,9 +1343,16 @@
             document.getElementById('persistent-board-enabled').checked = gameData.persistentScoreboard;
             document.getElementById('debug-mode-enabled').checked = gameData.debugMode;
             document.getElementById('timer-enabled').checked = gameData.timer.enabled;
-            document.getElementById('timer-duration').value = gameData.timer.duration;
+            
+            let timerDur = gameData.timer.duration || 30;
+            document.getElementById('timer-duration').value = timerDur;
+            document.getElementById('timer-val').innerText = timerDur;
+
+            let sfxVol = gameData.sfx.volume !== undefined ? gameData.sfx.volume : 50;
             document.getElementById('sfx-enabled').checked = gameData.sfx.enabled;
-            document.getElementById('sfx-volume').value = gameData.sfx.volume;
+            document.getElementById('sfx-volume').value = sfxVol;
+            document.getElementById('vol-val').innerText = sfxVol;
+
             document.getElementById('dd-enabled').checked = gameData.dailyDoubles.enabled;
             document.getElementById('dd-mode-select').value = gameData.dailyDoubles.mode;
             document.getElementById('fj-enabled').checked = gameData.finalJeopardy.enabled;
@@ -1470,9 +1520,17 @@
                         document.getElementById('debug-mode-enabled').checked = gameData.debugMode;
                         document.getElementById('dd-enabled').checked = gameData.dailyDoubles.enabled !== false;
                         document.getElementById('dd-mode-select').value = gameData.dailyDoubles.mode || 'wager';
+                        
+                        document.getElementById('timer-enabled').checked = gameData.timer.enabled !== false;
+                        let timerDur = gameData.timer.duration || 30;
+                        document.getElementById('timer-duration').value = timerDur;
+                        document.getElementById('timer-val').innerText = timerDur;
+
                         document.getElementById('sfx-enabled').checked = gameData.sfx.enabled !== false;
-                        document.getElementById('sfx-volume').value = gameData.sfx.volume !== undefined ? gameData.sfx.volume : 50;
-                        document.getElementById('vol-val').innerText = document.getElementById('sfx-volume').value;
+                        let sfxVol = gameData.sfx.volume !== undefined ? gameData.sfx.volume : 50;
+                        document.getElementById('sfx-volume').value = sfxVol;
+                        document.getElementById('vol-val').innerText = sfxVol;
+
                         document.getElementById('fj-wagers-enabled').checked = gameData.finalJeopardy.wagersEnabled !== false;
                         
                         toggleRound2Section();
@@ -1516,9 +1574,14 @@
                                 <label style="flex:1;">🎵 Local Audio: <input type="file" id="fj-audio" accept="audio/*"></label>
                             </div>
                             <input type="text" id="fj-media" class="media-input" placeholder="OR Drag & Drop / Paste URL (YouTube, Video link, etc)" value="${gameData.finalJeopardy.mediaUrl.replace(/"/g, '&quot;')}">
-                            <div id="fj-media-status" style="font-size: 0.85em; color: #f39c12;">
-                                ${gameData.finalJeopardy.img ? '✅ Local Img Saved | ' : ''} ${gameData.finalJeopardy.audio ? '✅ Local Audio Saved' : ''}
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; margin-bottom: 10px;">
+                                <div id="fj-media-status" style="font-size: 0.85em; color: #f39c12;">
+                                    ${gameData.finalJeopardy.img ? '✅ Local Img Saved | ' : ''} ${gameData.finalJeopardy.audio ? '✅ Local Audio Saved' : ''}
+                                </div>
+                                <button type="button" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.85em; text-decoration: underline; padding: 0;" onclick="clearFJMedia()">Clear Media</button>
                             </div>
+
                         </div>
 
                         <label style="color: #FFCC00; font-weight: bold; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer;">
@@ -1571,8 +1634,12 @@
                                     <label>🖼️ Local Img: <input type="file" id="img-${c}-${r}" accept="image/*"></label>
                                     <label>🎵 Local Audio: <input type="file" id="audio-${c}-${r}" accept="audio/*"></label>
                                 </div>
-                                <div id="media-status-${c}-${r}" style="font-size: 0.75em; color: #f39c12; margin-bottom: 5px;">
-                                    ${tile.img ? '✅ Local Img Saved | ' : ''} ${tile.audio ? '✅ Local Audio Saved' : ''}
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <div id="media-status-${c}-${r}" style="font-size: 0.75em; color: #f39c12;">
+                                        ${tile.img ? '✅ Img Saved | ' : ''} ${tile.audio ? '✅ Audio Saved' : ''}
+                                    </div>
+                                    <button type="button" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.8em; text-decoration: underline; padding: 0;" onclick="clearMedia(${c}, ${r})">Clear Media</button>
                                 </div>
 
                                 <input type="text" id="media-${c}-${r}" class="media-input" value="${tile.mediaUrl}" placeholder="OR Drag/Paste Media URL (YouTube, etc)">
@@ -2301,7 +2368,8 @@
             sorted.forEach((p, index) => {
                 setTimeout(() => {
                     playRevealDrum();
-                    let isWinner = index === sorted.length - 1 && sorted.length > 0;
+                    let isWinner = (p.score === maxScore && maxScore > 0); 
+                    if (maxScore === 0 && index === 0) isWinner = true; 
                     
                     let row = document.createElement('div');
                     row.className = `finale-row ${isWinner ? 'finale-winner' : ''}`;
