@@ -202,15 +202,14 @@
         
         .q-label { font-size: 0.95em; color: #FFCC00; font-weight: bold; margin-bottom: 5px; display: block; }
 
-        .file-inputs { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
-        .file-inputs label { font-size: 0.85em; color: #bdc3c7; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
-        .file-inputs input[type="file"] { font-size: 0.9em; color: #ecf0f1; width: 100%; }
-
-        .media-input {
-            width: 100%; padding: 8px; border-radius: 4px; border: none; box-sizing: border-box; font-size: 0.85em;
-            background: #34495e; color: #ecf0f1; border: 1px dashed #bdc3c7; margin-bottom: 8px;
-        }
-        .media-input::placeholder { color: #95a5a6; }
+        /* Media Row Styles */
+        .media-row { display: flex; align-items: stretch; gap: 8px; margin-bottom: 8px; width: 100%; }
+        .media-row label { flex: 1; background: #ecf0f1; color: #2c3e50; padding: 10px; border-radius: 4px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95em; font-weight: bold; box-sizing: border-box; margin: 0; overflow: hidden; border: none; }
+        .media-row label input[type="file"] { width: 100%; font-size: 0.9em; color: #2c3e50; cursor: pointer; border: none; padding: 0; background: transparent; }
+        .media-row input[type="text"] { flex: 1; margin-bottom: 0 !important; }
+        .btn-clear-media { background: #e74c3c; color: white; border: none; border-radius: 4px; padding: 0 14px; cursor: pointer; font-weight: bold; font-size: 1.1em; transition: transform 0.1s; display: flex; align-items: center; justify-content: center; }
+        .btn-clear-media:hover { filter: brightness(1.2); }
+        .btn-clear-media:active { transform: scale(0.95); }
 
         /* --- MODAL STYLES --- */
         .modal-overlay {
@@ -948,44 +947,47 @@
         }
 
         // --- CLEAR MEDIA FUNCTIONS ---
-        async function clearMedia(c, r) {
-            if(confirm("Clear all media (images, audio, URLs) for this question?")) {
-                const imgInput = document.getElementById(`img-${c}-${r}`);
-                if (imgInput) imgInput.value = "";
-                const audioInput = document.getElementById(`audio-${c}-${r}`);
-                if (audioInput) audioInput.value = "";
-                const mediaInput = document.getElementById(`media-${c}-${r}`);
-                if (mediaInput) mediaInput.value = "";
-
-                await saveAdminData(); 
-
-                const activeRoundData = gameData.rounds[currentAdminRound];
-                activeRoundData.board[c][r].img = null;
-                activeRoundData.board[c][r].audio = null;
-                activeRoundData.board[c][r].mediaUrl = "";
+        async function clearSpecificMedia(c, r, type) {
+            if(confirm(`Clear this ${type === 'img' ? 'image' : type === 'audio' ? 'audio' : 'URL'}?`)) {
+                if (type === 'img') {
+                    const el = document.getElementById(`img-${c}-${r}`);
+                    if (el) el.value = "";
+                    gameData.rounds[currentAdminRound].board[c][r].img = null;
+                } else if (type === 'audio') {
+                    const el = document.getElementById(`audio-${c}-${r}`);
+                    if (el) el.value = "";
+                    gameData.rounds[currentAdminRound].board[c][r].audio = null;
+                } else if (type === 'url') {
+                    const el = document.getElementById(`media-${c}-${r}`);
+                    if (el) el.value = "";
+                    gameData.rounds[currentAdminRound].board[c][r].mediaUrl = "";
+                }
                 
+                await saveAdminData(); 
                 renderAdminBoard();
-                logDebug("MEDIA", `Cleared media for Cat ${c+1}, Row ${r+1}`);
+                logDebug("MEDIA", `Cleared ${type} for Cat ${c+1}, Row ${r+1}`);
             }
         }
 
-        async function clearFJMedia() {
-            if(confirm("Clear all media for Final Jeopardy?")) {
-                const fjImgInput = document.getElementById('fj-img');
-                if (fjImgInput) fjImgInput.value = "";
-                const fjAudioInput = document.getElementById('fj-audio');
-                if (fjAudioInput) fjAudioInput.value = "";
-                const fjMediaInput = document.getElementById('fj-media');
-                if (fjMediaInput) fjMediaInput.value = "";
-
-                await saveAdminData();
-
-                gameData.finalJeopardy.img = null;
-                gameData.finalJeopardy.audio = null;
-                gameData.finalJeopardy.mediaUrl = "";
+        async function clearFJSpecificMedia(type) {
+            if(confirm(`Clear this ${type === 'img' ? 'image' : type === 'audio' ? 'audio' : 'URL'}?`)) {
+                if (type === 'img') {
+                    const el = document.getElementById('fj-img');
+                    if (el) el.value = "";
+                    gameData.finalJeopardy.img = null;
+                } else if (type === 'audio') {
+                    const el = document.getElementById('fj-audio');
+                    if (el) el.value = "";
+                    gameData.finalJeopardy.audio = null;
+                } else if (type === 'url') {
+                    const el = document.getElementById('fj-media');
+                    if (el) el.value = "";
+                    gameData.finalJeopardy.mediaUrl = "";
+                }
                 
+                await saveAdminData();
                 renderAdminBoard();
-                logDebug("MEDIA", `Cleared media for Final Jeopardy`);
+                logDebug("MEDIA", `Cleared ${type} for Final Jeopardy`);
             }
         }
 
@@ -1198,25 +1200,6 @@
             renderGameBoard();
         }
 
-        function generateMediaHTML(url) {
-            if (!url) return '';
-            
-            let ytMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-            if (ytMatch) {
-                return `<iframe class="modal-media-video" src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-            }
-            
-            if (url.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
-                return `<video class="modal-media-video" controls autoplay><source src="${url}">Your browser does not support the video tag.</video>`;
-            }
-            
-            if (url.match(/\.(mp3|wav)(\?.*)?$/i)) {
-                return `<audio class="modal-media-audio" controls autoplay><source src="${url}">Your browser does not support the audio tag.</audio>`;
-            }
-            
-            return `<img class="modal-media-image zoomable" style="display:block;" src="${url}" alt="Question Media" title="Click to enlarge" onclick="openLightbox(this.src)">`;
-        }
-
         function fileToBase64(file) {
             return new Promise((resolve, reject) => {
                 if (!file.type.startsWith('image/') || file.type.includes('svg')) {
@@ -1342,17 +1325,17 @@
             document.getElementById('round2-enabled').checked = gameData.round2Enabled;
             document.getElementById('persistent-board-enabled').checked = gameData.persistentScoreboard;
             document.getElementById('debug-mode-enabled').checked = gameData.debugMode;
-            document.getElementById('timer-enabled').checked = gameData.timer.enabled;
             
+            document.getElementById('timer-enabled').checked = gameData.timer.enabled !== false;
             let timerDur = gameData.timer.duration || 30;
             document.getElementById('timer-duration').value = timerDur;
             document.getElementById('timer-val').innerText = timerDur;
 
+            document.getElementById('sfx-enabled').checked = gameData.sfx.enabled !== false;
             let sfxVol = gameData.sfx.volume !== undefined ? gameData.sfx.volume : 50;
-            document.getElementById('sfx-enabled').checked = gameData.sfx.enabled;
             document.getElementById('sfx-volume').value = sfxVol;
             document.getElementById('vol-val').innerText = sfxVol;
-
+            
             document.getElementById('dd-enabled').checked = gameData.dailyDoubles.enabled;
             document.getElementById('dd-mode-select').value = gameData.dailyDoubles.mode;
             document.getElementById('fj-enabled').checked = gameData.finalJeopardy.enabled;
@@ -1569,19 +1552,22 @@
                         <textarea id="fj-q" class="fj-input" placeholder="Final Question..." style="height: 80px; resize: vertical;">${gameData.finalJeopardy.q}</textarea>
                         
                         <div id="fj-drop-box" class="drop-target-box" style="margin-bottom: 15px;">
-                            <div class="file-inputs" style="flex-direction: row; gap: 20px; margin-bottom: 10px;">
-                                <label style="flex:1;">🖼️ Local Image: <input type="file" id="fj-img" accept="image/*"></label>
-                                <label style="flex:1;">🎵 Local Audio: <input type="file" id="fj-audio" accept="audio/*"></label>
+                            <div class="media-row">
+                                <label title="Upload Image">🖼️ <input type="file" id="fj-img" accept="image/*"></label>
+                                <button type="button" class="btn-clear-media" onclick="clearFJSpecificMedia('img')" title="Clear Image">✕</button>
                             </div>
-                            <input type="text" id="fj-media" class="media-input" placeholder="OR Drag & Drop / Paste URL (YouTube, Video link, etc)" value="${gameData.finalJeopardy.mediaUrl.replace(/"/g, '&quot;')}">
+                            <div class="media-row">
+                                <label title="Upload Audio">🎵 <input type="file" id="fj-audio" accept="audio/*"></label>
+                                <button type="button" class="btn-clear-media" onclick="clearFJSpecificMedia('audio')" title="Clear Audio">✕</button>
+                            </div>
+                            <div class="media-row">
+                                <input type="text" id="fj-media" class="fj-input" style="margin-bottom:0 !important;" placeholder="🌐 Media URL (YouTube, Video, etc)" value="${gameData.finalJeopardy.mediaUrl.replace(/"/g, '&quot;')}">
+                                <button type="button" class="btn-clear-media" onclick="clearFJSpecificMedia('url')" title="Clear URL">✕</button>
+                            </div>
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; margin-bottom: 10px;">
-                                <div id="fj-media-status" style="font-size: 0.85em; color: #f39c12;">
-                                    ${gameData.finalJeopardy.img ? '✅ Local Img Saved | ' : ''} ${gameData.finalJeopardy.audio ? '✅ Local Audio Saved' : ''}
-                                </div>
-                                <button type="button" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.85em; text-decoration: underline; padding: 0;" onclick="clearFJMedia()">Clear Media</button>
+                            <div id="fj-media-status" style="font-size: 0.85em; color: #f39c12; text-align: center; margin-top: 5px; min-height: 14px;">
+                                ${gameData.finalJeopardy.img ? '✅ Img Saved &nbsp;' : ''} ${gameData.finalJeopardy.audio ? '✅ Audio Saved' : ''}
                             </div>
-
                         </div>
 
                         <label style="color: #FFCC00; font-weight: bold; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer;">
@@ -1628,21 +1614,25 @@
                         colHTML += `
                             <div class="${cellClass}" id="cell-box-${c}-${r}">
                                 <span class="q-label" style="${labelColor}">$${points} Question</span>
-                                <textarea id="q-${c}-${r}" placeholder="Question... (Drag file or Ctrl+V image here)">${tile.q}</textarea>
+                                <textarea id="q-${c}-${r}" placeholder="Question...">${tile.q}</textarea>
                                 
-                                <div class="file-inputs">
-                                    <label>🖼️ Local Img: <input type="file" id="img-${c}-${r}" accept="image/*"></label>
-                                    <label>🎵 Local Audio: <input type="file" id="audio-${c}-${r}" accept="audio/*"></label>
+                                <div class="media-row">
+                                    <label title="Upload Image">🖼️ <input type="file" id="img-${c}-${r}" accept="image/*"></label>
+                                    <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${c}', '${r}', 'img')" title="Clear Image">✕</button>
+                                </div>
+                                <div class="media-row">
+                                    <label title="Upload Audio">🎵 <input type="file" id="audio-${c}-${r}" accept="audio/*"></label>
+                                    <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${c}', '${r}', 'audio')" title="Clear Audio">✕</button>
+                                </div>
+                                <div class="media-row">
+                                    <input type="text" id="media-${c}-${r}" class="fj-input" style="margin-bottom:0 !important;" value="${tile.mediaUrl}" placeholder="🌐 Media URL (YouTube, etc)">
+                                    <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${c}', '${r}', 'url')" title="Clear URL">✕</button>
                                 </div>
 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                                    <div id="media-status-${c}-${r}" style="font-size: 0.75em; color: #f39c12;">
-                                        ${tile.img ? '✅ Img Saved | ' : ''} ${tile.audio ? '✅ Audio Saved' : ''}
-                                    </div>
-                                    <button type="button" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.8em; text-decoration: underline; padding: 0;" onclick="clearMedia(${c}, ${r})">Clear Media</button>
+                                <div id="media-status-${c}-${r}" style="font-size: 0.75em; color: #f39c12; margin-bottom: 8px; text-align: center; min-height: 14px;">
+                                    ${tile.img ? '✅ Img Saved &nbsp;' : ''} ${tile.audio ? '✅ Audio Saved' : ''}
                                 </div>
 
-                                <input type="text" id="media-${c}-${r}" class="media-input" value="${tile.mediaUrl}" placeholder="OR Drag/Paste Media URL (YouTube, etc)">
                                 <input type="text" id="a-${c}-${r}" value="${tile.a}" placeholder="Answer...">
                             </div>
                         `;
@@ -2178,11 +2168,9 @@
                     if (gameData.dailyDoubles.mode === 'double') {
                         pointsEarned = activeTile.originalPoints * 2;
                     } else {
-                        const roundNum = gameData.currentRound || 1;
-                        const currentPointVals = getPointValues(gameData.numQuestions, roundNum === 2);
-                        const boardMax = currentPointVals[currentPointVals.length - 1];
                         const player = players[playerIndex];
-                        const allowedMax = Math.max(player.score, boardMax);
+                        // HOUSE RULE: Cap at the tile's original value instead of the board's maximum
+                        const allowedMax = Math.max(player.score, activeTile.originalPoints);
                         pointsEarned = Math.round(allowedMax * (activeTile.ddPercent / 100));
                     }
                 }
@@ -2213,11 +2201,9 @@
                     if (gameData.dailyDoubles.mode === 'double') {
                         pointsLost = activeTile.originalPoints * 2;
                     } else {
-                        const roundNum = gameData.currentRound || 1;
-                        const currentPointVals = getPointValues(gameData.numQuestions, roundNum === 2);
-                        const boardMax = currentPointVals[currentPointVals.length - 1];
                         const player = players[playerIndex];
-                        const allowedMax = Math.max(player.score, boardMax);
+                        // HOUSE RULE: Cap at the tile's original value instead of the board's maximum
+                        const allowedMax = Math.max(player.score, activeTile.originalPoints);
                         pointsLost = Math.round(allowedMax * (activeTile.ddPercent / 100));
                     }
                 }
