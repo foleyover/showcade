@@ -189,6 +189,8 @@
             <!-- LEFT PANEL -->
             <div class="left-panel">
                 <button id="btn-show-sidebar" class="btn btn-info side-btn" onclick="toggleLeaderboard()">🏆 Show Leaderboard</button>
+                <button class="btn btn-info side-btn" style="background-color: #8e44ad; border-color: #9b59b6;" onclick="openHostCheatSheet()">🕵️ Host Cheat Sheet</button>
+                
                 <div id="persistent-leaderboard-container" style="display: none; background: #111; border: 2px solid #FFCC00; border-radius: 8px; padding: 15px; width: 100%; box-sizing: border-box; flex-direction: column;">
                     <h3 class="retro-title" style="margin-top: 0; color: #FFCC00; text-align: center; margin-bottom: 15px; font-size: 1.2em;">🏆 Scores</h3>
                     <div id="persistent-scoreboard-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
@@ -256,7 +258,8 @@
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
             <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">💾 Save & Play</button>
             <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
-            <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openRules()">📜 Game Rules</button>
+            <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openHostCheatSheet()">🕵️ Host Cheat Sheet</button>
+            <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #34495e; border-color: #bdc3c7;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px;" onclick="openHowTo()">💻 Technical Guide</button>
         </div>
 
@@ -405,6 +408,8 @@
                         <button type="button" class="btn-clear-media" onclick="clearGlobalMedia('bg-url')" title="Clear URL">✕</button>
                     </div>
                     <div id="bg-upload-status" style="font-size: 0.85em; color: #f39c12; font-weight: bold; text-align: center; margin-top: 5px; min-height: 14px;"></div>
+                    
+                    <input type="text" id="board-answer-input" style="width: 100%; padding: 10px; border-radius: 4px; border: 2px solid #8e44ad; box-sizing: border-box; font-size: 0.9em; background: #1a1a1a; color: #FFCC00; font-weight: bold; margin-top: 10px;" placeholder="🎯 Main Board Answer (Host Only - Hidden from players)..." value="">
                 </div>
 
                 <div id="drop-box-global" class="question-cell">
@@ -487,7 +492,7 @@
 
                 <div class="how-to-card">
                     <h4>🌐 Hosting & Local Files</h4>
-                    <p><strong>Recommended Hosts:</strong> Host your game for free using <strong>GitHub Pages</strong> or <strong>Cloudflare Pages</strong> to make all YouTube embeds and online media stream seamlessly.</p>
+                    <p><strong>Streamers & Hosts:</strong> Use the <strong>"Host Cheat Sheet"</strong> button to open a separate popup window containing all answers for the current round. You can drag this to a second monitor so viewers won't see it on your main screen share!</p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 30px;">
@@ -560,9 +565,11 @@
                 individualTileCovers: false,
                 bgImage: 'https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=600&h=600&auto=format&fit=crop',
                 mediaUrl: '',
+                boardAnswer: '',
                 globalTileCover: DEFAULT_BAKED_IN_TILE_COVER, 
                 aspectRatio: '1 / 1', 
                 questions: Array(totalT).fill(""),
+                answers: Array(totalT).fill(""),
                 tileImages: Array(totalT).fill(null),    
                 modalImages: Array(totalT).fill(null),   
                 tileAudio: Array(totalT).fill(null),
@@ -592,6 +599,7 @@
         
         var historyStack = [];
         var debugLogVisible = true;
+        var cheatSheetWindow = null;
 
         // --- DEBUG LOGGING ---
         function toggleDebugMode() {
@@ -732,6 +740,62 @@
             r.individualTileCovers = document.getElementById('enable-individual-covers').checked;
             await saveAdminData();
             renderAdminRound();
+        }
+
+        // --- HOST CHEAT SHEET ---
+        function openHostCheatSheet() {
+            if (cheatSheetWindow && !cheatSheetWindow.closed) {
+                cheatSheetWindow.focus();
+                updateCheatSheet();
+                return;
+            }
+            cheatSheetWindow = window.open('', 'CheatSheet', 'width=450,height=750');
+            updateCheatSheet();
+        }
+
+        function updateCheatSheet() {
+            if (!cheatSheetWindow || cheatSheetWindow.closed) return;
+            
+            const roundNum = document.getElementById('game-screen').style.display !== 'none' ? currentPlayRound : currentEditRound;
+            const rData = gameData.rounds[roundNum];
+
+            let html = `<!DOCTYPE html>
+            <html>
+            <head>
+                <title>🕵️ Host Cheat Sheet</title>
+                <style>
+                    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #0d1117; color: #fff; padding: 20px; margin: 0; }
+                    h2 { color: #FFCC00; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; font-family: 'Arial Black', Impact, sans-serif; letter-spacing: 1px; margin-top: 0; }
+                    .board-answer { background: #8e44ad; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 2px solid #9b59b6; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+                    .tile-block { background: #1a1a1a; padding: 15px; margin-bottom: 15px; border-left: 5px solid #3498db; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+                    .q-text { font-size: 1.05em; margin-bottom: 8px; color: #ecf0f1; }
+                    .a-text { color: #2ecc71; font-weight: bold; font-size: 1.15em; background: #000; padding: 8px; border-radius: 4px; border: 1px dashed #2ecc71; }
+                </style>
+            </head>
+            <body>
+                <h2>Puzzle ${roundNum + 1} Answers</h2>
+                <p style="color:#bdc3c7; font-size:0.9em; margin-top:-5px; margin-bottom:20px;">Keep this window on your second monitor. It auto-updates when you change rounds!</p>
+
+                <div class="board-answer">
+                    <h3 style="margin-top:0; color:#fff; font-size: 1.1em; text-transform: uppercase;">🎯 Main Board Answer</h3>
+                    <div style="font-size:1.4em; font-weight:bold; color:#FFCC00;">${rData.boardAnswer || '<em>No answer set</em>'}</div>
+                </div>
+            `;
+
+            const totalTiles = rData.gridSize * rData.gridSize;
+            for (let i = 0; i < totalTiles; i++) {
+                html += `
+                <div class="tile-block">
+                    <div style="color:#3498db; font-weight:bold; margin-bottom:5px; font-size: 1.2em;">Tile ${i + 1}</div>
+                    <div class="q-text">${rData.questions[i] || '<em>No question text</em>'}</div>
+                    <div class="a-text">Answer: ${rData.answers[i] || '<em>None</em>'}</div>
+                </div>`;
+            }
+
+            html += `</body></html>`;
+            cheatSheetWindow.document.open();
+            cheatSheetWindow.document.write(html);
+            cheatSheetWindow.document.close();
         }
 
         // --- FILE EXPORTS ---
@@ -987,6 +1051,7 @@
             
             r.gridSize = newSize;
             r.questions = Array(totalTiles).fill("").map((_, i) => r.questions[i] || "");
+            r.answers = Array(totalTiles).fill("").map((_, i) => r.answers[i] || "");
             r.tileImages = Array(totalTiles).fill(null).map((_, i) => r.tileImages[i] || null);
             r.modalImages = Array(totalTiles).fill(null).map((_, i) => r.modalImages[i] || null);
             r.tileAudio = Array(totalTiles).fill(null).map((_, i) => r.tileAudio[i] || null);
@@ -1007,6 +1072,7 @@
 
             document.getElementById('bg-upload').value = '';
             document.getElementById('bg-url-input').value = r.mediaUrl || '';
+            document.getElementById('board-answer-input').value = r.boardAnswer || '';
             
             const totalTiles = r.gridSize * r.gridSize;
             document.getElementById('tile-count-label').innerText = totalTiles;
@@ -1047,6 +1113,8 @@
                         <span class="q-label">Tile ${i + 1} Question</span>
                         <textarea id="input-q-${i}" style="height: 60px; resize: vertical;" placeholder="Question...">${(r.questions[i] || '').replace(/"/g, '&quot;')}</textarea>
                         
+                        <input type="text" id="input-a-${i}" value="${(r.answers[i] || '').replace(/"/g, '&quot;')}" placeholder="Answer (Host Only)..." style="width: 100%; padding: 10px; border-radius: 4px; border: none; box-sizing: border-box; font-size: 0.9em; background: #34495e; color: #ecf0f1; font-weight: bold; margin-bottom: 15px;">
+
                         <div class="media-row">
                             <label title="Upload Pop-up Image">🖼️ Pop-up <input type="file" id="input-modal-img-${i}" accept="image/*"></label>
                             <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${i}', 'modal')" title="Clear Pop-up Image">✕</button>
@@ -1067,6 +1135,8 @@
                 const group = document.getElementById(`tile-form-group-${i}`);
                 if (group) attachDropListeners(group, `input-modal-img-${i}`, `tile-upload-status-${i}`);
             }
+
+            updateCheatSheet();
         }
 
         async function saveAdminData() {
@@ -1099,6 +1169,8 @@
                 r.mediaUrl = document.getElementById('bg-url-input').value;
             }
 
+            r.boardAnswer = document.getElementById('board-answer-input').value;
+
             const globalTileInput = document.getElementById('global-tile-upload');
             if (globalTileInput && globalTileInput.files && globalTileInput.files[0]) {
                 r.globalTileCover = await fileToBase64(globalTileInput.files[0]);
@@ -1123,6 +1195,9 @@
             for (let i = 0; i < totalTiles; i++) {
                 const qInput = document.getElementById(`input-q-${i}`);
                 if (qInput) r.questions[i] = qInput.value;
+
+                const aInput = document.getElementById(`input-a-${i}`);
+                if (aInput) r.answers[i] = aInput.value;
 
                 const tileImgInput = document.getElementById(`input-img-${i}`);
                 if (tileImgInput && tileImgInput.files && tileImgInput.files[0]) {
@@ -1209,9 +1284,11 @@
                                 gridSize: gs,
                                 individualTileCovers: r.individualTileCovers || false,
                                 mediaUrl: r.mediaUrl || '',
+                                boardAnswer: r.boardAnswer || '',
                                 globalTileCover: r.globalTileCover || DEFAULT_BAKED_IN_TILE_COVER,
                                 aspectRatio: r.aspectRatio || '1 / 1', 
                                 questions: [...(r.questions || []), ...Array(totalT).fill("")].slice(0, totalT),
+                                answers: [...(r.answers || []), ...Array(totalT).fill("")].slice(0, totalT),
                                 tileImages: [...(r.tileImages || []), ...Array(totalT).fill(null)].slice(0, totalT),
                                 modalImages: [...(r.modalImages || []), ...Array(totalT).fill(null)].slice(0, totalT),
                                 tileAudio: [...(r.tileAudio || []), ...Array(totalT).fill(null)].slice(0, totalT),
@@ -1369,6 +1446,8 @@
 
             document.getElementById('btn-play-prev').disabled = (currentPlayRound === 0);
             document.getElementById('btn-play-next').disabled = (currentPlayRound === gameData.rounds.length - 1);
+
+            updateCheatSheet();
         }
 
         function changePlayRound(direction) {
