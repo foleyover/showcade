@@ -59,11 +59,9 @@
         .score-value:hover { background: #333; }
         .score-hint { font-size: 0.6em; color: #bdc3c7; text-align: center; font-weight: normal; margin-top: -3px; }
 
-        /* The Main Game Board (Catchphrase Grid) */
+        /* The Main Game Board (Catchphrase Grid) - Pure Aspect-Ratio Conforming */
         #game-board {
             width: min(85vw, 800px);
-            max-height: 68vh;
-            min-height: 320px;
             background-color: #000;
             background-size: cover;
             background-position: center;
@@ -117,7 +115,7 @@
         
         /* Media Row Styles */
         .media-row { display: flex; align-items: stretch; gap: 8px; margin-bottom: 8px; width: 100%; }
-        .media-row label { flex: 1; background: #ecf0f1; color: #2c3e50; padding: 10px; border-radius: 4px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95em; font-weight: bold; box-sizing: border-box; margin: 0; overflow: hidden; border: none; }
+        .media-row label { flex: 1; background: #ecf0f1; color: #2c3e50; padding: 10px; border-radius: 4px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95em; font-weight: bold; box-sizing: border-box; margin: 0; overflow: hidden; border: none; white-space: nowrap; }
         .media-row label input[type="file"] { width: 100%; font-size: 0.9em; color: #2c3e50; cursor: pointer; border: none; padding: 0; background: transparent; }
         .media-row input[type="text"] { flex: 1; margin-bottom: 0 !important; width: 100%; padding: 10px; border-radius: 4px; border: none; box-sizing: border-box; font-size: 0.9em; background: #ecf0f1; color: #2c3e50; font-weight: bold; }
         .btn-clear-media { background: #e74c3c; color: white; border: none; border-radius: 4px; padding: 0 14px; cursor: pointer; font-weight: bold; font-size: 1.1em; transition: transform 0.1s; display: flex; align-items: center; justify-content: center; }
@@ -256,8 +254,8 @@
     <div id="admin-screen">
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-            <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
             <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 20px;" onclick="switchToGame()">💾 Save & Play</button>
+            <a href="index.html" class="btn btn-home" style="font-size: 1.2em; padding: 12px 20px;">🏠 ShowCade</a>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px; background-color: #8e44ad; border-color: #9b59b6;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.2em; padding: 12px 20px;" onclick="openHowTo()">💻 Technical Guide</button>
         </div>
@@ -399,7 +397,7 @@
                 <div id="drop-box-bg" class="question-cell" style="margin-bottom: 15px;">
                     <label style="font-weight: bold; color: #FFCC00; display:block; margin-bottom: 8px;">🖼️ Hidden Picture (Background):</label>
                     <div class="media-row">
-                        <label title="Upload Image">🖼️ <input type="file" id="bg-upload" accept="image/*"></label>
+                        <label title="Upload Image">🖼️ Image <input type="file" id="bg-upload" accept="image/*"></label>
                         <button type="button" class="btn-clear-media" onclick="clearGlobalMedia('bg-img')" title="Clear Image">✕</button>
                     </div>
                     <div class="media-row">
@@ -413,7 +411,7 @@
                     <label style="font-weight: bold; color: #FFCC00; display:block; margin-bottom: 8px;">🧩 Global Tile Cover (Optional):</label>
                     <p style="color: #8FA0A1; font-size: 0.85em; margin-top: 0;">Upload an image here to apply it to all tiles on this puzzle instantly.</p>
                     <div class="media-row">
-                        <label title="Upload Global Tile Cover">🖼️ <input type="file" id="global-tile-upload" accept="image/*"></label>
+                        <label title="Upload Global Tile Cover">🧩 Cover <input type="file" id="global-tile-upload" accept="image/*"></label>
                         <button type="button" class="btn-clear-media" onclick="clearGlobalMedia('global-tile')" title="Clear Cover">✕</button>
                     </div>
                     <div id="global-tile-upload-status" style="font-size: 0.85em; color: #f39c12; font-weight: bold; text-align: center; margin-top: 5px; min-height: 14px;"></div>
@@ -1041,19 +1039,20 @@
                 
                 container.innerHTML += `
                     <div class="question-cell" id="tile-form-group-${i}">
+                        <div class="media-row tile-cover-row" style="display: ${showCovers}; margin-bottom: 12px;">
+                            <label title="Upload Custom Tile Cover" style="background: #e67e22; color: #fff;">🧩 Cover <input type="file" id="input-img-${i}" accept="image/*"></label>
+                            <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${i}', 'img')" title="Clear Tile Cover">✕</button>
+                        </div>
+
                         <span class="q-label">Tile ${i + 1} Question</span>
                         <textarea id="input-q-${i}" style="height: 60px; resize: vertical;" placeholder="Question...">${(r.questions[i] || '').replace(/"/g, '&quot;')}</textarea>
                         
-                        <div class="media-row tile-cover-row" style="display: ${showCovers};">
-                            <label title="Upload Tile Cover">🖼️ <input type="file" id="input-img-${i}" accept="image/*"></label>
-                            <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${i}', 'img')" title="Clear Tile Cover">✕</button>
-                        </div>
                         <div class="media-row">
-                            <label title="Upload Pop-up Image">🖼️ <input type="file" id="input-modal-img-${i}" accept="image/*"></label>
+                            <label title="Upload Pop-up Image">🖼️ Pop-up <input type="file" id="input-modal-img-${i}" accept="image/*"></label>
                             <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${i}', 'modal')" title="Clear Pop-up Image">✕</button>
                         </div>
                         <div class="media-row">
-                            <label title="Upload Audio">🎵 <input type="file" id="input-audio-${i}" accept="audio/*"></label>
+                            <label title="Upload Audio">🎵 Audio <input type="file" id="input-audio-${i}" accept="audio/*"></label>
                             <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${i}', 'audio')" title="Clear Audio">✕</button>
                         </div>
                         
