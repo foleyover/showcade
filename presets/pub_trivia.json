@@ -1,0 +1,145 @@
+{
+  "hostName": "ShowCade Quizmaster",
+  "numCategories": 6,
+  "numQuestions": 5,
+  "maxGuesses": 1,
+  "currentRound": 1,
+  "round2Enabled": true,
+  "persistentScoreboard": false,
+  "debugMode": false,
+  "chudEnabled": true,
+  "timer": {
+    "enabled": true,
+    "duration": 30
+  },
+  "sfx": {
+    "enabled": true,
+    "volume": 50
+  },
+  "dailyDoubles": {
+    "enabled": true,
+    "mode": "wager"
+  },
+  "rounds": {
+    "1": {
+      "categories": [
+        "Pop Music",
+        "Geography",
+        "Food & Drink",
+        "Science",
+        "History",
+        "Sports"
+      ],
+      "board": [
+        [
+          { "q": "Who is known as the \"Queen of Pop\"?", "a": "Madonna", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What band famously walked across Abbey Road?", "a": "The Beatles", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which artist released the hit album \"1989\" in 2014?", "a": "Taylor Swift", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What Elton John song was famously rewritten for Princess Diana?", "a": "Candle in the Wind", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Who sang the 2015 massive hit \"Uptown Funk\"?", "a": "Mark Ronson ft. Bruno Mars", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "What is the capital of France?", "a": "Paris", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which is the largest ocean on Earth?", "a": "Pacific Ocean", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Mount Everest is located in which mountain range?", "a": "Himalayas", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the smallest sovereign country in the world?", "a": "Vatican City", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which African country has the highest population?", "a": "Nigeria", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "What is the primary ingredient in guacamole?", "a": "Avocado", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which spirit is traditionally used to make a Margarita?", "a": "Tequila", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What type of pasta has an Italian name meaning \"little worms\"?", "a": "Vermicelli", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": true },
+          { "q": "Sriracha hot sauce originated in which Southeast Asian country?", "a": "Thailand", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the most consumed manufactured drink in the world?", "a": "Tea", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "What is the chemical symbol for water?", "a": "H2O", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which planet in our solar system is known as the Red Planet?", "a": "Mars", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What invisible force keeps us grounded on Earth?", "a": "Gravity", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which physicist is famous for the equation E=mc^2?", "a": "Albert Einstein", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the hardest naturally occurring substance on Earth?", "a": "Diamond", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "Who was the first President of the United States?", "a": "George Washington", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "In what year did World War II end?", "a": "1945", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Who was the British Prime Minister during most of WWII?", "a": "Winston Churchill", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "The ancient city of Rome was famously built on how many hills?", "a": "Seven", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What was the name of the ship that brought the Pilgrims to America in 1620?", "a": "The Mayflower", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "In what sport do players try to hit a \"hole-in-one\"?", "a": "Golf", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "How many players are on a standard soccer (football) team on the field?", "a": "11", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which country has won the most FIFA World Cups?", "a": "Brazil", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "In tennis, what term is used for a score of zero?", "a": "Love", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "The Olympic Games are traditionally held every how many years?", "a": "Four", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ]
+      ]
+    },
+    "2": {
+      "categories": [
+        "Movie Quotes",
+        "Animals",
+        "Technology",
+        "Literature",
+        "The 1990s",
+        "Pot Luck"
+      ],
+      "board": [
+        [
+          { "q": "Name the movie: \"May the Force be with you.\"", "a": "Star Wars", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Name the movie: \"There's no place like home.\"", "a": "The Wizard of Oz", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Name the movie: \"I'm the king of the world!\"", "a": "Titanic", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Name the movie: \"Here's looking at you, kid.\"", "a": "Casablanca", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": true },
+          { "q": "Name the movie: \"You can't handle the truth!\"", "a": "A Few Good Men", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "What is the fastest land animal in the world?", "a": "Cheetah", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What bird is historically used as the universal symbol of peace?", "a": "Dove", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the tallest living terrestrial animal?", "a": "Giraffe", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "A group of lions is known as a what?", "a": "A Pride", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the only mammal naturally capable of true and sustained flight?", "a": "Bat", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "In a website address, what does \"www\" stand for?", "a": "World Wide Web", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Who founded Microsoft alongside Paul Allen?", "a": "Bill Gates", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What massive technology company produces the iPhone?", "a": "Apple", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "In what decade was the very first email sent?", "a": "1970s (1971)", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "In computing, what does \"URL\" stand for?", "a": "Uniform Resource Locator", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "Who wrote the classic tragic play \"Romeo and Juliet\"?", "a": "William Shakespeare", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the name of the boy wizard created by J.K. Rowling?", "a": "Harry Potter", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Who wrote the dystopian novel \"1984\"?", "a": "George Orwell", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What famous pen name was used by the author Samuel Langhorne Clemens?", "a": "Mark Twain", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "In the novel \"Moby-Dick\", what is the name of the ship's captain?", "a": "Captain Ahab", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "Which iconic 90s TV show featured characters named Ross, Rachel, and Chandler?", "a": "Friends", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What pocket-sized digital pet was released by Bandai in 1996?", "a": "Tamagotchi", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which grunge band released the hit song \"Smells Like Teen Spirit\" in 1991?", "a": "Nirvana", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": true },
+          { "q": "What was the first commercially successful cloned mammal, born in 1996?", "a": "Dolly the Sheep", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which movie became the highest-grossing film of the 1990s?", "a": "Titanic", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ],
+        [
+          { "q": "What color is a standard school bus in the United States?", "a": "Yellow", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "How many sides does a standard stop sign have?", "a": "Eight (Octagon)", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Which planet is closest to the Sun?", "a": "Mercury", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "Who painted the world-famous Mona Lisa?", "a": "Leonardo da Vinci", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false },
+          { "q": "What is the official currency of Japan?", "a": "Yen", "img": null, "audio": null, "mediaUrl": "", "revealed": false, "isDD": false }
+        ]
+      ]
+    }
+  },
+  "finalJeopardy": {
+    "enabled": true,
+    "wagersEnabled": true,
+    "category": "Space Exploration",
+    "rule": "Standard Wagers Apply",
+    "q": "In 1969, who famously became the first human to step foot on the surface of the Moon?",
+    "a": "Neil Armstrong",
+    "img": null,
+    "audio": null,
+    "mediaUrl": "",
+    "hasAnswer": true
+  }
+}
