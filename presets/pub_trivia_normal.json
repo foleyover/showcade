@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["History", "Science", "UK TV", "Capitals", "Literature", "Brands"],
+"board": [
+[{"q":"Who was the first President of the United States?","a":"George Washington"},{"q":"In which year did the Titanic sink?","a":"1912"},{"q":"Who was the British Prime Minister during most of WWII?","a":"Winston Churchill"},{"q":"What wall fell in 1989, reuniting a country?","a":"The Berlin Wall"},{"q":"Which ancient civilization built the Machu Picchu?","a":"The Incas"}],
+[{"q":"What is the chemical symbol for water?","a":"H2O"},{"q":"What gas do plants absorb from the atmosphere?","a":"Carbon Dioxide"},{"q":"What is the hardest natural substance on Earth?","a":"Diamond"},{"q":"At what temperature Celsius does water boil?","a":"100 degrees"},{"q":"What force keeps the planets in orbit around the sun?","a":"Gravity"}],
+[{"q":"Which long-running soap is set in the fictional borough of Walford?","a":"EastEnders"},{"q":"Who are the two main characters in 'Peep Show' played by Mitchell and Webb?","a":"Mark and Jez"},{"q":"Which time-traveling alien travels in a blue police box?","a":"The Doctor (Doctor Who)"},{"q":"What is the name of the pub in Coronation Street?","a":"The Queen Vic (Wait, no, it's The Rovers Return!)"},{"q":"Which panel show features Jimmy Carr as host alongside Jon Richardson?","a":"8 Out of 10 Cats"}],
+[{"q":"What is the capital of Japan?","a":"Tokyo"},{"q":"What is the capital of Australia?","a":"Tokyo"},{"q":"What is the capital of Canada?","a":"Canberra"},{"q":"What is the capital of Brazil?","a":"Brasilia"},{"q":"What is the capital of Iceland?","a":"Ottawa (Wait, Iceland is Reykjavik)"}],
+[{"q":"Who wrote 'Romeo and Juliet'?","a":"William Shakespeare"},{"q":"What is the name of the hobbit created by J.R.R. Tolkien?","a":"Bilbo Baggins (or Frodo)"},{"q":"Who wrote '1984' and 'Animal Farm'?","a":"George Orwell"},{"q":"In which book would you find the character Holden Caulfield?","a":"1984 (Wait, it's Catcher in the Rye)"},{"q":"Which author wrote the 'A Song of Ice and Fire' series?","a":"George R.R. Martin"}],
+[{"q":"Which brand's slogan is 'Just Do It'?","a":"Nike"},{"q":"The golden arches are the logo for this company.","a":"McDonald's"},{"q":"This tech company's logo is a fruit with a bite taken out of it.","a":"Apple"},{"q":"Which car brand features a prancing horse on its badge?","a":"Ferrari"},{"q":"This brand is known for 'finger lickin' good' chicken.","a":"KFC"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Inventors", "rule": "Wager your points!", "q": "Who is credited with inventing the World Wide Web in 1989?", "a": "Tim Berners-Lee", "hasAnswer": true }
+}

@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["Premier League", "Tennis", "Olympics", "Formula 1", "Rugby", "Golf"],
+"board": [
+[{"q":"Which team plays their home games at Old Trafford?","a":"Manchester United"},{"q":"Who is the all-time top goalscorer in Premier League history?","a":"Alan Shearer"},{"q":"Which team went unbeaten in the 2003-04 Premier League season, earning the nickname 'The Invincibles'?","a":"Arsenal"},{"q":"What animal is on the logo of Leicester City?","a":"Fox"},{"q":"Which manager won 13 Premier League titles?","a":"Sir Alex Ferguson"}],
+[{"q":"What is the oldest tennis tournament in the world, played on grass?","a":"Wimbledon"},{"q":"Which Spanish player holds 14 French Open titles?","a":"Rafael Nadal"},{"q":"How many Grand Slam singles titles did Serena Williams win?","a":"23"},{"q":"In tennis, what term is used for a score of zero?","a":"Love"},{"q":"Who was the first British man to win the Wimbledon singles title since Fred Perry?","a":"Andy Murray"}],
+[{"q":"In which city were the 2012 Summer Olympics held?","a":"London"},{"q":"How often are the Summer Olympic games held?","a":"Every 4 years"},{"q":"What do the 5 interlocking rings on the Olympic flag represent?","a":"The 5 continents"},{"q":"Who holds the record for the most Olympic gold medals of all time?","a":"Michael Phelps"},{"q":"Which country has won the most Winter Olympic medals?","a":"Norway"}],
+[{"q":"Which driver holds the record for the most F1 World Championships alongside Michael Schumacher?","a":"Lewis Hamilton"},{"q":"What color are Ferrari F1 cars traditionally painted?","a":"Red"},{"q":"Which iconic F1 driver tragically died at the 1994 San Marino Grand Prix?","a":"Ayrton Senna"},{"q":"What flag is waved to indicate the end of a race?","a":"Chequered Flag"},{"q":"Which energy drink company owns two F1 teams?","a":"Red Bull"}],
+[{"q":"How many points is a try worth in Rugby Union?","a":"5"},{"q":"What is the name of the international rugby tournament held annually between 6 European nations?","a":"Six Nations"},{"q":"Which country's rugby team performs the Haka before a match?","a":"New Zealand (All Blacks)"},{"q":"What shape is a standard rugby ball?","a":"Oval"},{"q":"Who won the 2003 Rugby World Cup thanks to a drop goal by Jonny Wilkinson?","a":"England"}],
+[{"q":"What is it called when a golfer completes a hole in one stroke under par?","a":"Birdie"},{"q":"What is it called when a hole is completed in one stroke over par?","a":"Bogey"},{"q":"Which American golfer has won 15 major championships and wears red on Sundays?","a":"Tiger Woods"},{"q":"What prestigious golf tournament awards the winner a Green Jacket?","a":"The Masters"},{"q":"What is the term for a score of two strokes under par?","a":"Eagle"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Football History", "rule": "Wager your points!", "q": "In what year did England win their first and only FIFA World Cup?", "a": "1966", "hasAnswer": true }
+}

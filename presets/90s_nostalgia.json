@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["90s Music", "Movies", "TV Shows", "Toys", "90s Tech", "Slang"],
+"board": [
+[{"q":"Who hit me 'Baby One More Time'?","a":"Britney Spears"},{"q":"Which Britpop band sang 'Wonderwall'?","a":"Oasis"},{"q":"What girl group told us what they want, what they really really want?","a":"Spice Girls"},{"q":"Which Nirvana song became the anthem for 90s grunge?","a":"Smells Like Teen Spirit"},{"q":"Who sang the heartbreaking ballad 'My Heart Will Go On'?","a":"Celine Dion"}],
+[{"q":"Which 1993 film features dinosaurs brought back to life?","a":"Jurassic Park"},{"q":"What animated film features a lion cub named Simba?","a":"The Lion King"},{"q":"Keanu Reeves voices this toy cowboy in Toy Story. (Wait, Tom Hanks voices Woody)","a":"Tom Hanks"},{"q":"What 1999 sci-fi movie features Neo bending backward to dodge bullets?","a":"The Matrix"},{"q":"Which Bruce Willis movie involves a bus with a bomb that can't slow down?","a":"Speed"}],
+[{"q":"Which sitcom featured a group of six friends living in New York?","a":"Friends"},{"q":"What show followed a teenager named Will Smith moving to Bel-Air?","a":"The Fresh Prince of Bel-Air"},{"q":"Which animated show features a yellow family living in Springfield?","a":"The Simpsons"},{"q":"What show featured Mulder and Scully investigating the paranormal?","a":"The X-Files"},{"q":"Which medical drama launched George Clooney's career?","a":"ER"}],
+[{"q":"These digital pets lived on a small keychain.","a":"Tamagotchi"},{"q":"These small, fuzzy, electronic robots would learn English as you played with them.","a":"Furby"},{"q":"These plastic discs with pog designs were slammed with a heavier piece.","a":"Pogs"},{"q":"What Nintendo handheld console was released in 1989 but dominated the 90s?","a":"GameBoy"},{"q":"These small stuffed animals were highly collectible and had a heart-shaped tag.","a":"Beanie Babies"}],
+[{"q":"What dial-up internet provider sent millions of free CDs in the mail?","a":"AOL"},{"q":"What operating system was famously released by Microsoft in 1995?","a":"Windows 95"},{"q":"What physical format largely replaced the VHS tape in the late 90s?","a":"DVD"},{"q":"What music format replaced cassette tapes but was killed by the MP3?","a":"CD (Compact Disc)"},{"q":"What Sony video game console launched in 1994 and used CDs?","a":"PlayStation 1"}],
+[{"q":"If something was excellent, it was the '____'.","a":"Bomb"},{"q":"What phrase did you say to someone when you pranked them?","a":"Psych!"},{"q":"If you were leaving, you might say 'Catch you on the ____'.","a":"Flip side"},{"q":"What abbreviation meant 'Talk to you later'?","a":"TTYL"},{"q":"If someone was acting silly, they were trippin'. What word meant 'No way!'?","a":"As if!"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "90s Events", "rule": "Wager your points!", "q": "What major global fear occurred on New Year's Eve 1999 regarding computers?", "a": "Y2K Bug", "hasAnswer": true }
+}

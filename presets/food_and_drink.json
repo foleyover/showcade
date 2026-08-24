@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["Europe", "Cocktails", "Cheeses", "Asia", "Desserts", "Fast Food"],
+"board": [
+[{"q":"Paella is a traditional rice dish from which country?","a":"Spain"},{"q":"Haggis, Neeps, and Tatties is the national dish of where?","a":"Scotland"},{"q":"Which Italian city is widely considered the birthplace of pizza?","a":"Naples"},{"q":"Goulash is a heavily spiced stew originating from which country?","a":"Hungary"},{"q":"Escargot is a delicacy made of what animal?","a":"Snail"}],
+[{"q":"What clear liquor is mixed with tonic water?","a":"Gin"},{"q":"A Margarita is traditionally made with which liquor?","a":"Tequila"},{"q":"What cocktail consists of vodka, coffee liqueur, and cream?","a":"White Russian"},{"q":"Mint, rum, sugar, and lime make up this Cuban cocktail.","a":"Mojito"},{"q":"What cocktail is made with bourbon, Campari, and sweet vermouth?","a":"Boulevardier"}],
+[{"q":"This soft, white Italian cheese is made from mozzarella and cream.","a":"Burrata"},{"q":"Which country is famous for producing Brie and Camembert?","a":"France"},{"q":"What cheese is traditionally used to make Greek pesto?","a":"Feta"},{"q":"This hard, salty Italian cheese is often grated over pasta.","a":"Parmesan"},{"q":"Which blue cheese takes its name from a town in Italy?","a":"Gorgonzola"}],
+[{"q":"What Japanese dish consists of raw fish served without rice?","a":"Sashimi"},{"q":"Pad Thai is a famous noodle dish from which country?","a":"Thailand"},{"q":"Kimchi is a traditional fermented cabbage dish from where?","a":"South Korea"},{"q":"What spicy Indian dish consists of marinated chicken in a creamy tomato sauce?","a":"Chicken Tikka Masala"},{"q":"Pho is the national noodle soup of which country?","a":"Vietnam"}],
+[{"q":"What Italian dessert's name translates to 'pick me up'?","a":"Tiramisu"},{"q":"Which French pastry consists of choux dough filled with cream and topped with chocolate?","a":"Éclair"},{"q":"What crispy, layered Middle Eastern pastry is filled with chopped nuts and honey?","a":"Baklava"},{"q":"What Mexican dessert is made of fried dough dusted in cinnamon sugar?","a":"Churros"},{"q":"What traditional British dessert is made from bananas, cream, and toffee on a pastry base?","a":"Banoffee Pie"}],
+[{"q":"What fast food chain is famous for the Whopper?","a":"Burger King"},{"q":"Which chain has a mascot named Colonel Sanders?","a":"KFC"},{"q":"What Mexican-inspired chain is famous for its Crunchwrap Supreme?","a":"Taco Bell"},{"q":"Which pizza chain features a game piece in its logo?","a":"Domino's"},{"q":"What fast food chain famously calls its chicken sandwiches 'Fil-A'?","a":"Chick-fil-A"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Spices", "rule": "Wager your points!", "q": "What is the most expensive spice in the world by weight?", "a": "Saffron", "hasAnswer": true }
+}

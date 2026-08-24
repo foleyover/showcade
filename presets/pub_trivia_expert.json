@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["Nobel Winners", "Obscure Geo", "Battles", "Operas", "Elements", "Philosophy"],
+"board": [
+[{"q":"Who was the first woman to win a Nobel Prize?","a":"Marie Curie"},{"q":"Which US President won the Nobel Peace Prize in 1906 for brokering an end to the Russo-Japanese War?","a":"Theodore Roosevelt"},{"q":"Who won the 2016 Nobel Prize in Literature, causing controversy as a musician?","a":"Bob Dylan"},{"q":"Which famous physicist won the 1921 Nobel Prize in Physics, notably NOT for relativity?","a":"Albert Einstein"},{"q":"Who is the youngest ever Nobel laureate?","a":"Malala Yousafzai"}],
+[{"q":"What is the capital of Burkina Faso?","a":"Ouagadougou"},{"q":"Which African country is entirely surrounded by South Africa?","a":"Lesotho"},{"q":"What is the smallest country in Central America?","a":"El Salvador"},{"q":"Mount Erebus is the second-highest volcano on which continent?","a":"Antarctica"},{"q":"Which European country is divided into regions known as Cantons?","a":"Switzerland"}],
+[{"q":"In what year did the Battle of Hastings take place?","a":"1066"},{"q":"Which battle finally defeated Napoleon in 1815?","a":"Battle of Waterloo"},{"q":"The Battle of Agincourt was fought during which major conflict?","a":"The Hundred Years' War"},{"q":"Which famous naval battle saw Admiral Nelson defeat the combined French and Spanish fleets in 1805?","a":"Battle of Trafalgar"},{"q":"The Battle of Gettysburg is widely considered the turning point of which war?","a":"American Civil War"}],
+[{"q":"Which composer wrote 'The Magic Flute'?","a":"Wolfgang Amadeus Mozart"},{"q":"'Carmen' features a famous aria known commonly as the Habanera. Who composed it?","a":"Georges Bizet"},{"q":"Which Italian composer wrote 'La Traviata'?","a":"Giuseppe Verdi"},{"q":"'The Barber of Seville' was composed by who?","a":"Gioachino Rossini"},{"q":"Which Richard Wagner opera features a Valkyrie named Brünnhilde?","a":"Die Walküre"}],
+[{"q":"What element has the atomic number 1?","a":"Hydrogen"},{"q":"Pb is the symbol for which element?","a":"Lead"},{"q":"What noble gas is used in illuminated signs?","a":"Neon"},{"q":"Which element is named after the creator of the periodic table?","a":"Mendelevium"},{"q":"What is the only halogen with no stable isotopes?","a":"Astatine"}],
+[{"q":"Which ancient Greek philosopher was the teacher of Alexander the Great?","a":"Aristotle"},{"q":"Who famously stated 'I think, therefore I am'?","a":"René Descartes"},{"q":"Which German philosopher wrote 'Thus Spoke Zarathustra'?","a":"Friedrich Nietzsche"},{"q":"Who wrote 'The Republic', outlining his political philosophy?","a":"Plato"},{"q":"Which Scottish philosopher co-authored the Communist Manifesto?","a":"Karl Marx (He was German, co-authored with Engels. The question is a trick, trick answer: Karl Marx)"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Literature", "rule": "Wager your points!", "q": "What is the longest novel ever written, holding the Guinness World Record?", "a": "In Search of Lost Time (by Marcel Proust)", "hasAnswer": true }
+}

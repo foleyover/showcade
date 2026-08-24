@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["Gen 1", "Types", "Gyms", "Evolutions", "Items", "Legendaries"],
+"board": [
+[{"q":"This is Pokémon #001 in the Pokédex.","a":"Bulbasaur"},{"q":"Pikachu evolves into this Pokémon when exposed to a Thunder Stone.","a":"Raichu"},{"q":"This sleeping Pokémon frequently blocks paths in the Kanto region.","a":"Snorlax"},{"q":"Which fossil Pokémon is resurrected from the Helix Fossil?","a":"Omanyte"},{"q":"How many Pokémon are there in the original Kanto Pokédex?","a":"151"}],
+[{"q":"Water-type attacks are super effective against this type.","a":"Fire / Ground / Rock"},{"q":"Which type is completely immune to Normal and Fighting-type moves?","a":"Ghost"},{"q":"Fairy-type was introduced to balance out which overly powerful type?","a":"Dragon"},{"q":"This is the only type that is super effective against Electric.","a":"Ground"},{"q":"Bug-type moves are super effective against Grass, Psychic, and what other type?","a":"Dark"}],
+[{"q":"He is the Rock-type Gym Leader of Pewter City.","a":"Brock"},{"q":"Misty specializes in this type of Pokémon.","a":"Water"},{"q":"This Gym Leader uses a terrifying Miltank in Goldenrod City.","a":"Whitney"},{"q":"Which region features Gym Leaders named Roark, Bugsy, and Fantina?","a":"Sinnoh"},{"q":"Who is the Dragon-type Gym Leader of Blackthorn City?","a":"Clair"}],
+[{"q":"Magikarp evolves into this fierce Water/Flying type.","a":"Gyarados"},{"q":"Eevee evolves into Flareon, Jolteon, or this Water-type.","a":"Vaporeon"},{"q":"At what level does Charmander evolve into Ivysaur? (Wait, Charmander evolves into Charmeleon!)","a":"Level 16"},{"q":"Which Pokémon requires a Metal Coat and a trade to evolve into Scizor?","a":"Scyther"},{"q":"What specific condition is required to evolve Inkay into Malamar?","a":"Holding the console upside down"}],
+[{"q":"This ball has a 100% catch rate.","a":"Master Ball"},{"q":"This item heals a Pokémon's HP by 20 points.","a":"Potion"},{"q":"This machine teaches a Pokémon a new move, but breaks after one use in older games.","a":"TM (Technical Machine)"},{"q":"What item must a Pokémon hold to double the EVs gained in battle, while halving its speed?","a":"Macho Brace"},{"q":"Which berry cures paralysis?","a":"Cheri Berry"}],
+[{"q":"This bird is the legendary of Ice.","a":"Articuno"},{"q":"This genetically engineered clone of Mew resides in Cerulean Cave.","a":"Mewtwo"},{"q":"Which legendary controls time in the Sinnoh region?","a":"Dialga"},{"q":"This legendary is known as the 'Creator' of the Pokémon universe.","a":"Arceus"},{"q":"Which legendary trio includes Entei, Raikou, and Suicune?","a":"The Legendary Beasts"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Video Game Lore", "rule": "Wager your points!", "q": "What is the name of the professor who gives you your starter in the Johto region (Gold/Silver)?", "a": "Professor Elm", "hasAnswer": true }
+}

@@ -1,0 +1,24 @@
+{
+"hostName": "Showcade",
+"numCategories": 6,
+"numQuestions": 5,
+"maxGuesses": 1,
+"round2Enabled": false,
+"timer": { "enabled": true, "duration": 30 },
+"sfx": { "enabled": true, "volume": 50 },
+"dailyDoubles": { "enabled": true, "mode": "wager" },
+"rounds": {
+"1": {
+"categories": ["Nintendo", "PlayStation", "PC Gaming", "Villains", "Retro", "Indie"],
+"board": [
+[{"q":"This iconic plumber is Nintendo's mascot.","a":"Mario"},{"q":"In 'The Legend of Zelda', what is the name of the main protagonist?","a":"Link"},{"q":"What is the name of the pink puffball who can inhale enemies?","a":"Kirby"},{"q":"Which bounty hunter is the protagonist of the Metroid series?","a":"Samus Aran"},{"q":"What was Nintendo's first fully 3D home console?","a":"Nintendo 64"}],
+[{"q":"This game features a bandicoot named Crash.","a":"Crash Bandicoot"},{"q":"Who is the protagonist of the 'God of War' series?","a":"Kratos"},{"q":"What highly acclaimed 2013 game sees Joel and Ellie crossing a post-apocalyptic America?","a":"The Last of Us"},{"q":"Which treasure hunter stars in the 'Uncharted' series?","a":"Nathan Drake"},{"q":"What is the best-selling PlayStation console of all time?","a":"PlayStation 2"}],
+[{"q":"This block-building survival game is the best-selling video game of all time.","a":"Minecraft"},{"q":"What platform, created by Valve, dominates PC game sales?","a":"Steam"},{"q":"Which massive online game features Summoner's Rift?","a":"League of Legends"},{"q":"What simulation game lets you manage digital people and build their houses?","a":"The Sims"},{"q":"What does GPU stand for in PC building?","a":"Graphics Processing Unit"}],
+[{"q":"Who is the giant, turtle-like king of the Koopas?","a":"Bowser"},{"q":"What robotic AI tests Chell in the game 'Portal'?","a":"GLaDOS"},{"q":"Who is the main antagonist of the Final Fantasy VII?","a":"Sephiroth"},{"q":"What villain frequently kidnaps Princess Zelda?","a":"Ganon / Ganondorf"},{"q":"Dr. Ivo Robotnik is the nemesis of which fast video game character?","a":"Sonic the Hedgehog"}],
+[{"q":"This classic arcade game features a yellow circle eating dots and running from ghosts.","a":"Pac-Man"},{"q":"In what classic game do players arrange falling tetrominoes?","a":"Tetris"},{"q":"What classic console introduced the Konami Code?","a":"NES"},{"q":"This arcade game features a frog crossing a busy road and a river.","a":"Frogger"},{"q":"What was the first commercially successful video game, basically table tennis?","a":"Pong"}],
+[{"q":"Which indie farming RPG was developed entirely by one person, ConcernedApe?","a":"Stardew Valley"},{"q":"In 'Undertale', what is the name of the town the player moves to?","a":"Pelican Town"},{"q":"What indie game has you playing as a cup trying to repay a debt to the devil?","a":"Cuphead"},{"q":"Which acclaimed indie game has you playing as Zagreus escaping the Greek underworld?","a":"Hades"},{"q":"What incredibly difficult indie platformer has you climbing a mountain as a girl named Madeline?","a":"Celeste"}]
+]
+}
+},
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Gaming History", "rule": "Wager your points!", "q": "What video game crash occurred in 1983, largely blamed on an ET game for the Atari?", "a": "The Video Game Crash of 1983", "hasAnswer": true }
+}
