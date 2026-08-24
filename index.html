@@ -41,19 +41,13 @@
             letter-spacing: 0.5px;
         }
 
-        /* Games Grid - Strict 3-column layout to keep cards uniform */
+        /* Games Grid - Responsive auto-fit grid */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 30px;
             width: 100%;
             max-width: 1200px;
-        }
-
-        @media (max-width: 1050px) {
-            .games-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            }
         }
 
         /* Base Card Styling */
@@ -98,10 +92,9 @@
             justify-content: center;
             gap: 10px;
         }
-        /* Adjusted font-size to 1.9em so long words like CATCHPHRASE fit cleanly without wrapping or squishing */
         .game-title {
             margin: 0;
-            font-size: 1.9em;
+            font-size: 1.8em;
             font-weight: 900;
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -184,6 +177,27 @@
             filter: brightness(1.1);
         }
 
+        /* --- 💰 THEME 4: GOLDEN BALLS --- */
+        .card-goldenballs { border: 3px solid #f39c12; }
+        .card-goldenballs:hover {
+            border-color: #f1c40f;
+            box-shadow: 0 15px 35px rgba(243, 156, 18, 0.3), 0 0 20px rgba(241, 196, 15, 0.3);
+        }
+        .banner-goldenballs {
+            background: radial-gradient(circle at 30% 30%, #f9e79f, #d4ac0d 60%, #7d6608);
+            border-bottom: 3px solid #f1c40f;
+        }
+        .banner-goldenballs .game-title { color: #000; text-shadow: 0 1px 0 rgba(255,255,255,0.4); }
+        .btn-goldenballs {
+            background-color: #d4ac0d;
+            color: #000;
+            border: 2px solid #fef9e7;
+        }
+        .game-card:hover .btn-goldenballs {
+            background-color: #f1c40f;
+            filter: brightness(1.1);
+        }
+
         /* --- FEEDBACK BUTTON --- */
         .feedback-btn {
             position: fixed;
@@ -263,11 +277,25 @@
             </div>
         </a>
 
+        <!-- Golden Balls Card -->
+        <a href="goldenballs.html" class="game-card card-goldenballs">
+            <div class="card-banner banner-goldenballs">
+                <span style="font-size: 2.2em;">💰</span>
+                <h2 class="game-title">GOLDEN BALLS</h2>
+            </div>
+            <div class="card-body">
+                <p class="game-desc">
+                    Bluff your opponents, dodge the Killers, build the jackpot bank, and face off in the ultimate Split or Steal final showdown.
+                </p>
+                <div class="play-btn btn-goldenballs">Play Golden Balls →</div>
+            </div>
+        </a>
+
     </div>
 
     <!-- UPDATE WITH YOUR ACTUAL REPO URL BELOW -->
     <a href="https://github.com/foleyover/showcade/issues/new" target="_blank" class="feedback-btn" title="Open an issue on GitHub">
-        🐛 Report a Bug / Feedback
+        🐛 Report a Bug / Feedback[cite: 2]
     </a>
 
 </body>
