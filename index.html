@@ -41,13 +41,19 @@
             letter-spacing: 0.5px;
         }
 
-        /* Games Grid */
+        /* Games Grid - Strict 3-column layout to keep cards uniform */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 35px;
+            grid-template-columns: repeat(3, minmax(320px, 1fr));
+            gap: 30px;
             width: 100%;
-            max-width: 950px;
+            max-width: 1200px;
+        }
+
+        @media (max-width: 1050px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
         }
 
         /* Base Card Styling */
@@ -85,20 +91,21 @@
 
         /* Banner Accent Headers */
         .card-banner {
-            padding: 24px 20px;
+            padding: 24px 15px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
+        /* Adjusted font-size to 1.9em so long words like CATCHPHRASE fit cleanly without wrapping or squishing */
         .game-title {
             margin: 0;
-            font-size: 2.2em;
+            font-size: 1.9em;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            white-space: nowrap;
         }
 
         /* Buttons */
@@ -145,7 +152,7 @@
             background: linear-gradient(135deg, #c0392b, #e74c3c);
             border-bottom: 3px solid #2ecc71;
         }
-        .banner-catchphrase .game-title { color: #ffffff; letter-spacing: 1px; }
+        .banner-catchphrase .game-title { color: #ffffff; }
         .btn-catchphrase {
             background-color: #27ae60;
             color: #fff;
@@ -153,6 +160,27 @@
         }
         .game-card:hover .btn-catchphrase {
             background-color: #2ecc71;
+            filter: brightness(1.1);
+        }
+
+        /* --- 🎁 THEME 3: BOX OF FORTUNE --- */
+        .card-fortune { border: 3px solid #f1c40f; }
+        .card-fortune:hover {
+            border-color: #2ecc71;
+            box-shadow: 0 15px 35px rgba(241, 196, 15, 0.3), 0 0 20px rgba(46, 204, 113, 0.3);
+        }
+        .banner-fortune {
+            background: linear-gradient(135deg, #d35400, #f39c12);
+            border-bottom: 3px solid #2ecc71;
+        }
+        .banner-fortune .game-title { color: #ffffff; }
+        .btn-fortune {
+            background-color: #e67e22;
+            color: #fff;
+            border: 2px solid #f1c40f;
+        }
+        .game-card:hover .btn-fortune {
+            background-color: #f39c12;
             filter: brightness(1.1);
         }
 
@@ -218,6 +246,20 @@
                     Reveal the mystery image tile-by-tile, race to buzz in and "Say what you see!", and track points on a live scoreboard.
                 </p>
                 <div class="play-btn btn-catchphrase">Play Catchphrase →</div>
+            </div>
+        </a>
+
+        <!-- Box of Fortune Card -->
+        <a href="fortune.html" class="game-card card-fortune">
+            <div class="card-banner banner-fortune">
+                <span style="font-size: 2.2em;">🎁</span>
+                <h2 class="game-title">BOX OF FORTUNE</h2>
+            </div>
+            <div class="card-body">
+                <p class="game-desc">
+                    Spin the wheel, buy vowels, and guess hidden letters to solve puzzle phrases before your opponents take the cash.
+                </p>
+                <div class="play-btn btn-fortune">Play Box of Fortune →</div>
             </div>
         </a>
 
