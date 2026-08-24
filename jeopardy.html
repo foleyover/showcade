@@ -395,7 +395,7 @@
     <div id="admin-screen">
         
         <div style="display: flex; justify-content: flex-start; align-items: stretch; gap: 10px; margin-bottom: 30px; width: 100%; overflow-x: auto; padding-bottom: 5px;">
-            <a href="index.html" class="btn btn-home" style="font-size: 1.5em; padding: 10px 20px; flex-shrink: 0; white-space: nowrap;" title="Return to ShowCade Hub">🏠</a>
+            <a href="index.html" class="btn btn-home" style="font-size: 1.5em; padding: 10px 20px; flex-shrink: 0; white-space: nowrap;" title="Return to Hub">🏠</a>
             <button class="btn btn-info" style="font-size: 1.1em; flex: 1; flex-shrink: 0; background-color: #8e44ad; border-color: #9b59b6; white-space: nowrap;" onclick="openHostCheatSheet()">🕵️ Host Cheat Sheet</button>
             <button class="btn btn-info" style="font-size: 1.1em; flex: 1; flex-shrink: 0; background-color: #34495e; border-color: #bdc3c7; white-space: nowrap;" onclick="openRules()">📜 Game Rules</button>
             <button class="btn btn-info" style="font-size: 1.1em; flex: 1; flex-shrink: 0; white-space: nowrap;" onclick="openHowTo()">💻 Technical Guide</button>
@@ -416,6 +416,7 @@
                 <div style="display: flex; gap: 10px; margin-top: auto; flex-wrap: wrap;">
                     <button class="btn btn-dark" style="flex:1; padding: 15px; min-width: 120px;" onclick="document.getElementById('import-upload').click()">📥 Load File</button>
                     <button class="btn btn-info" style="flex:1; padding: 15px; min-width: 120px;" onclick="exportGame()">📤 Export File</button>
+                    <button class="btn btn-primary" style="flex:1; padding: 15px; min-width: 120px; background-color: #9b59b6; border-color: #8e44ad;" onclick="openPresetModal()">🌐 Load Preset</button>
                 </div>
                 <button class="btn btn-success" style="width: 100%; margin-top: 10px; padding: 12px;" onclick="downloadStandaloneHTML()">🌐 Download HTML Game File</button>
             </div>
@@ -659,6 +660,22 @@
             <div id="chud-player-list" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;"></div>
             <div style="margin-top: 30px;">
                 <button class="btn btn-danger" style="font-size: 1.2em; padding: 12px 35px;" onclick="closeChudModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- LOAD PRESET MODAL -->
+    <div id="preset-modal" class="modal-overlay" style="z-index: 250;">
+        <div class="modal-content info-modal-content" style="max-width: 700px; text-align: center;">
+            <h2 style="color: #3498db; margin-top: 0; border-bottom: none;">🌐 Load Preset Game</h2>
+            <p style="color: #bdc3c7; margin-bottom: 20px;">Select a pre-made game board to load directly from the catalog.</p>
+            
+            <div id="preset-list" style="display: flex; flex-direction: column; gap: 12px; max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                <!-- Fetched presets will be injected here -->
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <button class="btn btn-danger" style="font-size: 1.2em; padding: 12px 35px;" onclick="closePresetModal()">Cancel</button>
             </div>
         </div>
     </div>
@@ -1720,6 +1737,100 @@
             logDebug("SYSTEM", "Exported JSON Board");
         }
 
+        function processImportedData(importedData) {
+            if (importedData.rounds || importedData.categories) {
+                
+                gameData.hostName = importedData.hostName || "";
+                gameData.numCategories = importedData.numCategories || 6;
+                gameData.numQuestions = importedData.numQuestions || 5;
+                gameData.maxGuesses = importedData.maxGuesses !== undefined ? importedData.maxGuesses : 1;
+                gameData.currentRound = 1;
+                
+                if (importedData.round2Enabled !== undefined) gameData.round2Enabled = importedData.round2Enabled;
+                else gameData.round2Enabled = false;
+                
+                if (importedData.persistentScoreboard !== undefined) gameData.persistentScoreboard = importedData.persistentScoreboard;
+                else gameData.persistentScoreboard = false;
+
+                gameData.debugMode = importedData.debugMode || false;
+                gameData.chudEnabled = importedData.chudEnabled || false;
+
+                if (importedData.timer) gameData.timer = importedData.timer;
+                if (importedData.sfx) gameData.sfx = importedData.sfx;
+                else gameData.sfx = { enabled: true, volume: 50 };
+                
+                if (importedData.dailyDoubles) gameData.dailyDoubles = importedData.dailyDoubles;
+                else gameData.dailyDoubles = { enabled: true, mode: 'wager' };
+
+                if (importedData.rounds) {
+                    gameData.rounds = importedData.rounds;
+                } else if (importedData.categories && importedData.board) {
+                    gameData.rounds[1] = {
+                        categories: importedData.categories,
+                        board: importedData.board
+                    };
+                }
+
+                [1, 2].forEach(r => {
+                    if (gameData.rounds[r]) {
+                        for(let c=0; c<gameData.numCategories; c++) {
+                            if(!gameData.rounds[r].board[c]) gameData.rounds[r].board[c] = [];
+                            for(let rw=0; rw<gameData.numQuestions; rw++) {
+                                if(!gameData.rounds[r].board[c][rw]) gameData.rounds[r].board[c][rw] = {q:"", a:"", revealed:false, isDD:false};
+                                else if(gameData.rounds[r].board[c][rw].isDD === undefined) gameData.rounds[r].board[c][rw].isDD = false;
+                            }
+                        }
+                    }
+                });
+
+                gameData.finalJeopardy = importedData.finalJeopardy || { enabled: true, wagersEnabled: true, category: "", rule: "", q: "", a: "", img: null, audio: null, mediaUrl: "", hasAnswer: true };
+                if (gameData.finalJeopardy.enabled === undefined) gameData.finalJeopardy.enabled = true;
+                if (gameData.finalJeopardy.hasAnswer === undefined) gameData.finalJeopardy.hasAnswer = true;
+                if (gameData.finalJeopardy.wagersEnabled === undefined) gameData.finalJeopardy.wagersEnabled = true;
+
+                document.getElementById('host-name').value = gameData.hostName;
+                document.getElementById('category-count-select').value = gameData.numCategories;
+                document.getElementById('question-count-select').value = gameData.numQuestions;
+                document.getElementById('max-guesses-select').value = gameData.maxGuesses;
+                document.getElementById('round2-enabled').checked = gameData.round2Enabled;
+                document.getElementById('persistent-board-enabled').checked = gameData.persistentScoreboard;
+                document.getElementById('debug-mode-enabled').checked = gameData.debugMode;
+                document.getElementById('chud-enabled').checked = gameData.chudEnabled;
+                document.getElementById('dd-enabled').checked = gameData.dailyDoubles.enabled !== false;
+                document.getElementById('dd-mode-select').value = gameData.dailyDoubles.mode || 'wager';
+                
+                document.getElementById('timer-enabled').checked = gameData.timer.enabled !== false;
+                let timerDur = gameData.timer.duration || 30;
+                document.getElementById('timer-duration').value = timerDur;
+                document.getElementById('timer-val').innerText = timerDur;
+
+                document.getElementById('sfx-enabled').checked = gameData.sfx.enabled !== false;
+                let sfxVol = gameData.sfx.volume !== undefined ? gameData.sfx.volume : 50;
+                document.getElementById('sfx-volume').value = sfxVol;
+                document.getElementById('vol-val').innerText = sfxVol;
+
+                document.getElementById('fj-wagers-enabled').checked = gameData.finalJeopardy.wagersEnabled !== false;
+                
+                toggleRound2Section();
+                toggleDDSettings();
+                toggleDebugMode(); 
+                
+                currentAdminRound = 1;
+                document.getElementById('tab-round-1').className = "btn btn-primary";
+                document.getElementById('tab-round-2').className = "btn btn-dark";
+                const fjTab = document.getElementById('tab-round-fj');
+                if(fjTab) {
+                    fjTab.className = "btn btn-dark";
+                    fjTab.style.backgroundColor = ""; 
+                    fjTab.style.borderColor = "";
+                }
+                renderAdminBoard();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function importGame(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1728,84 +1839,8 @@
             reader.onload = function(e) {
                 try {
                     const importedData = JSON.parse(e.target.result);
-                    if (importedData.rounds || importedData.categories) {
-                        
-                        gameData.hostName = importedData.hostName || "";
-                        gameData.numCategories = importedData.numCategories || 6;
-                        gameData.numQuestions = importedData.numQuestions || 5;
-                        gameData.maxGuesses = importedData.maxGuesses !== undefined ? importedData.maxGuesses : 1;
-                        gameData.currentRound = 1;
-                        
-                        if (importedData.round2Enabled !== undefined) gameData.round2Enabled = importedData.round2Enabled;
-                        else gameData.round2Enabled = false;
-                        
-                        if (importedData.persistentScoreboard !== undefined) gameData.persistentScoreboard = importedData.persistentScoreboard;
-                        else gameData.persistentScoreboard = false;
-
-                        gameData.debugMode = importedData.debugMode || false;
-                        gameData.chudEnabled = importedData.chudEnabled || false;
-
-                        if (importedData.timer) gameData.timer = importedData.timer;
-                        if (importedData.sfx) gameData.sfx = importedData.sfx;
-                        else gameData.sfx = { enabled: true, volume: 50 };
-                        
-                        if (importedData.dailyDoubles) gameData.dailyDoubles = importedData.dailyDoubles;
-                        else gameData.dailyDoubles = { enabled: true, mode: 'wager' };
-
-                        if (importedData.rounds) {
-                            gameData.rounds = importedData.rounds;
-                        } else if (importedData.categories && importedData.board) {
-                            gameData.rounds[1] = {
-                                categories: importedData.categories,
-                                board: importedData.board
-                            };
-                        }
-
-                        [1, 2].forEach(r => {
-                            if (gameData.rounds[r]) {
-                                for(let c=0; c<gameData.numCategories; c++) {
-                                    if(!gameData.rounds[r].board[c]) gameData.rounds[r].board[c] = [];
-                                    for(let rw=0; rw<gameData.numQuestions; rw++) {
-                                        if(!gameData.rounds[r].board[c][rw]) gameData.rounds[r].board[c][rw] = {q:"", a:"", revealed:false, isDD:false};
-                                        else if(gameData.rounds[r].board[c][rw].isDD === undefined) gameData.rounds[r].board[c][rw].isDD = false;
-                                    }
-                                }
-                            }
-                        });
-
-                        gameData.finalJeopardy = importedData.finalJeopardy || { enabled: true, wagersEnabled: true, category: "", rule: "", q: "", a: "", img: null, audio: null, mediaUrl: "", hasAnswer: true };
-                        if (gameData.finalJeopardy.enabled === undefined) gameData.finalJeopardy.enabled = true;
-                        if (gameData.finalJeopardy.hasAnswer === undefined) gameData.finalJeopardy.hasAnswer = true;
-                        if (gameData.finalJeopardy.wagersEnabled === undefined) gameData.finalJeopardy.wagersEnabled = true;
-
-                        document.getElementById('host-name').value = gameData.hostName;
-                        document.getElementById('category-count-select').value = gameData.numCategories;
-                        document.getElementById('question-count-select').value = gameData.numQuestions;
-                        document.getElementById('max-guesses-select').value = gameData.maxGuesses;
-                        document.getElementById('round2-enabled').checked = gameData.round2Enabled;
-                        document.getElementById('persistent-board-enabled').checked = gameData.persistentScoreboard;
-                        document.getElementById('debug-mode-enabled').checked = gameData.debugMode;
-                        document.getElementById('chud-enabled').checked = gameData.chudEnabled;
-                        document.getElementById('dd-enabled').checked = gameData.dailyDoubles.enabled !== false;
-                        document.getElementById('dd-mode-select').value = gameData.dailyDoubles.mode || 'wager';
-                        
-                        document.getElementById('timer-enabled').checked = gameData.timer.enabled !== false;
-                        let timerDur = gameData.timer.duration || 30;
-                        document.getElementById('timer-duration').value = timerDur;
-                        document.getElementById('timer-val').innerText = timerDur;
-
-                        document.getElementById('sfx-enabled').checked = gameData.sfx.enabled !== false;
-                        let sfxVol = gameData.sfx.volume !== undefined ? gameData.sfx.volume : 50;
-                        document.getElementById('sfx-volume').value = sfxVol;
-                        document.getElementById('vol-val').innerText = sfxVol;
-
-                        document.getElementById('fj-wagers-enabled').checked = gameData.finalJeopardy.wagersEnabled !== false;
-                        
-                        toggleRound2Section();
-                        toggleDDSettings();
-                        toggleDebugMode(); 
-                        switchAdminRound(1);
-                        logDebug("SYSTEM", "Board data imported successfully");
+                    if(processImportedData(importedData)) {
+                        logDebug("SYSTEM", "Board data imported successfully from local file");
                         alert("Board loaded successfully!");
                     } else {
                         alert("Error: File does not contain valid Jeopardy data.");
@@ -1816,6 +1851,83 @@
                 event.target.value = ""; 
             };
             reader.readAsText(file);
+        }
+
+        // Configuration for the GitHub repository (Use RAW links)
+        const GITHUB_CATALOG_URL = "https://raw.githubusercontent.com/foleyover/showcade/main/presets/catalog.json";
+        const GITHUB_PRESETS_BASE_URL = "https://raw.githubusercontent.com/foleyover/showcade/main/presets/";
+
+        async function openPresetModal() {
+            document.getElementById('preset-modal').style.display = 'flex';
+            const presetList = document.getElementById('preset-list');
+            presetList.innerHTML = "<p style='color: #bdc3c7;'>Loading catalog...</p>";
+
+            try {
+                const response = await fetch(GITHUB_CATALOG_URL);
+                if (!response.ok) throw new Error("Failed to load catalog.json");
+                
+                const catalog = await response.json();
+
+                if (!catalog || catalog.length === 0) {
+                    presetList.innerHTML = "<p style='color: #bdc3c7;'>No presets found.</p>";
+                    return;
+                }
+
+                let html = "";
+                catalog.forEach(preset => {
+                    html += `
+                        <div style="background: #1a1a1a; border: 1px solid #30363d; border-radius: 8px; padding: 15px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="margin: 0 0 5px 0; color: #FFCC00; font-size: 1.2em;">${preset.title}</h4>
+                                <p style="margin: 0; font-size: 0.9em; color: #bdc3c7;">
+                                    ${preset.description || 'No description provided.'} 
+                                    <br><span style="color: #7f8c8d; font-size: 0.9em;">By ${preset.author || 'Unknown'}</span>
+                                </p>
+                            </div>
+                            <button class="btn btn-success" style="padding: 10px 20px;" onclick="loadPresetGame(event, '${preset.file}')">Load</button>
+                        </div>
+                    `;
+                });
+                presetList.innerHTML = html;
+
+            } catch (error) {
+                console.error(error);
+                presetList.innerHTML = `<p style="color: #e74c3c;">Error loading catalog. Please check your GitHub URL configuration.</p>`;
+            }
+        }
+
+        function closePresetModal() {
+            document.getElementById('preset-modal').style.display = 'none';
+        }
+
+        async function loadPresetGame(event, filename) {
+            const btn = event.target;
+            const originalText = btn.innerText;
+            
+            try {
+                btn.innerText = "Loading...";
+                btn.disabled = true;
+
+                const response = await fetch(GITHUB_PRESETS_BASE_URL + filename);
+                if (!response.ok) throw new Error("Failed to load preset file.");
+                
+                const importedData = await response.json();
+                
+                if(processImportedData(importedData)) {
+                    closePresetModal();
+                    logDebug("SYSTEM", `Loaded preset from GitHub: ${filename}`);
+                    alert("Preset loaded successfully!");
+                } else {
+                    throw new Error("Invalid Jeopardy data format.");
+                }
+                
+            } catch (error) {
+                console.error(error);
+                alert("Failed to load the preset. Check the console for details.");
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
         }
 
         function renderAdminBoard() {
@@ -2488,7 +2600,9 @@
                     if (gameData.dailyDoubles.mode === 'double') {
                         pointsEarned = activeTile.originalPoints * 2;
                     } else {
-                        const allowedMax = Math.max(player.score, activeTile.originalPoints);
+                        const pointVals = getPointValues(gameData.numQuestions, gameData.currentRound === 2);
+                        const maxBoardValue = pointVals[pointVals.length - 1];
+                        const allowedMax = Math.max(player.score, maxBoardValue);
                         pointsEarned = Math.round(allowedMax * (activeTile.ddPercent / 100));
                     }
                 }
@@ -2528,7 +2642,9 @@
                     if (gameData.dailyDoubles.mode === 'double') {
                         pointsLost = activeTile.originalPoints * 2;
                     } else {
-                        const allowedMax = Math.max(player.score, activeTile.originalPoints);
+                        const pointVals = getPointValues(gameData.numQuestions, gameData.currentRound === 2);
+                        const maxBoardValue = pointVals[pointVals.length - 1];
+                        const allowedMax = Math.max(player.score, maxBoardValue);
                         pointsLost = Math.round(allowedMax * (activeTile.ddPercent / 100));
                     }
                 }
