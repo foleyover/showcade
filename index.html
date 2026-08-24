@@ -41,23 +41,6 @@
             letter-spacing: 0.5px;
         }
 
-        .btn-hub-changelog {
-            background-color: #1f2937;
-            color: #58a6ff;
-            border: 1px solid #374151;
-            padding: 10px 22px;
-            font-size: 1em;
-            font-weight: bold;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-hub-changelog:hover {
-            background-color: #374151;
-            color: #fff;
-            border-color: #58a6ff;
-        }
-
         /* Games Grid */
         .games-grid {
             display: grid;
@@ -173,25 +156,32 @@
             filter: brightness(1.1);
         }
 
-        /* --- CHANGELOG MODAL --- */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; padding: 20px;
+        /* --- FEEDBACK BUTTON --- */
+        .feedback-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #161b22;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            padding: 10px 16px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        .modal-content {
-            background: #161b22; border: 2px solid #30363d; color: #f0f6fc; padding: 35px;
-            max-width: 800px; width: 100%; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-            box-sizing: border-box; max-height: 85vh; overflow-y: auto;
+        .feedback-btn:hover {
+            background-color: #30363d;
+            color: #f0f6fc;
+            border-color: #8b949e;
+            transform: translateY(-2px);
         }
-        .modal-content h2 {
-            color: #58a6ff; margin-top: 0; font-size: 2.2em; text-align: center;
-            border-bottom: 2px solid #30363d; padding-bottom: 15px;
-        }
-        .log-section {
-            background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 20px;
-        }
-        .log-section h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.3em; }
-        .log-section ul { margin: 0; padding-left: 20px; color: #c9d1d9; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -199,7 +189,6 @@
     <div class="arcade-header">
         <h1>🎮 ShowCade</h1>
         <p class="subtitle">Select a game show to start playing, or create custom boards to host with friends!</p>
-        <button class="btn-hub-changelog" onclick="openChangelog()">📜 ShowCade Changelog & Patch Notes</button>
     </div>
 
     <div class="games-grid">
@@ -234,43 +223,10 @@
 
     </div>
 
-    <!-- SHOWCADE UNIFIED CHANGELOG MODAL -->
-    <div id="changelog-modal" class="modal-overlay" onclick="closeChangelog(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h2>📜 ShowCade Version History</h2>
-
-            <div class="log-section">
-                <h3 style="color: #FFCC00;">🛎️ JEOPARDY! Updates</h3>
-                <ul style="padding-left: 20px;">
-                    <li><strong>V53 (Latest):</strong> Restored the vital "Undo Last Question" button to the game board. Cleaned up the in-game right panel by relocating the Setup and Reset buttons neatly beneath the Leaderboard on the left. Removed redundant Setup buttons from the admin view.</li>
-                    <li><strong>V51-V52:</strong> Added client-side Canvas auto-compression (reducing exported JSON size by ~90%), full Drag & Drop + Clipboard Paste (<code>Ctrl+V</code>) media attachments, and ShowCade hub navigation.</li>
-                    <li><strong>V50:</strong> Consolidated Final Jeopardy settings into Round Switcher tabs and streamlined game setup UI.</li>
-                </ul>
-            </div>
-
-            <div class="log-section">
-                <h3 style="color: #2ecc71;">🧩 CATCHPHRASE Updates</h3>
-                <ul style="padding-left: 20px;">
-                    <li><strong>V1.9 (Latest):</strong> Fully unified the Setup UI to perfectly mirror Jeopardy's modern design. Fixed a rendering bug for older JSON saves ensuring Background Images load properly. Restored the "Delete Round" safety button. Cleaned up the in-game control panels and button alignments.</li>
-                    <li><strong>V1.6-V1.8:</strong> Restructured Setup UI to fully match the Jeopardy layout; fixed mobile view scaling so the game board dynamically scales on phones and tablets.</li>
-                    <li><strong>V1.4-V1.5:</strong> Added Global Tile Cover support, auto-advance visual progress bar, Drag & Drop / Paste support, and Canvas image compression.</li>
-                </ul>
-            </div>
-
-            <div style="text-align: center; margin-top: 25px;">
-                <button class="play-btn" style="background: #238636; color: white; border: none; cursor: pointer; max-width: 200px;" onclick="document.getElementById('changelog-modal').style.display='none'">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openChangelog() {
-            document.getElementById('changelog-modal').style.display = 'flex';
-        }
-        function closeChangelog(e) {
-            document.getElementById('changelog-modal').style.display = 'none';
-        }
-    </script>
+    <!-- UPDATE WITH YOUR ACTUAL REPO URL BELOW -->
+    <a href="https://github.com/foleyover/showcade/issues/new" target="_blank" class="feedback-btn" title="Open an issue on GitHub">
+        🐛 Report a Bug / Feedback
+    </a>
 
 </body>
 </html>
