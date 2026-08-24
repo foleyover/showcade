@@ -4,5 +4,65 @@
     "title": "Pub Trivia Night",
     "author": "foleyover",
     "description": "A classic mix of general knowledge, pop culture, and history."
+  },
+  {
+    "file": "pub_trivia_easy.json",
+    "title": "Pub Trivia - Easy",
+    "author": "Showcade",
+    "description": "A breezy, highly accessible general knowledge game for casual players."
+  },
+  {
+    "file": "pub_trivia_normal.json",
+    "title": "Pub Trivia - Normal",
+    "author": "Showcade",
+    "description": "The gold standard pub trivia experience covering history, science, and pop culture."
+  },
+  {
+    "file": "pub_trivia_hard.json",
+    "title": "Pub Trivia - Hard",
+    "author": "Showcade",
+    "description": "Deeper cuts of knowledge requiring a solid trivia team to clear the board."
+  },
+  {
+    "file": "pub_trivia_expert.json",
+    "title": "Pub Trivia - Expert",
+    "author": "Showcade",
+    "description": "Brutal difficulty. Designed for serious quizzers and trivia veterans."
+  },
+  {
+    "file": "pokemon.json",
+    "title": "Pokémon Trivia",
+    "author": "Showcade",
+    "description": "Test your knowledge of the iconic monster-catching franchise."
+  },
+  {
+    "file": "gaming.json",
+    "title": "Video Games",
+    "author": "Showcade",
+    "description": "From retro classics to modern masterpieces across all platforms."
+  },
+  {
+    "file": "sports.json",
+    "title": "Global & UK Sports",
+    "author": "Showcade",
+    "description": "Premier League, Tennis, F1, Olympics, Rugby, and Golf."
+  },
+  {
+    "file": "90s_nostalgia.json",
+    "title": "90s Nostalgia",
+    "author": "Showcade",
+    "description": "Dial up the internet and grab your GameBoy. All about the 1990s."
+  },
+  {
+    "file": "food_and_drink.json",
+    "title": "Food & Drink",
+    "author": "Showcade",
+    "description": "A delicious board covering world cuisine, cocktails, and ingredients."
+  },
+  {
+    "file": "science_nature.json",
+    "title": "Science & Nature",
+    "author": "Showcade",
+    "description": "Explore the cosmos, human anatomy, and the animal kingdom."
   }
 ]
