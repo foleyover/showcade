@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -14,9 +18,20 @@
 [{"q":"This is Pokémon #001 in the Pokédex.","a":"Bulbasaur"},{"q":"Pikachu evolves into this Pokémon when exposed to a Thunder Stone.","a":"Raichu"},{"q":"This sleeping Pokémon frequently blocks paths in the Kanto region.","a":"Snorlax"},{"q":"Which fossil Pokémon is resurrected from the Helix Fossil?","a":"Omanyte"},{"q":"How many Pokémon are there in the original Kanto Pokédex?","a":"151"}],
 [{"q":"Water-type attacks are super effective against this type.","a":"Fire / Ground / Rock"},{"q":"Which type is completely immune to Normal and Fighting-type moves?","a":"Ghost"},{"q":"Fairy-type was introduced to balance out which overly powerful type?","a":"Dragon"},{"q":"This is the only type that is super effective against Electric.","a":"Ground"},{"q":"Bug-type moves are super effective against Grass, Psychic, and what other type?","a":"Dark"}],
 [{"q":"He is the Rock-type Gym Leader of Pewter City.","a":"Brock"},{"q":"Misty specializes in this type of Pokémon.","a":"Water"},{"q":"This Gym Leader uses a terrifying Miltank in Goldenrod City.","a":"Whitney"},{"q":"Which region features Gym Leaders named Roark, Bugsy, and Fantina?","a":"Sinnoh"},{"q":"Who is the Dragon-type Gym Leader of Blackthorn City?","a":"Clair"}],
-[{"q":"Magikarp evolves into this fierce Water/Flying type.","a":"Gyarados"},{"q":"Eevee evolves into Flareon, Jolteon, or this Water-type.","a":"Vaporeon"},{"q":"At what level does Charmander evolve into Ivysaur? (Wait, Charmander evolves into Charmeleon!)","a":"Level 16"},{"q":"Which Pokémon requires a Metal Coat and a trade to evolve into Scizor?","a":"Scyther"},{"q":"What specific condition is required to evolve Inkay into Malamar?","a":"Holding the console upside down"}],
-[{"q":"This ball has a 100% catch rate.","a":"Master Ball"},{"q":"This item heals a Pokémon's HP by 20 points.","a":"Potion"},{"q":"This machine teaches a Pokémon a new move, but breaks after one use in older games.","a":"TM (Technical Machine)"},{"q":"What item must a Pokémon hold to double the EVs gained in battle, while halving its speed?","a":"Macho Brace"},{"q":"Which berry cures paralysis?","a":"Cheri Berry"}],
+[{"q":"Magikarp evolves into this fierce Water/Flying type.","a":"Gyarados"},{"q":"Eevee evolves into Flareon, Jolteon, or this Water-type.","a":"Vaporeon"},{"q":"At what level does Charmander evolve into Charmeleon?","a":"Level 16"},{"q":"Which Pokémon requires a Metal Coat and a trade to evolve into Scizor?","a":"Scyther"},{"q":"What specific condition is required to evolve Inkay into Malamar?","a":"Holding the console upside down"}],
+[{"q":"This ball has a 100% catch rate.","a":"Master Ball"},{"q":"This item heals a Pokémon's HP by 20 points.","a":"Potion"},{"q":"This machine teaches a Pokémon a new move, but breaks after one use in older games.","a":"TM (Technical Machine)"},{"q":"What item halves a Pokémon's speed but doubles effort values gained?","a":"Macho Brace"},{"q":"Which berry cures paralysis?","a":"Cheri Berry"}],
 [{"q":"This bird is the legendary of Ice.","a":"Articuno"},{"q":"This genetically engineered clone of Mew resides in Cerulean Cave.","a":"Mewtwo"},{"q":"Which legendary controls time in the Sinnoh region?","a":"Dialga"},{"q":"This legendary is known as the 'Creator' of the Pokémon universe.","a":"Arceus"},{"q":"Which legendary trio includes Entei, Raikou, and Suicune?","a":"The Legendary Beasts"}]
+]
+},
+"2": {
+"categories": ["Gen 2", "Moves", "Regions", "Champions", "Teams", "Anime"],
+"board": [
+[{"q":"The grass starter of the Johto region.","a":"Chikorita"},{"q":"The fire starter of the Johto region.","a":"Cyndaquil"},{"q":"The water starter of the Johto region.","a":"Totodile"},{"q":"This baby Pokémon hatched from an egg in the anime.","a":"Togepi"},{"q":"This legendary bird resides in the Whirl Islands.","a":"Lugia"}],
+[{"q":"A powerful Normal-type move that requires the user to recharge on the next turn.","a":"Hyper Beam"},{"q":"This move never misses and always strikes first.","a":"Swift / Aerial Ace (Wait, Aerial Ace never misses. Quick Attack never misses.) Answer: Quick Attack or Swift"},{"q":"This move causes the user to faint, but deals massive damage to the opponent.","a":"Explosion / Self-Destruct"},{"q":"This move shakes the ground, dealing double damage to Pokémon using Dig.","a":"Earthquake"},{"q":"This HM move allows you to cross bodies of water.","a":"Surf"}],
+[{"q":"The region based on the real-world Kanto region of Japan.","a":"Kanto"},{"q":"The region where Mount Coronet is located.","a":"Sinnoh"},{"q":"The region featured in Pokémon Ruby and Sapphire.","a":"Hoenn"},{"q":"The region based on the United Kingdom, introduced in Sword and Shield.","a":"Galar"},{"q":"The region based on Hawaii, introduced in Sun and Moon.","a":"Alola"}],
+[{"q":"The arrogant rival who becomes Champion in Red and Blue.","a":"Blue (or Gary)"},{"q":"The Dragon-type master who is Champion in Gold and Silver.","a":"Lance"},{"q":"The highly feared Champion of the Sinnoh region who uses a Garchomp.","a":"Cynthia"},{"q":"The Champion of the Hoenn region who specializes in Steel types.","a":"Steven Stone"},{"q":"The undefeated Champion of the Galar region with a Charizard.","a":"Leon"}],
+[{"q":"The criminal organization led by Giovanni.","a":"Team Rocket"},{"q":"The team attempting to expand the landmass in the Hoenn region.","a":"Team Magma"},{"q":"The team attempting to expand the ocean in the Hoenn region.","a":"Team Aqua"},{"q":"The team led by Cyrus attempting to recreate the universe.","a":"Team Galactic"},{"q":"The team fighting for Pokémon liberation in the Unova region.","a":"Team Plasma"}],
+[{"q":"The main protagonist of the Pokémon anime for 25 years.","a":"Ash Ketchum"},{"q":"Ash's first traveling companions were Brock and who else?","a":"Misty"},{"q":"The three members of the Team Rocket trio that constantly follow Ash.","a":"Jessie, James, and Meowth"},{"q":"The professor who gives Ash his Pikachu.","a":"Professor Oak"},{"q":"Ash finally became World Champion by defeating this trainer.","a":"Leon"}]
 ]
 }
 },

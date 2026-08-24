@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -16,7 +20,18 @@
 [{"q":"In what year did the Battle of Hastings take place?","a":"1066"},{"q":"Which battle finally defeated Napoleon in 1815?","a":"Battle of Waterloo"},{"q":"The Battle of Agincourt was fought during which major conflict?","a":"The Hundred Years' War"},{"q":"Which famous naval battle saw Admiral Nelson defeat the combined French and Spanish fleets in 1805?","a":"Battle of Trafalgar"},{"q":"The Battle of Gettysburg is widely considered the turning point of which war?","a":"American Civil War"}],
 [{"q":"Which composer wrote 'The Magic Flute'?","a":"Wolfgang Amadeus Mozart"},{"q":"'Carmen' features a famous aria known commonly as the Habanera. Who composed it?","a":"Georges Bizet"},{"q":"Which Italian composer wrote 'La Traviata'?","a":"Giuseppe Verdi"},{"q":"'The Barber of Seville' was composed by who?","a":"Gioachino Rossini"},{"q":"Which Richard Wagner opera features a Valkyrie named Brünnhilde?","a":"Die Walküre"}],
 [{"q":"What element has the atomic number 1?","a":"Hydrogen"},{"q":"Pb is the symbol for which element?","a":"Lead"},{"q":"What noble gas is used in illuminated signs?","a":"Neon"},{"q":"Which element is named after the creator of the periodic table?","a":"Mendelevium"},{"q":"What is the only halogen with no stable isotopes?","a":"Astatine"}],
-[{"q":"Which ancient Greek philosopher was the teacher of Alexander the Great?","a":"Aristotle"},{"q":"Who famously stated 'I think, therefore I am'?","a":"René Descartes"},{"q":"Which German philosopher wrote 'Thus Spoke Zarathustra'?","a":"Friedrich Nietzsche"},{"q":"Who wrote 'The Republic', outlining his political philosophy?","a":"Plato"},{"q":"Which Scottish philosopher co-authored the Communist Manifesto?","a":"Karl Marx (He was German, co-authored with Engels. The question is a trick, trick answer: Karl Marx)"}]
+[{"q":"Which ancient Greek philosopher was the teacher of Alexander the Great?","a":"Aristotle"},{"q":"Who famously stated 'I think, therefore I am'?","a":"René Descartes"},{"q":"Which German philosopher wrote 'Thus Spoke Zarathustra'?","a":"Friedrich Nietzsche"},{"q":"Who wrote 'The Republic', outlining his political philosophy?","a":"Plato"},{"q":"Which German philosopher co-authored the Communist Manifesto with Engels?","a":"Karl Marx"}]
+]
+},
+"2": {
+"categories": ["Ancient", "Advanced Sci", "Authors", "Monarchs", "Art", "Astronomy"],
+"board": [
+[{"q":"Which ancient wonder was located in Alexandria?","a":"The Lighthouse"},{"q":"What is the oldest known writing system, developed by the Sumerians?","a":"Cuneiform"},{"q":"Who was the legendary founder and first king of Rome?","a":"Romulus"},{"q":"The Rosetta Stone was the key to deciphering what ancient script?","a":"Egyptian Hieroglyphs"},{"q":"What Persian king was defeated by the Greeks at the Battle of Marathon?","a":"Darius I"}],
+[{"q":"What is the term for a theoretical boundary around a black hole beyond which no light can escape?","a":"Event Horizon"},{"q":"What subatomic particles mediate the strong nuclear force?","a":"Gluons"},{"q":"Which biological process converts light energy into chemical energy?","a":"Photosynthesis"},{"q":"What is the most abundant protein in the human body?","a":"Collagen"},{"q":"What temperature is absolute zero in Celsius?","a":"-273.15"}],
+[{"q":"Who wrote 'Crime and Punishment'?","a":"Fyodor Dostoevsky"},{"q":"Which Colombian author wrote 'One Hundred Years of Solitude'?","a":"Gabriel García Márquez"},{"q":"Who wrote the epic poem 'Paradise Lost'?","a":"John Milton"},{"q":"Which ancient Greek poet is credited with writing the Iliad and the Odyssey?","a":"Homer"},{"q":"Who wrote the dystopian novel 'Brave New World'?","a":"Aldous Huxley"}],
+[{"q":"Who was the longest-reigning monarch in British history before Queen Elizabeth II?","a":"Queen Victoria"},{"q":"Which Russian Tsar was known as 'The Terrible'?","a":"Ivan IV (Ivan the Terrible)"},{"q":"Who was the last Tsar of Russia?","a":"Nicholas II"},{"q":"Which French King was known as the 'Sun King'?","a":"Louis XIV"},{"q":"Who was the first female Pharaoh of ancient Egypt?","a":"Hatshepsut"}],
+[{"q":"Who painted 'The Starry Night'?","a":"Vincent van Gogh"},{"q":"Which Spanish surrealist painted 'The Persistence of Memory' (melting clocks)?","a":"Salvador Dalí"},{"q":"Who sculpted the marble statue of David?","a":"Michelangelo"},{"q":"Which movement was pioneered by Claude Monet and Pierre-Auguste Renoir?","a":"Impressionism"},{"q":"Who painted 'Guernica', depicting the tragedies of war?","a":"Pablo Picasso"}],
+[{"q":"What is the term for a star that suddenly increases greatly in brightness because of a catastrophic explosion?","a":"Supernova"},{"q":"What is the largest moon of Saturn?","a":"Titan"},{"q":"The Asteroid Belt is located between which two planets?","a":"Mars and Jupiter"},{"q":"What name is given to the region of the solar system beyond Neptune, containing comets and asteroids?","a":"Kuiper Belt"},{"q":"What is the name of the supermassive black hole at the center of the Milky Way?","a":"Sagittarius A*"}]
 ]
 }
 },

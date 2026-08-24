@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -11,12 +15,23 @@
 "1": {
 "categories": ["History", "Science", "UK TV", "Capitals", "Literature", "Brands"],
 "board": [
-[{"q":"Who was the first President of the United States?","a":"George Washington"},{"q":"In which year did the Titanic sink?","a":"1912"},{"q":"Who was the British Prime Minister during most of WWII?","a":"Winston Churchill"},{"q":"What wall fell in 1989, reuniting a country?","a":"The Berlin Wall"},{"q":"Which ancient civilization built the Machu Picchu?","a":"The Incas"}],
+[{"q":"Who was the first President of the United States?","a":"George Washington"},{"q":"In which year did the Titanic sink?","a":"1912"},{"q":"Who was the British Prime Minister during most of WWII?","a":"Winston Churchill"},{"q":"What wall fell in 1989, reuniting a country?","a":"The Berlin Wall"},{"q":"Which ancient civilization built Machu Picchu?","a":"The Incas"}],
 [{"q":"What is the chemical symbol for water?","a":"H2O"},{"q":"What gas do plants absorb from the atmosphere?","a":"Carbon Dioxide"},{"q":"What is the hardest natural substance on Earth?","a":"Diamond"},{"q":"At what temperature Celsius does water boil?","a":"100 degrees"},{"q":"What force keeps the planets in orbit around the sun?","a":"Gravity"}],
-[{"q":"Which long-running soap is set in the fictional borough of Walford?","a":"EastEnders"},{"q":"Who are the two main characters in 'Peep Show' played by Mitchell and Webb?","a":"Mark and Jez"},{"q":"Which time-traveling alien travels in a blue police box?","a":"The Doctor (Doctor Who)"},{"q":"What is the name of the pub in Coronation Street?","a":"The Queen Vic (Wait, no, it's The Rovers Return!)"},{"q":"Which panel show features Jimmy Carr as host alongside Jon Richardson?","a":"8 Out of 10 Cats"}],
-[{"q":"What is the capital of Japan?","a":"Tokyo"},{"q":"What is the capital of Australia?","a":"Tokyo"},{"q":"What is the capital of Canada?","a":"Canberra"},{"q":"What is the capital of Brazil?","a":"Brasilia"},{"q":"What is the capital of Iceland?","a":"Ottawa (Wait, Iceland is Reykjavik)"}],
-[{"q":"Who wrote 'Romeo and Juliet'?","a":"William Shakespeare"},{"q":"What is the name of the hobbit created by J.R.R. Tolkien?","a":"Bilbo Baggins (or Frodo)"},{"q":"Who wrote '1984' and 'Animal Farm'?","a":"George Orwell"},{"q":"In which book would you find the character Holden Caulfield?","a":"1984 (Wait, it's Catcher in the Rye)"},{"q":"Which author wrote the 'A Song of Ice and Fire' series?","a":"George R.R. Martin"}],
+[{"q":"Which long-running soap is set in the fictional borough of Walford?","a":"EastEnders"},{"q":"Who are the two main characters in 'Peep Show'?","a":"Mark and Jez"},{"q":"Which time-traveling alien travels in a blue police box?","a":"The Doctor (Doctor Who)"},{"q":"What is the name of the pub in Coronation Street?","a":"The Rovers Return"},{"q":"Which panel show features Jimmy Carr as host alongside Jon Richardson?","a":"8 Out of 10 Cats"}],
+[{"q":"What is the capital of Japan?","a":"Tokyo"},{"q":"What is the capital of Australia?","a":"Canberra"},{"q":"What is the capital of Canada?","a":"Ottawa"},{"q":"What is the capital of Brazil?","a":"Brasilia"},{"q":"What is the capital of Iceland?","a":"Reykjavik"}],
+[{"q":"Who wrote 'Romeo and Juliet'?","a":"William Shakespeare"},{"q":"What is the name of the hobbit created by J.R.R. Tolkien?","a":"Bilbo Baggins (or Frodo)"},{"q":"Who wrote '1984' and 'Animal Farm'?","a":"George Orwell"},{"q":"In which book would you find the character Holden Caulfield?","a":"The Catcher in the Rye"},{"q":"Which author wrote the 'A Song of Ice and Fire' series?","a":"George R.R. Martin"}],
 [{"q":"Which brand's slogan is 'Just Do It'?","a":"Nike"},{"q":"The golden arches are the logo for this company.","a":"McDonald's"},{"q":"This tech company's logo is a fruit with a bite taken out of it.","a":"Apple"},{"q":"Which car brand features a prancing horse on its badge?","a":"Ferrari"},{"q":"This brand is known for 'finger lickin' good' chicken.","a":"KFC"}]
+]
+},
+"2": {
+"categories": ["Space", "Movie Quotes", "UK Music", "Water Bodies", "Anatomy", "2000s Pop"],
+"board": [
+[{"q":"What is the largest planet in our solar system?","a":"Jupiter"},{"q":"Who was the first human to walk on the moon?","a":"Neil Armstrong"},{"q":"What is the closest planet to the Sun?","a":"Mercury"},{"q":"What galaxy is Earth located in?","a":"The Milky Way"},{"q":"What is the name of the first artificial Earth satellite, launched in 1957?","a":"Sputnik 1"}],
+[{"q":"'I'll be back.'","a":"The Terminator"},{"q":"'You can't handle the truth!'","a":"A Few Good Men"},{"q":"'Here's looking at you, kid.'","a":"Casablanca"},{"q":"'To infinity and beyond!'","a":"Toy Story"},{"q":"'I see dead people.'","a":"The Sixth Sense"}],
+[{"q":"Who released the hit album '21' featuring 'Rolling in the Deep'?","a":"Adele"},{"q":"Which band was formed by brothers Liam and Noel Gallagher?","a":"Oasis"},{"q":"What legendary band was led by Freddie Mercury?","a":"Queen"},{"q":"Who sang 'Rehab' and 'Valerie'?","a":"Amy Winehouse"},{"q":"Which pop group featured Ginger, Baby, Scary, Sporty, and Posh?","a":"Spice Girls"}],
+[{"q":"What is the largest ocean on Earth?","a":"The Pacific Ocean"},{"q":"Which river flows through Paris?","a":"The Seine"},{"q":"What is the longest river in the world?","a":"The Nile"},{"q":"Which sea separates Europe and Africa?","a":"The Mediterranean Sea"},{"q":"What is the largest lake in the UK?","a":"Lough Neagh"}],
+[{"q":"What organ pumps blood around the body?","a":"The Heart"},{"q":"What is the largest organ of the human body?","a":"The Skin"},{"q":"How many bones are in the adult human body?","a":"206"},{"q":"What type of blood cells fight infection?","a":"White blood cells"},{"q":"Which bone is the longest in the human body?","a":"Femur"}],
+[{"q":"Which social network was founded by Mark Zuckerberg in 2004?","a":"Facebook"},{"q":"What Apple device revolutionized portable music in 2001?","a":"The iPod"},{"q":"Which artist sang 'Toxic' and 'Oops!... I Did It Again'?","a":"Britney Spears"},{"q":"Which reality TV show launched Simon Cowell to international fame?","a":"Pop Idol / American Idol"},{"q":"What magical film franchise released its first movie in 2001?","a":"Harry Potter"}]
 ]
 }
 },

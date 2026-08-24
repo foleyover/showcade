@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -11,14 +15,25 @@
 "1": {
 "categories": ["Rivers", "19th Century", "Chemistry", "Mythology", "Oscars", "Currencies"],
 "board": [
-[{"q":"This river flows through London.","a":"The Thames"},{"q":"This is the second longest river in Europe, passing through 10 countries.","a":"The Danube"},{"q":"This river forms part of the border between the US and Mexico.","a":"The Rio Grande"},{"q":"This major river flows through Venezuela, Colombia, and the US.","a":"Colorado River"},{"q":"This is the longest river in Asia.","a":"Yangtze"}],
+[{"q":"This river flows through London.","a":"The Thames"},{"q":"This is the second longest river in Europe, passing through 10 countries.","a":"The Danube"},{"q":"This river forms part of the border between the US and Mexico.","a":"The Rio Grande"},{"q":"This major river flows through Venezuela and Colombia.","a":"Orinoco River"},{"q":"This is the longest river in Asia.","a":"Yangtze"}],
 [{"q":"This Queen defined an era of British history from 1837 to 1901.","a":"Queen Victoria"},{"q":"In 1804, this man declared himself Emperor of the French.","a":"Napoleon Bonaparte"},{"q":"This war was fought in the US between 1861 and 1865.","a":"The American Civil War"},{"q":"This famous English naturalist published 'On the Origin of Species' in 1859.","a":"Charles Darwin"},{"q":"This war was fought between the Russian Empire and an alliance of France, Britain, and the Ottoman Empire from 1853 to 1856.","a":"The Crimean War"}],
 [{"q":"What is the chemical symbol for Iron?","a":"Fe"},{"q":"What is the lightest element on the periodic table?","a":"Hydrogen"},{"q":"What metallic element is liquid at room temperature?","a":"Mercury"},{"q":"What is the most abundant gas in the Earth's atmosphere?","a":"Nitrogen"},{"q":"Which element is diamond entirely composed of?","a":"Carbon"}],
 [{"q":"In Greek mythology, who is the god of the sea?","a":"Poseidon"},{"q":"Who was the king of the Norse gods?","a":"Odin"},{"q":"In Greek myth, who flew too close to the sun with wax wings?","a":"Icarus"},{"q":"What creature is half man and half horse?","a":"Centaur"},{"q":"Who is the Roman goddess of love and beauty?","a":"Venus"}],
 [{"q":"Which film won Best Picture in 1994, taking home 11 Oscars?","a":"Titanic"},{"q":"Who holds the record for the most acting Oscars (4 wins)?","a":"Katharine Hepburn"},{"q":"Which 2019 South Korean film was the first non-English language film to win Best Picture?","a":"Parasite"},{"q":"Who directed the 'Lord of the Rings' trilogy, winning Best Director for Return of the King?","a":"Peter Jackson"},{"q":"Which actor won his first Oscar for 'The Revenant' in 2016?","a":"Leonardo DiCaprio"}],
-[{"q":"What is the official currency of Japan?","a":"Yen"},{"q":"What currency is used in South Africa?","a":"Real (Wait, it's Rand)"},{"q":"What is the official currency of Switzerland?","a":"Krona"},{"q":"What currency does India use?","a":"Rupee"},{"q":"What is the official currency of Russia?","a":"Ruble"}]
+[{"q":"What is the official currency of Japan?","a":"Yen"},{"q":"What currency is used in South Africa?","a":"Rand"},{"q":"What is the official currency of Switzerland?","a":"Swiss Franc"},{"q":"What currency does India use?","a":"Rupee"},{"q":"What is the official currency of Russia?","a":"Ruble"}]
+]
+},
+"2": {
+"categories": ["European History", "Hard Science", "Lit Quotes", "World Flags", "Classical", "UK Politics"],
+"board": [
+[{"q":"Who was the first Holy Roman Emperor?","a":"Charlemagne"},{"q":"The French Revolution began with the storming of what prison in 1789?","a":"The Bastille"},{"q":"What ruling family dominated the Austrian Empire for centuries?","a":"The Habsburgs"},{"q":"The War of the Roses was fought between the houses of York and what?","a":"Lancaster"},{"q":"What treaty ended World War I in 1919?","a":"Treaty of Versailles"}],
+[{"q":"What is the powerhouse of the biological cell?","a":"Mitochondria"},{"q":"What particle has a negative electrical charge?","a":"Electron"},{"q":"What is the closest star system to our solar system?","a":"Alpha Centauri"},{"q":"Who developed the theory of general relativity?","a":"Albert Einstein"},{"q":"What does DNA stand for?","a":"Deoxyribonucleic Acid"}],
+[{"q":"'Call me Ishmael.'","a":"Moby-Dick"},{"q":"'It was the best of times, it was the worst of times.'","a":"A Tale of Two Cities"},{"q":"'All animals are equal, but some animals are more equal than others.'","a":"Animal Farm"},{"q":"'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.'","a":"Pride and Prejudice"},{"q":"'Last night I dreamt I went to Manderley again.'","a":"Rebecca"}],
+[{"q":"Which country's flag features a red maple leaf?","a":"Canada"},{"q":"Which country's flag is the only one in the world that is not a rectangle or square?","a":"Nepal"},{"q":"What two colors make up the flag of Ukraine?","a":"Blue and Yellow"},{"q":"Which country's flag features a green cedar tree on a white background?","a":"Lebanon"},{"q":"The flag of Wales features what mythical creature?","a":"A Dragon"}],
+[{"q":"Who composed the 'Four Seasons'?","a":"Antonio Vivaldi"},{"q":"Who composed the 'Moonlight Sonata'? (Wait, Beethoven composed it, but it's part of piano sonata 14)","a":"Ludwig van Beethoven"},{"q":"Which deaf composer wrote the 9th Symphony?","a":"Beethoven"},{"q":"Who composed the ballet 'Swan Lake'?","a":"Tchaikovsky"},{"q":"Which composer wrote 'The Magic Flute'?","a":"Mozart"}],
+[{"q":"Who resides at 10 Downing Street?","a":"The Prime Minister"},{"q":"What are the two main political parties in the UK?","a":"Conservative and Labour"},{"q":"Which Prime Minister held the role during the 2016 Brexit referendum?","a":"David Cameron"},{"q":"What is the upper house of the UK Parliament called?","a":"House of Lords"},{"q":"Who was the first female Prime Minister of the UK?","a":"Margaret Thatcher"}]
 ]
 }
 },
-"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Geography", "rule": "Wager your points!", "q": "What is the only country in the world that does not have a rectangular flag?", "a": "Nepal (Wait, it's Nepal)", "hasAnswer": true }
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Geography", "rule": "Wager your points!", "q": "What is the only country in the world to have coastlines on both the Red Sea and the Persian Gulf?", "a": "Egypt", "hasAnswer": true }
 }

@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -11,14 +15,25 @@
 "1": {
 "categories": ["Space", "The Body", "Physics", "Animals", "Weather", "Dinosaurs"],
 "board": [
-[{"q":"Which planet is closest to the Sun?","a":"Mercury"},{"q":"What is the largest planet in our solar system?","a":"Jupiter"},{"q":"What do we call a rock that enters Earth's atmosphere and burns up?","a":"Meteor (or Shooting Star)"},{"q":"Which planet is known as the Red Planet?","a":"Mars"},{"q":"What is the name of our galaxy?","a":"The Milky Way"}],
-[{"q":"What organ pumps blood around the body?","a":"Heart"},{"q":"What is the largest organ of the human body?","a":"Skin"},{"q":"Which bones protect the human brain?","a":"Skull / Cranium"},{"q":"What type of blood cells help fight infection?","a":"White blood cells"},{"q":"How many bones are in the adult human body?","a":"206"}],
-[{"q":"Who formulated the laws of motion and universal gravitation?","a":"Isaac Newton"},{"q":"What is the measurement unit of electrical resistance?","a":"Ohm"},{"q":"What force opposes motion between two surfaces in contact?","a":"Friction"},{"q":"What travels at 299,792 kilometers per second in a vacuum?","a":"Light"},{"q":"What famous equation relates mass to energy?","a":"E = mc²"}],
-[{"q":"What is the fastest land animal?","a":"Cheetah"},{"q":"What is the largest animal on Earth?","a":"Blue Whale"},{"q":"What bird lays the largest eggs?","a":"Ostrich"},{"q":"Which mammal is known for having a pouch to carry its young?","a":"Kangaroo (or Marsupials)"},{"q":"What is the only mammal capable of true sustained flight?","a":"Bat"}],
-[{"q":"What do we call frozen rain that falls in pellets?","a":"Hail"},{"q":"What natural phenomenon is measured using the Fujita scale?","a":"Tornadoes"},{"q":"What type of cloud is large, dark, and brings thunderstorms?","a":"Cumulonimbus"},{"q":"What instrument is used to measure atmospheric pressure?","a":"Barometer"},{"q":"What is the term for the calm area in the center of a hurricane?","a":"The Eye"}],
-[{"q":"Which dinosaur is famously known as the 'King of the Tyrant Lizards'?","a":"Tyrannosaurus Rex (T-Rex)"},{"q":"Which herbivore dinosaur is famous for having three horns on its face?","a":"Triceratops"},{"q":"Which flying reptile lived alongside dinosaurs?","a":"Pterodactyl (or Pterosaur)"},{"q":"Which dinosaur had a large clubbed tail and bony armor?","a":"Ankylosaurus"},{"q":"The Jurassic period falls between the Triassic and which other period?","a":"Cretaceous"}]
+[{"q":"What is the star at the center of our solar system?","a":"The Sun"},{"q":"Which planet is known as the Red Planet?","a":"Mars"},{"q":"What planet do we live on?","a":"Earth"},{"q":"What is the largest planet in our solar system?","a":"Jupiter"},{"q":"Which planet is famous for its rings?","a":"Saturn"}],
+[{"q":"What organ pumps blood around the body?","a":"The Heart"},{"q":"What organ inside your skull controls the nervous system?","a":"The Brain"},{"q":"What pair of organs allow you to breathe?","a":"The Lungs"},{"q":"What is the largest organ of the human body?","a":"The Skin"},{"q":"What hard structures make up the skeleton?","a":"Bones"}],
+[{"q":"What force pulls objects towards the ground?","a":"Gravity"},{"q":"What travels at 299,792 kilometers per second in a vacuum?","a":"Light"},{"q":"What travels through the air as vibrations to your ear?","a":"Sound"},{"q":"What invisible force attracts iron objects?","a":"Magnetism"},{"q":"What energy flows through wires to power your home?","a":"Electricity"}],
+[{"q":"What pet is known as man's best friend?","a":"Dog"},{"q":"What small feline pet meows?","a":"Cat"},{"q":"What aquatic animal breathes through gills?","a":"Fish"},{"q":"What type of animal has feathers and lays eggs?","a":"Bird"},{"q":"What class of cold-blooded animals includes snakes and lizards?","a":"Reptile"}],
+[{"q":"Water falling from clouds in liquid drops.","a":"Rain"},{"q":"Atmospheric water vapor frozen into ice crystals falling in light flakes.","a":"Snow"},{"q":"The star that provides light and heat to our weather system.","a":"The Sun"},{"q":"The perceptible natural movement of the air.","a":"Wind"},{"q":"A visible mass of condensed water vapor floating in the atmosphere.","a":"Cloud"}],
+[{"q":"Which dinosaur is famously known as the 'King of the Tyrant Lizards'?","a":"T-Rex"},{"q":"Which herbivore dinosaur is famous for having three horns on its face?","a":"Triceratops"},{"q":"Which dinosaur was heavily popularized as a smart pack-hunter in Jurassic Park?","a":"Velociraptor"},{"q":"Which massive, long-necked dinosaur was previously called an Apatosaurus?","a":"Brontosaurus"},{"q":"Which dinosaur had a row of bony plates along its back and a spiked tail?","a":"Stegosaurus"}]
+]
+},
+"2": {
+"categories": ["Chemistry", "Botany", "Earth", "Inventions", "Microbes", "Marine Life"],
+"board": [
+[{"q":"What is the chemical formula for water?","a":"H2O"},{"q":"What gas do humans need to breathe?","a":"Oxygen"},{"q":"What valuable yellow metal has the chemical symbol Au?","a":"Gold"},{"q":"What magnetic metal has the chemical symbol Fe?","a":"Iron"},{"q":"Which element is diamond entirely composed of?","a":"Carbon"}],
+[{"q":"A large woody plant with a trunk.","a":"Tree"},{"q":"The seed-bearing part of a plant, consisting of reproductive organs.","a":"Flower"},{"q":"The common green plant that covers lawns.","a":"Grass"},{"q":"The flat green part of a plant that performs photosynthesis.","a":"Leaf"},{"q":"The part of a plant that anchors it in the ground and absorbs water.","a":"Root"}],
+[{"q":"A large natural elevation of the earth's surface.","a":"Mountain"},{"q":"A large natural stream of water flowing in a channel.","a":"River"},{"q":"The vast body of salt water that covers almost 3/4 of the earth.","a":"Ocean"},{"q":"A mountain with a crater where lava erupts.","a":"Volcano"},{"q":"A sudden violent shaking of the ground.","a":"Earthquake"}],
+[{"q":"Alexander Graham Bell is credited with inventing what communication device?","a":"The Telephone"},{"q":"Henry Ford mass-produced what mode of transport?","a":"The Car (Automobile)"},{"q":"The Wright Brothers invented what flying machine?","a":"The Airplane"},{"q":"Thomas Edison is famously credited with inventing what illuminating device?","a":"The Lightbulb"},{"q":"Tim Berners-Lee invented what global communication network?","a":"The World Wide Web (Internet)"}],
+[{"q":"An infective agent that requires a host cell to replicate.","a":"Virus"},{"q":"Single-celled organisms that can cause infections but are treated with antibiotics.","a":"Bacteria"},{"q":"The smallest structural and functional unit of an organism.","a":"Cell"},{"q":"The molecule that carries genetic instructions.","a":"DNA"},{"q":"A common term for a microscopic organism that causes disease.","a":"Germ"}],
+[{"q":"A large cartilaginous predator fish.","a":"Shark"},{"q":"The largest animal on earth is the Blue ____.","a":"Whale"},{"q":"A highly intelligent marine mammal that swims in pods.","a":"Dolphin"},{"q":"A mollusk with eight tentacles.","a":"Octopus"},{"q":"A crustacean with a broad carapace and two large pincers.","a":"Crab"}]
 ]
 }
 },
-"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Biology", "rule": "Wager your points!", "q": "What does DNA stand for?", "a": "Deoxyribonucleic acid", "hasAnswer": true }
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Biology", "rule": "Wager your points!", "q": "What pigment gives plants their green color and helps them absorb sunlight?", "a": "Chlorophyll", "hasAnswer": true }
 }

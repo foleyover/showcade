@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -13,10 +17,21 @@
 "board": [
 [{"q":"Paella is a traditional rice dish from which country?","a":"Spain"},{"q":"Haggis, Neeps, and Tatties is the national dish of where?","a":"Scotland"},{"q":"Which Italian city is widely considered the birthplace of pizza?","a":"Naples"},{"q":"Goulash is a heavily spiced stew originating from which country?","a":"Hungary"},{"q":"Escargot is a delicacy made of what animal?","a":"Snail"}],
 [{"q":"What clear liquor is mixed with tonic water?","a":"Gin"},{"q":"A Margarita is traditionally made with which liquor?","a":"Tequila"},{"q":"What cocktail consists of vodka, coffee liqueur, and cream?","a":"White Russian"},{"q":"Mint, rum, sugar, and lime make up this Cuban cocktail.","a":"Mojito"},{"q":"What cocktail is made with bourbon, Campari, and sweet vermouth?","a":"Boulevardier"}],
-[{"q":"This soft, white Italian cheese is made from mozzarella and cream.","a":"Burrata"},{"q":"Which country is famous for producing Brie and Camembert?","a":"France"},{"q":"What cheese is traditionally used to make Greek pesto?","a":"Feta"},{"q":"This hard, salty Italian cheese is often grated over pasta.","a":"Parmesan"},{"q":"Which blue cheese takes its name from a town in Italy?","a":"Gorgonzola"}],
+[{"q":"This soft, white Italian cheese is made from mozzarella and cream.","a":"Burrata"},{"q":"Which country is famous for producing Brie and Camembert?","a":"France"},{"q":"What cheese is traditionally used to make Greek salads?","a":"Feta"},{"q":"This hard, salty Italian cheese is often grated over pasta.","a":"Parmesan"},{"q":"Which blue cheese takes its name from a town in Italy?","a":"Gorgonzola"}],
 [{"q":"What Japanese dish consists of raw fish served without rice?","a":"Sashimi"},{"q":"Pad Thai is a famous noodle dish from which country?","a":"Thailand"},{"q":"Kimchi is a traditional fermented cabbage dish from where?","a":"South Korea"},{"q":"What spicy Indian dish consists of marinated chicken in a creamy tomato sauce?","a":"Chicken Tikka Masala"},{"q":"Pho is the national noodle soup of which country?","a":"Vietnam"}],
 [{"q":"What Italian dessert's name translates to 'pick me up'?","a":"Tiramisu"},{"q":"Which French pastry consists of choux dough filled with cream and topped with chocolate?","a":"Éclair"},{"q":"What crispy, layered Middle Eastern pastry is filled with chopped nuts and honey?","a":"Baklava"},{"q":"What Mexican dessert is made of fried dough dusted in cinnamon sugar?","a":"Churros"},{"q":"What traditional British dessert is made from bananas, cream, and toffee on a pastry base?","a":"Banoffee Pie"}],
 [{"q":"What fast food chain is famous for the Whopper?","a":"Burger King"},{"q":"Which chain has a mascot named Colonel Sanders?","a":"KFC"},{"q":"What Mexican-inspired chain is famous for its Crunchwrap Supreme?","a":"Taco Bell"},{"q":"Which pizza chain features a game piece in its logo?","a":"Domino's"},{"q":"What fast food chain famously calls its chicken sandwiches 'Fil-A'?","a":"Chick-fil-A"}]
+]
+},
+"2": {
+"categories": ["UK Classics", "Spices", "Drinks", "Americas", "Baking", "Ingredients"],
+"board": [
+[{"q":"A traditional battered seafood and potato meal wrapped in paper.","a":"Fish and Chips"},{"q":"A traditional Sunday meal featuring meat, potatoes, and Yorkshire pudding.","a":"Sunday Roast"},{"q":"A traditional London working-class meal featuring pastry and liquor.","a":"Pie and Mash"},{"q":"The national dish of Scotland, containing sheep's pluck.","a":"Haggis"},{"q":"A breakfast featuring eggs, bacon, sausage, beans, and black pudding.","a":"Full English Breakfast"}],
+[{"q":"The most common seasoning alongside pepper.","a":"Salt"},{"q":"A black spice commonly ground into food.","a":"Black Pepper"},{"q":"A sweet brown spice commonly used in baking rolls and on toast.","a":"Cinnamon"},{"q":"An earthy spice heavily used in Indian curries and Mexican chili.","a":"Cumin"},{"q":"A red spice made from dried, ground peppers.","a":"Paprika"}],
+[{"q":"The most popular hot beverage in the UK, often served with milk.","a":"Tea"},{"q":"A caffeinated drink made from roasted beans.","a":"Coffee"},{"q":"An alcoholic drink brewed from malted barley and hops.","a":"Beer"},{"q":"An alcoholic drink fermented from grapes.","a":"Wine"},{"q":"An alcoholic drink fermented from apples.","a":"Cider"}],
+[{"q":"A folded corn or wheat tortilla filled with meat and salsa.","a":"Taco"},{"q":"A beef patty served in a sliced bun.","a":"Hamburger"},{"q":"A grilled sausage served in a sliced bun.","a":"Hot Dog"},{"q":"A Canadian dish of fries topped with cheese curds and gravy.","a":"Poutine"},{"q":"A large flour tortilla wrapped around a filling of rice, beans, and meat.","a":"Burrito"}],
+[{"q":"A powdery substance made by grinding wheat or other grains.","a":"Flour"},{"q":"A sweet crystalline substance obtained from various plants.","a":"Sugar"},{"q":"A pale yellow dairy product churned from cream.","a":"Butter"},{"q":"Oval objects laid by chickens, used to bind baked goods.","a":"Eggs"},{"q":"A microscopic fungus used to make bread rise.","a":"Yeast"}],
+[{"q":"A round vegetable with many layers that makes you cry when cut.","a":"Onion"},{"q":"A pungent bulb made of cloves, used to keep vampires away.","a":"Garlic"},{"q":"A red fruit commonly mistaken for a vegetable, used to make ketchup.","a":"Tomato"},{"q":"A starchy root vegetable used to make crisps and fries.","a":"Potato"},{"q":"An orange root vegetable associated with improved eyesight.","a":"Carrot"}]
 ]
 }
 },

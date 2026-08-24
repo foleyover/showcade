@@ -3,7 +3,11 @@
 "numCategories": 6,
 "numQuestions": 5,
 "maxGuesses": 1,
-"round2Enabled": false,
+"currentRound": 1,
+"round2Enabled": true,
+"persistentScoreboard": false,
+"debugMode": false,
+"chudEnabled": false,
 "timer": { "enabled": true, "duration": 30 },
 "sfx": { "enabled": true, "volume": 50 },
 "dailyDoubles": { "enabled": true, "mode": "wager" },
@@ -14,11 +18,22 @@
 [{"q":"This iconic plumber is Nintendo's mascot.","a":"Mario"},{"q":"In 'The Legend of Zelda', what is the name of the main protagonist?","a":"Link"},{"q":"What is the name of the pink puffball who can inhale enemies?","a":"Kirby"},{"q":"Which bounty hunter is the protagonist of the Metroid series?","a":"Samus Aran"},{"q":"What was Nintendo's first fully 3D home console?","a":"Nintendo 64"}],
 [{"q":"This game features a bandicoot named Crash.","a":"Crash Bandicoot"},{"q":"Who is the protagonist of the 'God of War' series?","a":"Kratos"},{"q":"What highly acclaimed 2013 game sees Joel and Ellie crossing a post-apocalyptic America?","a":"The Last of Us"},{"q":"Which treasure hunter stars in the 'Uncharted' series?","a":"Nathan Drake"},{"q":"What is the best-selling PlayStation console of all time?","a":"PlayStation 2"}],
 [{"q":"This block-building survival game is the best-selling video game of all time.","a":"Minecraft"},{"q":"What platform, created by Valve, dominates PC game sales?","a":"Steam"},{"q":"Which massive online game features Summoner's Rift?","a":"League of Legends"},{"q":"What simulation game lets you manage digital people and build their houses?","a":"The Sims"},{"q":"What does GPU stand for in PC building?","a":"Graphics Processing Unit"}],
-[{"q":"Who is the giant, turtle-like king of the Koopas?","a":"Bowser"},{"q":"What robotic AI tests Chell in the game 'Portal'?","a":"GLaDOS"},{"q":"Who is the main antagonist of the Final Fantasy VII?","a":"Sephiroth"},{"q":"What villain frequently kidnaps Princess Zelda?","a":"Ganon / Ganondorf"},{"q":"Dr. Ivo Robotnik is the nemesis of which fast video game character?","a":"Sonic the Hedgehog"}],
-[{"q":"This classic arcade game features a yellow circle eating dots and running from ghosts.","a":"Pac-Man"},{"q":"In what classic game do players arrange falling tetrominoes?","a":"Tetris"},{"q":"What classic console introduced the Konami Code?","a":"NES"},{"q":"This arcade game features a frog crossing a busy road and a river.","a":"Frogger"},{"q":"What was the first commercially successful video game, basically table tennis?","a":"Pong"}],
-[{"q":"Which indie farming RPG was developed entirely by one person, ConcernedApe?","a":"Stardew Valley"},{"q":"In 'Undertale', what is the name of the town the player moves to?","a":"Pelican Town"},{"q":"What indie game has you playing as a cup trying to repay a debt to the devil?","a":"Cuphead"},{"q":"Which acclaimed indie game has you playing as Zagreus escaping the Greek underworld?","a":"Hades"},{"q":"What incredibly difficult indie platformer has you climbing a mountain as a girl named Madeline?","a":"Celeste"}]
+[{"q":"Who is the giant, turtle-like king of the Koopas?","a":"Bowser"},{"q":"What robotic AI tests Chell in the game 'Portal'?","a":"GLaDOS"},{"q":"Who is the main antagonist of Final Fantasy VII?","a":"Sephiroth"},{"q":"What villain frequently kidnaps Princess Zelda?","a":"Ganon / Ganondorf"},{"q":"Dr. Ivo Robotnik is the nemesis of which fast video game character?","a":"Sonic the Hedgehog"}],
+[{"q":"This classic arcade game features a yellow circle eating dots and running from ghosts.","a":"Pac-Man"},{"q":"In what classic game do players arrange falling tetrominoes?","a":"Tetris"},{"q":"What classic console introduced the Konami Code?","a":"NES (Nintendo Entertainment System)"},{"q":"This arcade game features a frog crossing a busy road and a river.","a":"Frogger"},{"q":"What was the first commercially successful video game, basically table tennis?","a":"Pong"}],
+[{"q":"Which indie farming RPG was developed entirely by one person, ConcernedApe?","a":"Stardew Valley"},{"q":"In 'Undertale', what is the name of the town the player moves to?","a":"Snowdin / The Underground"},{"q":"What indie game has you playing as a cup trying to repay a debt to the devil?","a":"Cuphead"},{"q":"Which acclaimed indie game has you playing as Zagreus escaping the Greek underworld?","a":"Hades"},{"q":"What incredibly difficult indie platformer has you climbing a mountain as a girl named Madeline?","a":"Celeste"}]
+]
+},
+"2": {
+"categories": ["Xbox", "Studios", "E-Sports", "Heroes", "2010s Hits", "Easter Eggs"],
+"board": [
+[{"q":"The green-armored super soldier from the Halo franchise.","a":"Master Chief"},{"q":"The chainsaw-wielding shooter franchise set on the planet Sera.","a":"Gears of War"},{"q":"Xbox's premier racing simulation franchise.","a":"Forza Motorsport"},{"q":"The popular RPG series set in the world of Albion.","a":"Fable"},{"q":"Xbox's highly successful monthly game subscription service.","a":"Xbox Game Pass"}],
+[{"q":"The studio behind Fortnite and Unreal Engine.","a":"Epic Games"},{"q":"The studio that developed Grand Theft Auto and Red Dead Redemption.","a":"Rockstar Games"},{"q":"The developer of Half-Life, Portal, and Left 4 Dead.","a":"Valve"},{"q":"The studio responsible for Crash Bandicoot, Jak & Daxter, and The Last of Us.","a":"Naughty Dog"},{"q":"The developers of The Elder Scrolls and Fallout series.","a":"Bethesda Game Studios"}],
+[{"q":"The legendary Korean League of Legends player known as the 'Unkillable Demon King'.","a":"Faker"},{"q":"The game acronym CS:GO stands for what?","a":"Counter-Strike: Global Offensive"},{"q":"This MOBA holds the record for the largest prize pool in E-Sports history via 'The International'.","a":"Dota 2"},{"q":"Blizzard's highly successful team-based hero shooter.","a":"Overwatch"},{"q":"Psyonix's E-Sport game where you play soccer with rocket-powered cars.","a":"Rocket League"}],
+[{"q":"The blue blur who collects golden rings.","a":"Sonic the Hedgehog"},{"q":"The British archaeologist and adventurer starring in Tomb Raider.","a":"Lara Croft"},{"q":"The legendary stealth operative from the Metal Gear series.","a":"Solid Snake"},{"q":"The pink puffball who lives in Dream Land.","a":"Kirby"},{"q":"The space marine protagonist of the Doom series.","a":"Doomguy / The Doom Slayer"}],
+[{"q":"The massive open-world fantasy game featuring the Dragonborn.","a":"The Elder Scrolls V: Skyrim"},{"q":"The fifth installment of Rockstar's crime franchise, set in Los Santos.","a":"Grand Theft Auto V"},{"q":"CD Projekt Red's fantasy RPG starring Geralt of Rivia.","a":"The Witcher 3: Wild Hunt"},{"q":"The wildly popular battle royale game featuring a shrinking storm.","a":"Fortnite"},{"q":"Rockstar's epic cowboy game starring Arthur Morgan.","a":"Red Dead Redemption 2"}],
+[{"q":"Up, Up, Down, Down, Left, Right, Left, Right, B, A, Start is known as what?","a":"The Konami Code"},{"q":"In Diablo II, entering a portal opens the secret level full of what animal?","a":"Cows (The Secret Cow Level)"},{"q":"In Portal, graffiti on the walls warns players that 'The ___ is a lie'.","a":"Cake"},{"q":"In Doom II, whose severed head is secretly hidden on a spike behind the final boss?","a":"John Romero"},{"q":"In Grand Theft Auto: Vice City, an easter egg features an actual chocolate egg with what word written on it?","a":"Happy Easter"}]
 ]
 }
 },
-"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Gaming History", "rule": "Wager your points!", "q": "What video game crash occurred in 1983, largely blamed on an ET game for the Atari?", "a": "The Video Game Crash of 1983", "hasAnswer": true }
+"finalJeopardy": { "enabled": true, "wagersEnabled": true, "category": "Gaming History", "rule": "Wager your points!", "q": "What video game crash occurred in 1983, largely blamed on an E.T. game for the Atari?", "a": "The Video Game Crash of 1983", "hasAnswer": true }
 }
