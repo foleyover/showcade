@@ -1783,10 +1783,18 @@
                     }
                 });
 
-                gameData.finalJeopardy = importedData.finalJeopardy || { enabled: true, wagersEnabled: true, category: "", rule: "", q: "", a: "", img: null, audio: null, mediaUrl: "", hasAnswer: true };
-                if (gameData.finalJeopardy.enabled === undefined) gameData.finalJeopardy.enabled = true;
-                if (gameData.finalJeopardy.hasAnswer === undefined) gameData.finalJeopardy.hasAnswer = true;
-                if (gameData.finalJeopardy.wagersEnabled === undefined) gameData.finalJeopardy.wagersEnabled = true;
+                // FALLBACKS APPLIED HERE to ensure Final Jeopardy loads safely
+                gameData.finalJeopardy = importedData.finalJeopardy || {};
+                gameData.finalJeopardy.enabled = gameData.finalJeopardy.enabled !== false;
+                gameData.finalJeopardy.wagersEnabled = gameData.finalJeopardy.wagersEnabled !== false;
+                gameData.finalJeopardy.hasAnswer = gameData.finalJeopardy.hasAnswer !== false;
+                gameData.finalJeopardy.category = gameData.finalJeopardy.category || "";
+                gameData.finalJeopardy.rule = gameData.finalJeopardy.rule || "";
+                gameData.finalJeopardy.q = gameData.finalJeopardy.q || "";
+                gameData.finalJeopardy.a = gameData.finalJeopardy.a || "";
+                gameData.finalJeopardy.mediaUrl = gameData.finalJeopardy.mediaUrl || "";
+                gameData.finalJeopardy.img = gameData.finalJeopardy.img || null;
+                gameData.finalJeopardy.audio = gameData.finalJeopardy.audio || null;
 
                 document.getElementById('host-name').value = gameData.hostName;
                 document.getElementById('category-count-select').value = gameData.numCategories;
@@ -1944,9 +1952,9 @@
 
                 container.innerHTML = `
                     <div id="fj-settings-container">
-                        <input type="text" id="fj-cat" class="fj-input" placeholder="Final Category (e.g. World History)" value="${gameData.finalJeopardy.category.replace(/"/g, '&quot;')}">
-                        <input type="text" id="fj-rule" class="fj-input" placeholder="Custom Rule (e.g. Wager, point-swap, or mini-game!)" value="${gameData.finalJeopardy.rule.replace(/"/g, '&quot;')}">
-                        <textarea id="fj-q" class="fj-input" placeholder="Final Question..." style="height: 80px; resize: vertical;">${gameData.finalJeopardy.q}</textarea>
+                        <input type="text" id="fj-cat" class="fj-input" placeholder="Final Category (e.g. World History)" value="${(gameData.finalJeopardy.category || '').replace(/"/g, '&quot;')}">
+                        <input type="text" id="fj-rule" class="fj-input" placeholder="Custom Rule (e.g. Wager, point-swap, or mini-game!)" value="${(gameData.finalJeopardy.rule || '').replace(/"/g, '&quot;')}">
+                        <textarea id="fj-q" class="fj-input" placeholder="Final Question..." style="height: 80px; resize: vertical;">${gameData.finalJeopardy.q || ''}</textarea>
                         
                         <div id="fj-drop-box" class="drop-target-box" style="margin-bottom: 15px;">
                             <div class="media-row">
@@ -1958,7 +1966,7 @@
                                 <button type="button" class="btn-clear-media" onclick="clearFJSpecificMedia('audio')" title="Clear Audio">✕</button>
                             </div>
                             <div class="media-row">
-                                <input type="text" id="fj-media" class="fj-input" style="margin-bottom:0 !important;" placeholder="🌐 Media URL (YouTube, Video, etc)" value="${gameData.finalJeopardy.mediaUrl.replace(/"/g, '&quot;')}">
+                                <input type="text" id="fj-media" class="fj-input" style="margin-bottom:0 !important;" placeholder="🌐 Media URL (YouTube, Video, etc)" value="${(gameData.finalJeopardy.mediaUrl || '').replace(/"/g, '&quot;')}">
                                 <button type="button" class="btn-clear-media" onclick="clearFJSpecificMedia('url')" title="Clear URL">✕</button>
                             </div>
                             
@@ -1971,7 +1979,7 @@
                             <input type="checkbox" id="fj-has-answer" style="width: 20px; height: 20px;" onchange="toggleFJAnswerInput()" ${gameData.finalJeopardy.hasAnswer ? 'checked' : ''}>
                             Include an Answer Reveal
                         </label>
-                        <input type="text" id="fj-a" class="fj-input" placeholder="Final Answer (Host Only)..." value="${gameData.finalJeopardy.a.replace(/"/g, '&quot;')}" style="display: ${gameData.finalJeopardy.hasAnswer ? 'block' : 'none'}; background: #34495e; color: #ecf0f1; font-weight: bold;">
+                        <input type="text" id="fj-a" class="fj-input" placeholder="Final Answer (Host Only)..." value="${(gameData.finalJeopardy.a || '').replace(/"/g, '&quot;')}" style="display: ${gameData.finalJeopardy.hasAnswer ? 'block' : 'none'}; background: #34495e; color: #ecf0f1; font-weight: bold;">
                     </div>
                 `;
 
@@ -1994,7 +2002,7 @@
                     colHTML += `
                         <div style="display: flex; align-items: center; gap: 15px;">
                             <label style="font-size: 1.2em; color: #f39c12; font-weight: bold; white-space: nowrap;">Category ${c+1}:</label>
-                            <input type="text" id="cat-${c}" value="${activeRoundData.categories[c] || 'Category ' + (c+1)}" placeholder="Enter Category Name" style="width: 100%; padding: 12px; border-radius: 4px; border: 2px solid #f39c12; font-size: 1.1em; background: #ecf0f1; color: #2c3e50; font-weight: bold; box-sizing: border-box;">
+                            <input type="text" id="cat-${c}" value="${(activeRoundData.categories[c] || 'Category ' + (c+1)).replace(/"/g, '&quot;')}" placeholder="Enter Category Name" style="width: 100%; padding: 12px; border-radius: 4px; border: 2px solid #f39c12; font-size: 1.1em; background: #ecf0f1; color: #2c3e50; font-weight: bold; box-sizing: border-box;">
                         </div>
                     `;
                     
@@ -2011,7 +2019,7 @@
                         colHTML += `
                             <div class="${cellClass}" id="cell-box-${c}-${r}">
                                 <span class="q-label" style="${labelColor}">$${points} Question</span>
-                                <textarea id="q-${c}-${r}" placeholder="Question...">${tile.q}</textarea>
+                                <textarea id="q-${c}-${r}" placeholder="Question...">${tile.q || ''}</textarea>
                                 
                                 <input type="text" id="a-${c}-${r}" value="${(tile.a || '').replace(/"/g, '&quot;')}" placeholder="Answer (Host Only)..." style="width: 100%; padding: 10px; border-radius: 4px; border: none; box-sizing: border-box; font-size: 0.9em; background: #34495e; color: #ecf0f1; font-weight: bold; margin-bottom: 8px;">
 
@@ -2024,7 +2032,7 @@
                                     <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${c}', '${r}', 'audio')" title="Clear Audio">✕</button>
                                 </div>
                                 <div class="media-row">
-                                    <input type="text" id="media-${c}-${r}" class="fj-input" style="margin-bottom:0 !important;" value="${tile.mediaUrl}" placeholder="🌐 Media URL (YouTube, etc)">
+                                    <input type="text" id="media-${c}-${r}" class="fj-input" style="margin-bottom:0 !important;" value="${(tile.mediaUrl || '').replace(/"/g, '&quot;')}" placeholder="🌐 Media URL (YouTube, etc)">
                                     <button type="button" class="btn-clear-media" onclick="clearSpecificMedia('${c}', '${r}', 'url')" title="Clear URL">✕</button>
                                 </div>
 
