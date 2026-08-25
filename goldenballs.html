@@ -7,14 +7,14 @@
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif; display: flex; flex-direction: column;
-            align-items: center; background-color: #0d1117; color: white; margin: 0; padding: 20px; overflow-x: hidden;
-            min-height: 100vh; box-sizing: border-box;
+            align-items: center; justify-content: center; background-color: #0d1117; color: white; margin: 0; padding: 0;
+            overflow: hidden; height: 100vh; width: 100vw; box-sizing: border-box;
         }
 
         .retro-title { font-family: 'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; }
 
         /* Buttons */
-        .btn { padding: 10px 20px; font-size: 1.1em; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: filter 0.2s, transform 0.1s; box-sizing: border-box; }
+        .btn { padding: 8px 14px; font-size: 1em; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: filter 0.2s, transform 0.1s; box-sizing: border-box; }
         .btn:active { transform: scale(0.95); }
         .btn-primary { background-color: #f39c12; color: white; } 
         .btn-success { background-color: #2ecc71; color: white; } 
@@ -26,27 +26,52 @@
         .btn:disabled { filter: grayscale(100%); opacity: 0.4; cursor: not-allowed; transform: none; }
 
         /* Screens */
-        #game-screen, #finale-screen { display: none; width: 100%; max-width: 1800px; flex-direction: column; align-items: center; } 
+        #game-screen { 
+            display: none; 
+            width: 90vw; 
+            height: 85vh; 
+            max-width: 1920px; 
+            flex-direction: row; 
+            align-items: stretch; 
+            justify-content: center;
+            box-sizing: border-box;
+            gap: 20px;
+            margin: auto;
+        }
+        #finale-screen { display: none; width: 100%; max-width: 1800px; flex-direction: column; align-items: center; } 
         #admin-screen { display: block; background-color: #1a1a1a; padding: 30px; border-radius: 12px; width: 100%; max-width: 1100px; border: 2px solid #333; margin: 0 auto; box-sizing: border-box; }
 
-        /* --- GAME LAYOUT --- */
-        .game-layout { display: flex; width: 100%; gap: 20px; justify-content: center; align-items: flex-start; }
-        .left-panel { display: flex; flex-direction: column; width: 250px; gap: 15px; flex-shrink: 0; }
-        .right-panel { display: flex; flex-direction: column; width: 280px; gap: 15px; flex-shrink: 0; }
-        
-        .center-panel { 
-            flex: 1; width: 100%; max-width: 1300px; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            margin: 20px auto;
+        /* Left Panel */
+        .left-panel { 
+            display: flex; 
+            flex-direction: column; 
+            width: 260px; 
+            gap: 12px; 
+            flex-shrink: 0; 
+            height: 100%;
+            justify-content: flex-start;
+            box-sizing: border-box;
         }
-        
-        .side-btn { width: 100%; padding: 15px 10px; font-size: 1.1em; text-align: center; }
-        .admin-controls-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 2px dashed #333; }
+
+        .side-btn { width: 100%; padding: 12px 10px; font-size: 1em; text-align: center; }
+        .admin-controls-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 12px; border-top: 2px dashed #333; }
+
+        /* Center Panel */
+        .center-panel { 
+            flex: 1; 
+            min-height: 0;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: stretch;
+            height: 100%;
+        }
 
         @media (max-width: 1100px) {
-            .game-layout { flex-direction: column; align-items: center; }
-            .left-panel, .right-panel { width: 100%; max-width: 600px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
-            .side-btn { width: auto; flex: 1; min-width: 150px; }
+            body { overflow-y: auto; height: auto; padding: 20px; }
+            #game-screen { height: auto; flex-direction: column; width: 95vw; }
+            .left-panel { width: 100%; max-width: 600px; }
+            .side-btn { width: auto; flex: 1; min-width: 140px; }
             .admin-controls-group { flex-direction: row; width: 100%; border-top: none; padding-top: 0; }
         }
 
@@ -59,115 +84,169 @@
         #leaderboard-sidebar h2 { margin-top: 0; border-bottom: 2px solid #f1c40f; padding-bottom: 10px; color: #f1c40f; }
         .close-sidebar { position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 1.8em; cursor: pointer; line-height: 1; }
         .close-sidebar:hover { color: #e74c3c; }
-        .scoreboard-item { background: #000000; padding: 12px 15px; border-radius: 8px; border: 2px solid #f1c40f; font-size: 1.2em; font-weight: bold; display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; color: #f1c40f; }
-        .score-value { cursor: pointer; background: #111; padding: 5px; border-radius: 4px; text-align: center; border: 1px dashed #f1c40f; transition: background 0.2s; }
+        .scoreboard-item { background: #000000; padding: 10px 12px; border-radius: 8px; border: 2px solid #f1c40f; font-size: 1.1em; font-weight: bold; display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; color: #f1c40f; }
+        .score-value { cursor: pointer; background: #111; padding: 4px; border-radius: 4px; text-align: center; border: 1px dashed #f1c40f; transition: background 0.2s; }
         .score-value:hover { background: #333; }
 
-        /* The Main Game Board */
+        /* Left-Side Jackpot Display - Tall Sizing */
+        .jackpot-display {
+            background: linear-gradient(135deg, #d35400, #f39c12);
+            color: #fff;
+            padding: 16px 12px;
+            border-radius: 8px;
+            font-size: 1.4em;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            text-transform: uppercase;
+            font-family: 'Arial Black', Impact, sans-serif;
+            border: 2px solid #f1c40f;
+            letter-spacing: 1.5px;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90px;
+        }
+
+        /* Clean Main Game Board Container with Balanced Inset Padding */
         #game-board {
             background-color: #111;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 40px rgba(241,196,15,0.1);
-            border: 8px solid #f1c40f;
+            border: 6px solid #f1c40f;
             border-radius: 12px;
-            margin-bottom: 20px;
-            padding: 25px;
+            padding: 20px;
             box-sizing: border-box;
             width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 420px;
+            overflow: hidden;
         }
 
-        .jackpot-display {
-            background: linear-gradient(135deg, #d35400, #f39c12);
-            color: #fff;
-            padding: 12px 35px;
-            border-radius: 8px;
-            font-size: 2.2em;
-            font-weight: bold;
-            margin-bottom: 25px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.6);
-            text-transform: uppercase;
-            font-family: 'Arial Black', Impact, sans-serif;
-            border: 2px solid #f1c40f;
-            letter-spacing: 2px;
-        }
-
-        /* Player Pod Containers */
+        /* Centered Flex Container for Symmetrical Multi-Row Layout */
         .player-pods-wrapper {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            gap: 16px;
             width: 100%;
+            flex: 1;
+            min-height: 0;
+            box-sizing: border-box;
+            padding: 4px;
+        }
+
+        .pods-tier-row {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 16px;
+            width: 100%;
+            flex: 1;
+            min-height: 0;
         }
 
         .player-pod {
             background: #161b22;
             border: 2px solid #30363d;
             border-radius: 10px;
-            padding: 15px;
-            width: calc(50% - 20px);
-            min-width: 320px;
-            max-width: 580px;
+            padding: 8px 12px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: space-between;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            transition: opacity 0.3s;
+            min-height: 0;
+            flex: 1;
+            max-width: 480px;
+            height: 100%;
+        }
+
+        .player-pod.pod-eliminated {
+            opacity: 0.5;
+            border-color: #e74c3c;
+            background: #251010;
         }
 
         .player-pod-name {
             font-family: 'Arial Black', Impact, sans-serif;
-            font-size: 1.3em;
+            font-size: clamp(0.95em, 1.25vw, 1.25em);
             color: #3498db;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 2px;
             border-bottom: 2px solid #34495e;
-            padding-bottom: 5px;
+            padding-bottom: 2px;
             width: 100%;
             text-align: center;
+            flex-shrink: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .pod-balls-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 12px;
+        .pod-tiered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            gap: 6px;
             width: 100%;
-            justify-items: center;
+            flex: 1;
+            min-height: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Final Round 10-Ball Grid (2 rows of 5) */
+        .pod-row {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+        }
+
         .final-grid-wrapper {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+            gap: 15px;
             width: 100%;
-            max-width: 750px;
-            margin: 15px auto;
+            max-width: 900px;
+            margin: auto;
             justify-items: center;
+            align-content: center;
+            flex: 1;
         }
 
+        /* Maximized Golden Balls */
         .golden-ball {
-            width: 85px;
-            height: 85px;
+            width: clamp(65px, 11vh, 120px);
+            height: clamp(65px, 11vh, 120px);
+            aspect-ratio: 1 / 1;
             background: radial-gradient(circle at 30% 30%, #f9e79f, #d4ac0d 60%, #7d6608);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset -4px -4px 12px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: inset -4px -4px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5);
             cursor: pointer;
             position: relative;
             transition: transform 0.2s, filter 0.2s;
             border: 2px solid #fef9e7;
             user-select: none;
+            flex-shrink: 0;
         }
-        .golden-ball:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .golden-ball:hover { transform: scale(1.06); filter: brightness(1.1); }
         .golden-ball.revealed {
             background: #2c3e50;
             border: 3px solid #3498db;
@@ -178,15 +257,19 @@
             background: radial-gradient(circle at 30% 30%, #f1948a, #b03a2e 60%, #641e16);
             border-color: #fadbd8;
         }
-        .golden-ball.binned {
+        .golden-ball.binned, .golden-ball.lost {
             background: #1a1a1a;
             border: 2px dashed #7f8c8d;
             box-shadow: none;
             cursor: default;
             transform: none !important;
         }
+        .golden-ball.carrying {
+            background: radial-gradient(circle at 30% 30%, #58d68d, #27ae60 60%, #196f3d);
+            border: 2px dashed #a9dfbf;
+        }
         .ball-num-badge {
-            font-size: 1.4em;
+            font-size: clamp(1.3em, 2.5vw, 2em);
             font-weight: 900;
             font-family: 'Arial Black', Impact, sans-serif;
             color: #111;
@@ -194,51 +277,59 @@
         }
         .ball-label {
             font-family: 'Arial Black', Impact, sans-serif;
-            font-size: 0.95em;
+            font-size: clamp(0.85em, 1.35vw, 1.25em);
             color: #000;
             text-shadow: 0 1px 0 rgba(255,255,255,0.4);
             text-align: center;
-            padding: 4px;
+            padding: 2px;
+            line-height: 1.1;
             word-break: break-word;
         }
         .golden-ball.revealed .ball-label {
             color: #fff;
-            font-size: 0.85em;
+            font-size: clamp(0.8em, 1.25vw, 1.15em);
             text-shadow: none;
         }
-        .golden-ball.binned .ball-label {
+        .golden-ball.carrying .ball-label {
+            color: #ffffff;
+            font-size: clamp(0.8em, 1.25vw, 1.15em);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+        }
+        .golden-ball.binned .ball-label, .golden-ball.lost .ball-label {
             color: #e74c3c;
-            font-size: 0.75em;
+            font-size: clamp(0.8em, 1.25vw, 1.15em);
             text-shadow: none;
         }
 
-        /* --- ADMIN SECTIONS --- */
+        /* Admin / Modals */
         .admin-section { background: #2c3e50; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #34495e; box-sizing: border-box; }
         .admin-section h3 { margin-top: 0; border-bottom: 2px solid #7f8c8d; padding-bottom: 10px; margin-bottom: 20px; color: #FFCC00; }
         .admin-input { width: 100%; padding: 12px; border-radius: 6px; border: none; box-sizing: border-box; background: #ecf0f1; color: #2c3e50; margin-bottom: 15px; font-size: 1.1em; font-weight: bold; }
 
-        /* Finale Screen Styles */
         @keyframes revealUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         #finale-results-list { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 900px; max-height: 55vh; overflow-y: auto; overflow-x: hidden; padding: 40px 50px; box-sizing: border-box; }
         .finale-row { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 20px 40px; border: 3px solid #3498db; border-radius: 12px; opacity: 0; width: 100%; max-width: 800px; margin: 0 auto; box-sizing: border-box; flex-shrink: 0; }
         .finale-winner { border-color: #f1c40f; background: #2c3e50; transform: scale(1.05); box-shadow: 0 0 40px rgba(241,196,15,0.8); z-index: 10; position: relative; }
 
-        /* Modals */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; z-index: 100; overflow-y: auto; padding: 20px; box-sizing: border-box; }
         .modal-content { background: #1e272e; color: white; border: 4px solid #f1c40f; border-radius: 10px; text-align: center; width: 85vw; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 3vw; display: flex; flex-direction: column; box-sizing: border-box; }
-        .info-modal-content { background: #24292e; border: 2px solid #444d56; color: #f6f8fa; padding: 40px; text-align: left; max-width: 1000px; border-radius: 12px; margin: auto; display: block; box-sizing: border-box; }
-        .info-modal-content h2 { color: #58a6ff; margin-top: 0; font-size: 2.2em; text-align: center; border-bottom: 2px solid #30363d; padding-bottom: 20px; }
-        .how-to-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
-        .how-to-card { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 8px; }
-        .how-to-card h4 { color: #7ee787; font-size: 1.2em; margin-top: 0; }
-        .how-to-card p { color: #c9d1d9; font-size: 0.95em; line-height: 1.5; }
+        
+        /* Guide & Rules Tab Modal */
+        .info-modal-content { background: #24292e; border: 2px solid #444d56; color: #f6f8fa; padding: 30px; text-align: left; max-width: 1050px; border-radius: 12px; margin: auto; display: block; box-sizing: border-box; }
+        .guide-tab-bar { display: flex; gap: 10px; border-bottom: 2px solid #30363d; margin-bottom: 20px; }
+        .guide-tab-btn { background: #161b22; color: #8b949e; border: 1px solid #30363d; border-bottom: none; border-radius: 6px 6px 0 0; padding: 10px 20px; font-weight: bold; cursor: pointer; font-size: 1.05em; }
+        .guide-tab-btn.active { background: #3498db; color: #ffffff; border-color: #3498db; }
+        .how-to-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 15px; }
+        .how-to-card { background: #161b22; border: 1px solid #30363d; padding: 16px; border-radius: 8px; }
+        .how-to-card h4 { color: #7ee787; font-size: 1.15em; margin-top: 0; margin-bottom: 8px; }
+        .how-to-card p { color: #c9d1d9; font-size: 0.9em; line-height: 1.5; margin: 0; }
+        .how-to-card ul { color: #c9d1d9; font-size: 0.9em; line-height: 1.5; margin: 0; padding-left: 20px; }
 
-        /* Vote Reveal Cards */
         .vote-cards-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 20px 0; }
-        .vote-card { background: #161b22; border: 2px solid #30363d; padding: 15px 25px; border-radius: 8px; font-size: 1.5em; font-weight: bold; font-family: 'Arial Black', Impact, sans-serif; color: #f1c40f; text-transform: uppercase; }
+        .vote-card { background: #161b22; border: 2px solid #30363d; padding: 15px 25px; border-radius: 8px; font-size: 1.5em; font-weight: bold; font-family: 'Arial Black', Impact, sans-serif; color: #f1c40f; text-transform: uppercase; opacity: 0; transform: scale(0.8); transition: opacity 0.4s, transform 0.4s, border-color 0.4s, background-color 0.4s; }
+        .vote-card.visible-card { opacity: 1; transform: scale(1); }
         .vote-card.eliminated-target { border-color: #e74c3c; background: rgba(231, 76, 60, 0.25); color: #e74c3c; transform: scale(1.1); box-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }
 
-        /* Split or Steal Stream Cards */
         .split-steal-box {
             background: #000;
             border: 3px dashed #7f8c8d;
@@ -270,46 +361,29 @@
 
     <!-- GAME SCREEN -->
     <div id="game-screen">
-        <h1 style="margin: 0 0 10px 0; color: #f1c40f; font-size: 3.2em; text-shadow: 3px 3px #000; text-align: center; letter-spacing: 2px;" class="retro-title">GOLDEN BALLS!</h1>
-        <div id="phase-indicator" class="retro-title" style="color: #3498db; font-size: 1.2em; margin-bottom: 20px;">Round 1: Building the Bank</div>
+        <!-- LEFT PANEL -->
+        <div class="left-panel">
+            <h1 style="margin: 0; color: #f1c40f; font-size: 1.8em; text-shadow: 3px 3px #000; text-align: center; letter-spacing: 2px;" class="retro-title">GOLDEN BALLS</h1>
+            <div id="phase-indicator" class="retro-title" style="color: #3498db; font-size: 0.85em; text-align: center; margin-bottom: 2px;">Round 1: Building the Bank</div>
+
+            <div class="jackpot-display" id="jackpot-display">JACKPOT: £0</div>
+
+            <div class="spin-module" style="background: #1a1a1a; border: 2px solid #f1c40f; border-radius: 8px; padding: 12px 10px; text-align: center; width: 100%; box-sizing: border-box; min-height: 90px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="color: #bdc3c7; font-size: 0.8em; text-transform: uppercase; font-weight: bold; margin-bottom: 4px;">Active Players Left</div>
+                <div id="active-players-count" style="font-size: 2em; font-weight: bold; color: #f1c40f; font-family: 'Arial Black', Impact, sans-serif;">0</div>
+            </div>
+
+            <div class="admin-controls-group">
+                <button class="btn btn-dark side-btn" style="background-color: #34495e; font-size: 0.95em; padding: 10px;" onclick="switchToAdmin()">⚙️ Setup Mode</button>
+                <button class="btn btn-info side-btn" style="background-color: #8e44ad; border-color: #9b59b6; font-size: 0.95em; padding: 10px;" onclick="openHostCheatSheet()">🕵️ Host Dashboard</button>
+                <a href="index.html" class="btn btn-home side-btn" style="font-size: 1.3em; padding: 8px;" title="Return to Hub">🏠</a>
+            </div>
+        </div>
         
-        <div class="game-layout">
-            <!-- LEFT PANEL -->
-            <div class="left-panel">
-                <button id="btn-show-sidebar" class="btn btn-info side-btn" onclick="toggleLeaderboard()">🏆 Show Leaderboard</button>
-                
-                <div id="persistent-leaderboard-container" style="display: none; background: #111; border: 2px solid #f1c40f; border-radius: 8px; padding: 15px; width: 100%; box-sizing: border-box; flex-direction: column;">
-                    <h3 class="retro-title" style="margin-top: 0; color: #f1c40f; text-align: center; margin-bottom: 15px; font-size: 1.2em;">🏆 Bank</h3>
-                    <div id="persistent-scoreboard-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
-                </div>
-
-                <div class="admin-controls-group">
-                    <button class="btn btn-dark side-btn" style="background-color: #34495e; font-size: 0.95em; padding: 10px;" onclick="switchToAdmin()">⚙️ Setup Mode</button>
-                    <button class="btn btn-info side-btn" style="background-color: #8e44ad; border-color: #9b59b6; font-size: 0.95em; padding: 10px;" onclick="openHostCheatSheet()">🕵️ Host Dashboard</button>
-                    <button class="btn btn-danger" style="width: 100%; font-size: 0.85em; padding: 8px; background-color: #c0392b;" onclick="resetScores()" title="Zero scores">🔄 Scores</button>
-                </div>
-
-                <a href="index.html" class="btn btn-home side-btn" style="margin-top: 10px; font-size: 1.5em; padding: 10px;" title="Return to Hub">🏠</a>
-            </div>
-            
-            <!-- CENTER PANEL -->
-            <div class="center-panel">
-                <div id="game-board">
-                    <div class="jackpot-display" id="jackpot-display">JACKPOT: $0</div>
-                    <div class="player-pods-wrapper" id="player-pods-wrapper"></div>
-                </div>
-
-                <div class="board-controls-bar">
-                    <button id="btn-end-game-trigger" class="btn btn-danger" style="background-color: #f39c12; border-color: #e67e22;" onclick="triggerEndGameEarly(false)">🏆 Finish Game</button>
-                </div>
-            </div>
-
-            <!-- RIGHT PANEL -->
-            <div class="right-panel">
-                <div class="spin-module" style="background: #1a1a1a; border: 2px solid #f1c40f; border-radius: 10px; padding: 15px; text-align: center; width: 100%; box-sizing: border-box;">
-                    <div style="color: #bdc3c7; font-size: 0.9em; text-transform: uppercase; font-weight: bold; margin-bottom: 8px;">Active Players Left</div>
-                    <div id="active-players-count" style="font-size: 2.2em; font-weight: bold; color: #f1c40f; font-family: 'Arial Black', Impact, sans-serif;">0</div>
-                </div>
+        <!-- CENTER PANEL -->
+        <div class="center-panel">
+            <div id="game-board">
+                <div class="player-pods-wrapper" id="player-pods-wrapper"></div>
             </div>
         </div>
     </div>
@@ -330,7 +404,7 @@
         <div style="display: flex; justify-content: flex-start; align-items: stretch; gap: 10px; margin-bottom: 30px; width: 100%; overflow-x: auto; padding-bottom: 5px;">
             <a href="index.html" class="btn btn-home" style="font-size: 1.5em; padding: 10px 20px; flex-shrink: 0;" title="Return to Hub">🏠</a>
             <button class="btn btn-info" style="font-size: 1.1em; flex: 1; background-color: #8e44ad; border-color: #9b59b6;" onclick="openHostCheatSheet()">🕵️ Host Dashboard</button>
-            <button class="btn btn-info" style="font-size: 1.1em; flex: 1; background-color: #34495e; border-color: #bdc3c7;" onclick="openRules()">📜 Game Rules</button>
+            <button class="btn btn-info" style="font-size: 1.1em; flex: 1; background-color: #34495e; border-color: #bdc3c7;" onclick="openRules()">📜 Rules & Host Guide</button>
             <button id="btn-play-game-admin" class="btn btn-success" style="font-size: 1.4em; padding: 10px 25px; flex: 1.5;" onclick="promptSaveAndPlay()">💾 Save & Play</button>
         </div>
 
@@ -360,7 +434,7 @@
                     <input type="text" id="host-name" placeholder="Enter Host Name..." style="width: 100%; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; box-sizing: border-box;">
                 </div>
                 <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                    <input type="text" id="new-player-name" placeholder="Player name..." style="flex: 1; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold;">
+                    <input type="text" id="new-player-name" placeholder="Player name..." style="flex: 1; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold;" onkeydown="handlePlayerNameKey(event)">
                     <button class="btn btn-success" onclick="addPlayer()">Add</button>
                 </div>
                 <div id="admin-player-list" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
@@ -368,38 +442,89 @@
         </div>
     </div>
 
-    <!-- GAME RULES MODAL -->
+    <!-- RULES & HOST GUIDE MODAL -->
     <div id="rules-modal" class="modal-overlay">
         <div class="modal-content info-modal-content">
-            <h2>📜 Golden Balls Game Rules & Mechanics</h2>
-            <div class="how-to-grid">
-                <div class="how-to-card">
-                    <h4>🔒 Persistent Golden Balls</h4>
-                    <p>4 players start with 4 balls each. Survived unrevealed balls carry forward and get reshuffled. Penultimate 3-player round adds 1 Killer (max 5); Final 2-player round adds 1 Killer (max 6).</p>
-                </div>
-                <div class="how-to-card">
-                    <h4>🗳️ Secret Voting & Elimination</h4>
-                    <p>Host records secret votes on the Host Dashboard. The stream modal reveals the voted names and highlights the most-voted player. Ties remain in a deadlock state until re-voted from the Host Dashboard.</p>
-                </div>
-                <div class="how-to-card">
-                    <h4>🤝 Split or Steal Finale</h4>
-                    <p>The final two submit their secret Split or Steal decisions to the host. The host triggers the reveal, showing choices before crowning the winner.</p>
+            <div class="guide-tab-bar">
+                <button id="tab-btn-rules" class="guide-tab-btn active" onclick="switchGuideTab('rules')">📜 Game Rules</button>
+                <button id="tab-btn-host" class="guide-tab-btn" onclick="switchGuideTab('host')">🕵️ Host Dashboard Step-by-Step</button>
+            </div>
+
+            <!-- TAB 1: PLAYER RULES -->
+            <div id="tab-content-rules">
+                <h2 style="margin: 0; color: #58a6ff; font-size: 1.8em; text-align: center;">📜 Golden Balls: Game Rules & Mechanics</h2>
+                <div class="how-to-grid">
+                    <div class="how-to-card">
+                        <h4>🔒 1. Front & Back Rows</h4>
+                        <p>Each player starts with cash balls and Killers[cite: 1]. <strong>Front Row</strong> balls are revealed publicly to build the bank[cite: 1]. <strong>Back Row</strong> balls remain secret on private cards until carried over or lost[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card">
+                        <h4>💀 2. Killer Balls</h4>
+                        <p>Revealing a <strong>Killer Ball</strong> during the front row reveal (or keeping one in the finale) cuts the accumulated jackpot in half (<strong>50% penalty</strong>)[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card">
+                        <h4>🗳️ 3. Bluffing & Voting</h4>
+                        <p>Convince others you have high cash and zero Killers. Players DM secret votes to the host[cite: 1]. The most-voted player is eliminated along with their balls[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card">
+                        <h4>🎯 4. Bin or Keep (Final 2)</h4>
+                        <p>The final two select from 10 neutral balls: <strong>5 are Kept</strong> to finalize the jackpot, and <strong>5 are Binned</strong> safely[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card" style="grid-column: 1 / -1;">
+                        <h4>🤝 5. Split or Steal Finale</h4>
+                        <p>
+                            <strong>Both SPLIT:</strong> Both finalists share the prize fund equally (50 / 50)[cite: 1].<br>
+                            <strong>One STEALS, One SPLITS:</strong> The Stealer takes 100% of the jackpot; the Splitter leaves with £0[cite: 1].<br>
+                            <strong>Both STEAL:</strong> Greed destroys the jackpot; both players leave empty-handed (£0)[cite: 1].
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="btn btn-primary" style="font-size: 1.2em; padding: 12px 35px;" onclick="closeRules()">Got it!</button>
+
+            <!-- TAB 2: HOST DASHBOARD GUIDE -->
+            <div id="tab-content-host" style="display: none;">
+                <h2 style="margin: 0; color: #f1c40f; font-size: 1.8em; text-align: center;">🕵️ Host Dashboard Step-by-Step Guide</h2>
+                <div class="how-to-grid">
+                    <div class="how-to-card">
+                        <h4>Step 1: Download & DM Cards</h4>
+                        <p>Click <strong style="color: #8e44ad;">📥 Download All Player Cards to DM</strong>[cite: 1]. The game generates PNG images showing each player's secret front and back balls[cite: 1]. Send each player their card privately.</p>
+                    </div>
+                    <div class="how-to-card">
+                        <h4>Step 2: Auto-Reveal Front Balls</h4>
+                        <p>Click <strong style="color: #3498db;">⚡ Auto-Reveal Public Front Balls</strong>[cite: 1]. The main screen will flip all public front row balls one by one, adding cash or slashing the pot if killers appear[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card">
+                        <h4>Step 3: Collect & Input Votes</h4>
+                        <p>Have players debate and privately DM their elimination votes. Use the dropdown menus for each player to input who they voted for, then click <strong style="color: #2ecc71;">🎬 Reveal Votes on Stream</strong>[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card">
+                        <h4>Step 4: Post-Vote Reveals & Banish</h4>
+                        <p>Use <strong style="color: #f39c12;">👁️ Reveal Secret Balls</strong> to reveal hidden back rows for discussion[cite: 1]. When finished, click <strong style="color: #e74c3c;">🚪 Banish & Start Next Round</strong> to advance[cite: 1].</p>
+                    </div>
+                    <div class="how-to-card" style="grid-column: 1 / -1;">
+                        <h4>Step 5: The Final 2 (Bin/Keep & Split or Steal)</h4>
+                        <ul>
+                            <li><strong>Bin or Keep:</strong> In the dashboard, click <strong>Keep</strong> (to add to bank or halve with killer) or <strong>Bin</strong> (discard) until 5 balls are kept[cite: 1].</li>
+                            <li><strong>Split or Steal:</strong> Collect finalists' secret choices, set both dropdowns in the dashboard, and click <strong style="color: #8e44ad;">🎬 Reveal Decisions on Stream</strong>[cite: 1].</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="btn btn-primary" style="font-size: 1.2em; padding: 10px 35px;" onclick="closeRules()">Got it!</button>
             </div>
         </div>
     </div>
 
-    <!-- ELIMINATION REVEAL MODAL -->
+    <!-- ELIMINATION MODAL -->
     <div id="elimination-reveal-modal" class="modal-overlay">
         <div class="modal-content" style="border-color: #e74c3c; max-width: 750px; text-align: center;">
-            <h2 class="retro-title" style="color: #e74c3c; font-size: 2.2em; margin-bottom: 10px;">VOTES CAST</h2>
+            <h2 id="vote-modal-title" class="retro-title" style="color: #e74c3c; font-size: 2.2em; margin-bottom: 10px;">VOTES CAST</h2>
             <div id="vote-cards-display" class="vote-cards-container"></div>
             <div id="vote-outcome-banner" style="font-size: 1.5em; font-weight: bold; color: #f1c40f; margin: 15px 0;"></div>
             <p id="tie-instructions" style="color: #bdc3c7; font-size: 1.1em; display: none;">Host must input new votes on the Host Dashboard to break the tie!</p>
-            <button id="btn-finalize-elimination" class="btn btn-success" style="font-size: 1.2em; padding: 12px 30px; display: none;" onclick="finalizeElimination()">Banish Player & Reshuffle Remaining Balls ➔</button>
+            <p id="vote-waiting-label" style="color: #bdc3c7; font-size: 0.9em; margin-top: 20px; font-style: italic;">Awaiting Host Dashboard command...</p>
         </div>
     </div>
 
@@ -407,7 +532,7 @@
     <div id="split-steal-modal" class="modal-overlay">
         <div class="modal-content" style="border-color: #f1c40f; max-width: 800px;">
             <h2 class="retro-title" style="color: #f1c40f; font-size: 2.5em; margin-bottom: 5px;">🤝 SPLIT OR STEAL?</h2>
-            <div style="font-size: 1.8em; font-weight: bold; color: #2ecc71; margin-bottom: 10px;" id="stream-prize-fund">PRIZE FUND: $0</div>
+            <div style="font-size: 1.8em; font-weight: bold; color: #2ecc71; margin-bottom: 10px;" id="stream-prize-fund">PRIZE FUND: £0</div>
             <p style="color: #bdc3c7; font-size: 1.1em; margin-bottom: 25px;">Finalists, submit your secret choice (SPLIT or STEAL) to the host now!</p>
             
             <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
@@ -450,8 +575,114 @@
         var players = [];
         var eliminatedRankings = []; 
         var vaultBalls = [];
+        var eliminationVotesTracker = {}; // Tracks { "PlayerName": totalVotesReceived }
+        var totalKillersTracker = {};     // Tracks { "PlayerName": cumulativeKillerCount }
+        var maxKillersInRoundTracker = {};// Tracks { "PlayerName": highestKillersInASingleRound }
         var eliminatedPlayerName = "";
+        var postEliminationRevealDone = false;
+        var isAutoRevealing = false;
+        var isVoteSequenceRunning = false;
+        var roundCardsDownloaded = false;
         var cheatSheetWindow = null;
+
+        function switchGuideTab(tab) {
+            const rulesContent = document.getElementById('tab-content-rules');
+            const hostContent = document.getElementById('tab-content-host');
+            const rulesBtn = document.getElementById('tab-btn-rules');
+            const hostBtn = document.getElementById('tab-btn-host');
+
+            if (tab === 'rules') {
+                rulesContent.style.display = 'block';
+                hostContent.style.display = 'none';
+                rulesBtn.classList.add('active');
+                hostBtn.classList.remove('active');
+            } else {
+                rulesContent.style.display = 'none';
+                hostContent.style.display = 'block';
+                hostBtn.classList.add('active');
+                rulesBtn.classList.remove('active');
+            }
+        }
+
+        function trackRoundKillers() {
+            if (players.length <= 2) return;
+            players.forEach(p => {
+                let pKillers = vaultBalls.filter(b => b.owner && b.owner.toLowerCase() === p.name.toLowerCase() && b.isKiller).length;
+                totalKillersTracker[p.name] = (totalKillersTracker[p.name] || 0) + pKillers;
+                maxKillersInRoundTracker[p.name] = Math.max(maxKillersInRoundTracker[p.name] || 0, pKillers);
+            });
+        }
+
+        function getMostVotedPlayers() {
+            let maxVotes = 0;
+            for (let name in eliminationVotesTracker) {
+                if (eliminationVotesTracker[name] > maxVotes) {
+                    maxVotes = eliminationVotesTracker[name];
+                }
+            }
+            if (maxVotes === 0) return { maxVotes: 0, names: [] };
+
+            let mostVoted = [];
+            for (let name in eliminationVotesTracker) {
+                if (eliminationVotesTracker[name] === maxVotes) {
+                    mostVoted.push(name.toLowerCase());
+                }
+            }
+            return { maxVotes: maxVotes, names: mostVoted };
+        }
+
+        function getMostTotalKillersPlayers() {
+            let maxK = 0;
+            for (let name in totalKillersTracker) {
+                if (totalKillersTracker[name] > maxK) {
+                    maxK = totalKillersTracker[name];
+                }
+            }
+            if (maxK === 0) return { maxKillers: 0, names: [] };
+
+            let list = [];
+            for (let name in totalKillersTracker) {
+                if (totalKillersTracker[name] === maxK) {
+                    list.push(name.toLowerCase());
+                }
+            }
+            return { maxKillers: maxK, names: list };
+        }
+
+        function getMostRoundKillersPlayers() {
+            let maxK = 0;
+            for (let name in maxKillersInRoundTracker) {
+                if (maxKillersInRoundTracker[name] > maxK) {
+                    maxK = maxKillersInRoundTracker[name];
+                }
+            }
+            if (maxK === 0) return { maxKillers: 0, names: [] };
+
+            let list = [];
+            for (let name in maxKillersInRoundTracker) {
+                if (maxKillersInRoundTracker[name] === maxK) {
+                    list.push(name.toLowerCase());
+                }
+            }
+            return { maxKillers: maxK, names: list };
+        }
+
+        function generateOrganicBallValue() {
+            let roll = Math.random();
+            if (roll < 0.15) {
+                let step = Math.random() < 0.5 ? 10 : 50;
+                return Math.floor(Math.random() * (950 / step)) * step + step;
+            } else if (roll < 0.45) {
+                let step = Math.random() < 0.5 ? 50 : 250;
+                return (Math.floor(Math.random() * (8800 / step)) * step) + 1000;
+            } else if (roll < 0.85) {
+                let step = Math.random() < 0.5 ? 250 : 500;
+                return (Math.floor(Math.random() * (39500 / step)) * step) + 10000;
+            } else {
+                let step = Math.random() < 0.5 ? 500 : 1000;
+                return (Math.floor(Math.random() * (50000 / step)) * step) + 50000;
+            }
+        }
 
         function initAudio() {
             if (!window.audioCtx) { window.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
@@ -488,86 +719,139 @@
 
         function openHostCheatSheet() {
             if (cheatSheetWindow && !cheatSheetWindow.closed) { cheatSheetWindow.focus(); updateCheatSheet(); return; }
-            cheatSheetWindow = window.open('', 'CheatSheet', 'width=680,height=920');
+            cheatSheetWindow = window.open('', 'CheatSheet', 'width=900,height=880');
             updateCheatSheet();
         }
 
         function updateCheatSheet() {
             if (!cheatSheetWindow || cheatSheetWindow.closed) return;
+            
+            let unrevealedFrontCount = vaultBalls.filter(b => b.row === 'front' && !b.revealed && !b.binned).length;
+
+            let nextPlayerToReveal = null;
+            if (eliminatedPlayerName !== "") {
+                if (eliminatedPlayerName && vaultBalls.some(b => b.owner.toLowerCase() === eliminatedPlayerName.toLowerCase() && !b.revealed && !b.binned && !b.previewCarry && !b.lost)) {
+                    nextPlayerToReveal = eliminatedPlayerName;
+                } else {
+                    let survivorWithUnrevealed = players.find(p => vaultBalls.some(b => b.owner.toLowerCase() === p.name.toLowerCase() && !b.revealed && !b.binned && !b.previewCarry && !b.lost));
+                    if (survivorWithUnrevealed) {
+                        nextPlayerToReveal = survivorWithUnrevealed.name;
+                    }
+                }
+            }
+
             let html = `<!DOCTYPE html><html><head><title>🕵️ Host Dashboard</title><style>
-                body { font-family: sans-serif; background: #0d1117; color: #fff; padding: 20px; margin: 0; box-sizing: border-box; }
-                h2 { color: #f1c40f; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; font-size: 1.1em; }
-                .player-box { background: #161b22; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #30363d; }
-                .balls-flex-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+                body { font-family: sans-serif; background: #0d1117; color: #fff; padding: 15px; margin: 0; box-sizing: border-box; }
+                h2 { color: #f1c40f; border-bottom: 2px solid #333; padding-bottom: 8px; text-transform: uppercase; font-size: 1.1em; margin-top: 0; }
+                
+                .host-dashboard-grid {
+                    display: grid;
+                    grid-template-columns: repeat(${players.length === 3 ? 3 : Math.max(1, Math.ceil(players.length / 2))}, 1fr);
+                    gap: 10px;
+                    margin-top: 10px;
+                }
+
+                .player-box { background: #161b22; padding: 10px; border-radius: 8px; border: 1px solid #30363d; display: flex; flex-direction: column; justify-content: space-between; }
+                .balls-section-title { font-size: 0.7em; text-transform: uppercase; color: #f1c40f; margin-top: 4px; font-weight: bold; }
+                .balls-flex-container { display: flex; flex-wrap: nowrap; justify-content: space-evenly; align-items: center; gap: 8px; margin-top: 4px; margin-bottom: 4px; width: 100%; }
                 
                 .golden-ball-host {
-                    width: 75px; height: 75px;
+                    flex: 1 1 0;
+                    aspect-ratio: 1 / 1;
+                    max-width: 90px;
+                    max-height: 90px;
+                    min-width: 50px;
                     background: radial-gradient(circle at 30% 30%, #f9e79f, #d4ac0d 60%, #7d6608);
                     border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
-                    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6), 0 3px 6px rgba(0,0,0,0.5);
-                    border: 2px solid #fef9e7; color: #000; font-family: 'Arial Black', Impact, sans-serif; font-size: 0.8em; text-align: center;
+                    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.5);
+                    border: 2px solid #fef9e7; color: #000; font-family: 'Arial Black', Impact, sans-serif; font-size: clamp(0.7em, 1.1vw, 0.9em); text-align: center;
                 }
                 .golden-ball-host.killer { background: radial-gradient(circle at 30% 30%, #f1948a, #b03a2e 60%, #641e16); border-color: #fadbd8; color: #fff; }
                 .golden-ball-host.is-revealed { background: #2c3e50; border: 2px solid #3498db; color: #fff; }
                 .golden-ball-host.is-binned { background: #1a1a1a; border: 2px dashed #7f8c8d; color: #e74c3c; opacity: 0.4; }
 
-                .btn-mini { background: #34495e; color: white; border: none; padding: 2px 5px; font-size: 0.65em; border-radius: 3px; cursor: pointer; margin-top: 4px; font-weight: bold; }
-                .btn-mini:hover { background: #2ecc71; }
-                
-                .action-box { background: #1a1a1a; padding: 15px; border-radius: 8px; border: 1px solid #f1c40f; margin-bottom: 20px; }
-                .admin-input { width: 100%; padding: 10px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; margin-top: 5px; margin-bottom: 12px; box-sizing: border-box; }
-                .btn-host { background: #2ecc71; color: #fff; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1em; text-transform: uppercase; margin-bottom: 8px; }
+                .action-box { background: #1a1a1a; padding: 12px; border-radius: 8px; border: 1px solid #f1c40f; margin-bottom: 12px; }
+                .admin-input { width: 100%; padding: 8px; border-radius: 4px; border: none; background: #ecf0f1; color: #2c3e50; font-weight: bold; margin-top: 4px; margin-bottom: 8px; box-sizing: border-box; }
+                .btn-host { background: #2ecc71; color: #fff; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1em; text-transform: uppercase; margin-bottom: 6px; }
+                .btn-host-warning { background: #f39c12; color: #fff; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1em; text-transform: uppercase; margin-bottom: 6px; }
                 .btn-host-danger { background: #e74c3c; color: #fff; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1em; text-transform: uppercase; }
-                .btn-download-all { background: #3498db; color: #fff; border: none; padding: 10px 14px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; font-size: 0.95em; text-transform: uppercase; margin-bottom: 15px; }
-                .btn-download-all:hover { background: #2980b9; }
-                .btn-dl-single { background: #4b6584; color: #fff; border: none; padding: 4px 8px; font-size: 0.75em; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 10px; }
+                .btn-dl-single { background: #4b6584; color: #fff; border: none; padding: 3px 6px; font-size: 0.7em; border-radius: 4px; cursor: pointer; font-weight: bold; }
                 .btn-dl-single:hover { background: #3498db; }
             </style></head><body>`;
             
             html += `<h2>🕵️ Host Dashboard - Round ${gameData.roundNum}</h2>`;
 
             if(players.length > 2) {
-                html += `<div class="action-box"><strong>🗳️ Secret Voting Console</strong><p style="color:#bdc3c7; font-size:0.85em; margin-top:5px;">Input secret votes from DMs:</p>`;
+                html += `<div class="action-box"><strong>🗳️ Secret Voting & Round Progression Console</strong><p style="color:#bdc3c7; font-size:0.8em; margin-top:4px;">Input secret votes from DMs:</p>`;
+                
+                html += `<div style="display:grid; grid-template-columns: repeat(${players.length === 3 ? 3 : Math.max(1, Math.ceil(players.length / 2))}, 1fr); gap:8px;">`;
                 players.forEach(p => {
                     let opts = `<option value="">-- ${p.name}'s Vote --</option>`;
                     players.forEach(t => { if(t.name !== p.name) opts += `<option value="${t.name}">${t.name}</option>`; });
-                    html += `<label style="font-size:0.85em; color:#3498db;">${p.name} votes for:</label><select id="cs-vote-${p.name}" class="admin-input">${opts}</select>`;
+                    html += `<div><label style="font-size:0.8em; color:#3498db;">${p.name}:</label><select id="cs-vote-${p.name}" class="admin-input">${opts}</select></div>`;
                 });
-                html += `<button class="btn-host" onclick="window.opener.runEliminationFromDashboard()">🎬 Launch / Update Elimination Reveal</button>`;
+                html += `</div>`;
                 
-                if (eliminatedPlayerName !== "") {
-                    html += `<button class="btn-host-danger" onclick="window.opener.finalizeElimination()">🚪 Banish ${eliminatedPlayerName} & Reshuffle</button>`;
+                if (!roundCardsDownloaded) {
+                    html += `<button class="btn-host" style="background:#8e44ad;" onclick="window.opener.stepDownloadCardsAndAdvance()">📥 Download All Player Cards to DM</button>`;
+                } else if (unrevealedFrontCount > 0) {
+                    html += `<button class="btn-host" style="background:#3498db;" onclick="window.opener.autoRevealFrontBalls()" ${isAutoRevealing ? 'disabled' : ''}>⚡ Auto-Reveal Public Front Balls (Player by Player)</button>`;
+                } else if (eliminatedPlayerName === "") {
+                    html += `<button class="btn-host" onclick="window.opener.runEliminationFromDashboard()" ${isVoteSequenceRunning ? 'disabled' : ''}>🎬 Reveal Votes on Stream</button>`;
+                } else if (nextPlayerToReveal !== null) {
+                    html += `<button class="btn-host-warning" onclick="window.opener.revealSinglePlayerRemainingBalls('${nextPlayerToReveal}')">👁️ Reveal Secret Balls for ${nextPlayerToReveal}</button>`;
+                } else {
+                    html += `<button class="btn-host-danger" onclick="window.opener.finalizeElimination()">🚪 Banish ${eliminatedPlayerName} & Start Next Round</button>`;
                 }
                 
                 html += `</div>`;
             } else if(players.length === 2) {
                 html += `<div class="action-box"><strong style="color:#f1c40f;">Final 2: Split or Steal Secret Console</strong><p style="color:#bdc3c7; font-size:0.85em;">Input each player's secret DM choice:</p>`;
-                html += `<label style="color:#3498db; font-size:0.9em;">${players[0].name}'s Choice:</label><select id="host-p1-choice" class="admin-input"><option value="SPLIT">SPLIT</option><option value="STEAL">STEAL</option></select>`;
-                html += `<label style="color:#e74c3c; font-size:0.9em;">${players[1].name}'s Choice:</label><select id="host-p2-choice" class="admin-input"><option value="SPLIT">SPLIT</option><option value="STEAL">STEAL</option></select>`;
+                html += `<div style="display:flex; gap:10px;"><div style="flex:1;"><label style="color:#3498db; font-size:0.85em;">${players[0].name}:</label><select id="host-p1-choice" class="admin-input"><option value="SPLIT">SPLIT</option><option value="STEAL">STEAL</option></select></div>`;
+                html += `<div style="flex:1;"><label style="color:#e74c3c; font-size:0.85em;">${players[1].name}:</label><select id="host-p2-choice" class="admin-input"><option value="SPLIT">SPLIT</option><option value="STEAL">STEAL</option></select></div></div>`;
                 html += `<button class="btn-host" style="background:#8e44ad;" onclick="window.opener.triggerSplitStealRevealFromHost()">🎬 Reveal Decisions on Stream</button>`;
                 html += `</div>`;
             }
 
             if(players.length > 2) {
-                html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; margin-bottom:5px;"><h3 style="color:#f1c40f; font-size:1em; text-transform:uppercase; margin:0;">Secret Ball Allocations</h3><button class="btn-download-all" style="width:auto; margin:0;" onclick="window.opener.downloadAllPlayerBallImages()">📥 Download All Player Images</button></div>`;
+                html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; margin-bottom:5px;"><h3 style="color:#f1c40f; font-size:0.95em; text-transform:uppercase; margin:0;">Secret Ball Allocations</h3></div>`;
+                
+                html += `<div class="host-dashboard-grid">`;
                 players.forEach(p => {
                     let pBalls = vaultBalls.filter(b => b.owner.toLowerCase() === p.name.toLowerCase());
-                    html += `<div class="player-box"><div style="display:flex; justify-content:space-between; align-items:center;"><strong style="color:#3498db; font-size:1.1em;">${p.name}</strong><button class="btn-dl-single" onclick="window.opener.downloadSinglePlayerBallImage('${p.name}')">📸 Download Image</button></div><div class="balls-flex-container">`;
+                    let frontBalls = pBalls.filter(b => b.row === 'front');
+                    let backBalls = pBalls.filter(b => b.row === 'back');
+
+                    html += `<div class="player-box"><div style="display:flex; justify-content:space-between; align-items:center;"><strong style="color:#3498db; font-size:1em;">${p.name}</strong><button class="btn-dl-single" onclick="window.opener.downloadSinglePlayerBallImage('${p.name}')">📸 Download</button></div>`;
+                    
                     if(pBalls.length === 0) {
-                        html += `<em style="color:#7f8c8d;">No balls allocated</em>`;
+                        html += `<em style="color:#7f8c8d; font-size:0.8em;">No balls</em>`;
                     } else {
-                        pBalls.forEach(b => {
-                            let globalIdx = vaultBalls.indexOf(b);
+                        html += `<div class="balls-section-title">Front Row (Public)</div><div class="balls-flex-container">`;
+                        frontBalls.forEach(b => {
                             let tagClass = b.isKiller ? 'golden-ball-host killer' : 'golden-ball-host';
                             if(b.binned) tagClass += ' is-binned';
                             else if(b.revealed) tagClass += ' is-revealed';
                             
-                            let action = !b.revealed ? `<button class="btn-mini" onclick="window.opener.revealBall(${globalIdx})">Reveal</button>` : `<span style="font-size:0.65em;">(Open)</span>`;
-                            html += `<div class="${tagClass}"><span>${b.label}</span>${action}</div>`;
+                            let statusText = b.revealed ? `<span style="font-size:0.65em;">(Open)</span>` : `<span style="font-size:0.65em; color:rgba(0,0,0,0.65); font-weight:900;">(Hidden)</span>`;
+                            html += `<div class="${tagClass}"><span>${b.label}</span>${statusText}</div>`;
                         });
+                        html += `</div>`;
+
+                        html += `<div class="balls-section-title">Back Row (Hidden / Carry)</div><div class="balls-flex-container">`;
+                        backBalls.forEach(b => {
+                            let tagClass = b.isKiller ? 'golden-ball-host killer' : 'golden-ball-host';
+                            if(b.binned) tagClass += ' is-binned';
+                            else if(b.revealed) tagClass += ' is-revealed';
+                            
+                            let statusText = b.revealed ? `<span style="font-size:0.65em;">(Open)</span>` : `<span style="font-size:0.65em; color:rgba(0,0,0,0.65); font-weight:900;">(Hidden)</span>`;
+                            html += `<div class="${tagClass}"><span>${b.label}</span>${statusText}</div>`;
+                        });
+                        html += `</div>`;
                     }
-                    html += `</div></div>`;
+                    html += `</div>`;
                 });
+                html += `</div>`;
             } else {
                 html += `<h3 style="color:#f1c40f; font-size:1em; text-transform:uppercase;">Final 10 Neutral Balls</h3><div class="player-box"><div class="balls-flex-container">`;
                 vaultBalls.forEach((b, i) => {
@@ -601,8 +885,8 @@
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
 
-            const width = Math.max(500, pBalls.length * 120 + 80);
-            const height = 300;
+            const width = Math.max(540, pBalls.length * 110 + 60);
+            const height = 360;
             canvas.width = width;
             canvas.height = height;
 
@@ -614,52 +898,64 @@
             ctx.strokeRect(10, 10, width - 20, height - 20);
 
             ctx.fillStyle = '#f1c40f';
-            ctx.font = 'bold 30px "Arial Black", Impact, sans-serif';
+            ctx.font = 'bold 26px "Arial Black", Impact, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText(`GOLDEN BALLS - ROUND ${gameData.roundNum}`, width / 2, 55);
+            ctx.fillText(`GOLDEN BALLS - ROUND ${gameData.roundNum}`, width / 2, 45);
 
             ctx.fillStyle = '#3498db';
-            ctx.font = 'bold 22px "Helvetica Neue", Helvetica, Arial, sans-serif';
-            ctx.fillText(`Private Card for: ${playerName.toUpperCase()}`, width / 2, 90);
+            ctx.font = 'bold 18px "Helvetica Neue", Helvetica, Arial, sans-serif';
+            ctx.fillText(`Private Card for: ${playerName.toUpperCase()}`, width / 2, 75);
 
-            const ballRadius = 45;
-            const startX = (width - ((pBalls.length - 1) * 110)) / 2;
-            const centerY = 180;
+            let front = pBalls.filter(b => b.row === 'front');
+            let back = pBalls.filter(b => b.row === 'back');
 
-            pBalls.forEach((ball, i) => {
-                const cx = startX + (i * 110);
-                const cy = centerY;
-
-                const grad = ctx.createRadialGradient(cx - 12, cy - 12, 5, cx, cy, ballRadius);
-                if (ball.isKiller) {
-                    grad.addColorStop(0, '#f1948a');
-                    grad.addColorStop(0.6, '#b03a2e');
-                    grad.addColorStop(1, '#641e16');
-                } else {
-                    grad.addColorStop(0, '#f9e79f');
-                    grad.addColorStop(0.6, '#d4ac0d');
-                    grad.addColorStop(1, '#7d6608');
-                }
-
-                ctx.beginPath();
-                ctx.arc(cx, cy, ballRadius, 0, Math.PI * 2);
-                ctx.fillStyle = grad;
-                ctx.fill();
-                ctx.strokeStyle = ball.isKiller ? '#fadbd8' : '#fef9e7';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-                ctx.fillStyle = ball.isKiller ? '#ffffff' : '#000000';
-                ctx.font = 'bold 15px "Arial Black", Impact, sans-serif';
+            function drawBallRow(balls, yPos, labelText) {
+                ctx.fillStyle = '#f1c40f';
+                ctx.font = 'bold 14px "Arial Black", Impact, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(ball.label, cx, cy);
-            });
+                ctx.fillText(labelText, width / 2, yPos - 38);
+
+                const ballRadius = 32;
+                const startX = (width - ((balls.length - 1) * 95)) / 2;
+
+                balls.forEach((ball, i) => {
+                    const cx = startX + (i * 95);
+                    const cy = yPos;
+
+                    const grad = ctx.createRadialGradient(cx - 8, cy - 8, 4, cx, cy, ballRadius);
+                    if (ball.isKiller) {
+                        grad.addColorStop(0, '#f1948a');
+                        grad.addColorStop(0.6, '#b03a2e');
+                        grad.addColorStop(1, '#641e16');
+                    } else {
+                        grad.addColorStop(0, '#f9e79f');
+                        grad.addColorStop(0.6, '#d4ac0d');
+                        grad.addColorStop(1, '#7d6608');
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, ballRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                    ctx.strokeStyle = ball.isKiller ? '#fadbd8' : '#fef9e7';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    ctx.fillStyle = ball.isKiller ? '#ffffff' : '#000000';
+                    ctx.font = 'bold 11px "Arial Black", Impact, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(ball.label, cx, cy);
+                });
+            }
+
+            drawBallRow(back, 140, "BACK ROW (HIDDEN)");
+            drawBallRow(front, 250, "FRONT ROW (PUBLIC)");
 
             ctx.fillStyle = '#8b949e';
-            ctx.font = '14px "Helvetica Neue", Helvetica, Arial, sans-serif';
+            ctx.font = '12px "Helvetica Neue", Helvetica, Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('Keep your balls secret from the other players!', width / 2, 265);
+            ctx.fillText('Keep your balls secret from the other players!', width / 2, 335);
 
             const a = document.createElement('a');
             const safeName = playerName.replace(/[^a-zA-Z0-9_-]/g, '_');
@@ -676,6 +972,12 @@
                     downloadSinglePlayerBallImage(p.name);
                 }, index * 250);
             });
+        }
+
+        function stepDownloadCardsAndAdvance() {
+            downloadAllPlayerBallImages();
+            roundCardsDownloaded = true;
+            updateCheatSheet();
         }
 
         function downloadStandaloneHTML() {
@@ -701,11 +1003,15 @@
                 }
             }
 
+            let mostVotedData = getMostVotedPlayers();
+            let mostTotalKillersData = getMostTotalKillersPlayers();
+            let mostRoundKillersData = getMostRoundKillersPlayers();
+
             const rowHeight = 75;
             const rowGap = 15;
             const headerHeight = 180;
             const padding = 50;
-            const width = 800;
+            const width = 1050;
             const height = headerHeight + (fullRoster.length * (rowHeight + rowGap)) + padding;
             
             canvas.width = width;
@@ -730,7 +1036,12 @@
             
             fullRoster.forEach((p, i) => {
                 let isWinner = (p.score === maxScore && maxScore > 0);
+                let pNameLower = p.name.toLowerCase();
                 
+                let isMostVoted = mostVotedData.names.includes(pNameLower) && mostVotedData.maxVotes > 0;
+                let isMostTotalK = mostTotalKillersData.names.includes(pNameLower) && mostTotalKillersData.maxKillers > 0;
+                let isMostRoundK = mostRoundKillersData.names.includes(pNameLower) && mostRoundKillersData.maxKillers > 0;
+
                 ctx.fillStyle = isWinner ? '#2c3e50' : (p.isEliminated ? '#111111' : '#1a1a1a');
                 ctx.fillRect(padding, startY, width - (padding * 2), rowHeight);
                 ctx.strokeStyle = isWinner ? '#f1c40f' : (p.isEliminated ? '#444444' : '#3498db');
@@ -738,17 +1049,45 @@
                 ctx.strokeRect(padding, startY, width - (padding * 2), rowHeight);
                 
                 ctx.fillStyle = isWinner ? '#f1c40f' : (p.isEliminated ? '#7f8c8d' : '#FFFFFF');
-                ctx.font = 'bold 28px "Arial Black", Impact, sans-serif';
+                ctx.font = 'bold 24px "Arial Black", Impact, sans-serif';
                 ctx.textAlign = 'left';
                 ctx.textBaseline = 'middle';
                 
                 let rankPrefix = isWinner ? '🏆 ' : `${i+1}. `;
                 let statusSuffix = p.isEliminated ? ' (Eliminated)' : '';
-                ctx.fillText(rankPrefix + p.name + statusSuffix, padding + 25, startY + (rowHeight / 2));
+                let fullLabel = rankPrefix + p.name + statusSuffix;
+                
+                ctx.fillText(fullLabel, padding + 20, startY + (rowHeight / 2));
+                
+                let labelMetrics = ctx.measureText(fullLabel);
+                let curTagX = padding + 25 + labelMetrics.width;
+                let tagY = startY + (rowHeight / 2) - 12;
+
+                function drawCanvasBadge(text, bgCol, widthPad) {
+                    ctx.font = 'bold 11px "Helvetica Neue", Arial, sans-serif';
+                    let w = ctx.measureText(text).width + widthPad;
+                    ctx.fillStyle = bgCol;
+                    ctx.fillRect(curTagX, tagY, w, 24);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(text, curTagX + (w / 2), tagY + 16);
+                    curTagX += w + 8;
+                }
+
+                if (isMostVoted) {
+                    drawCanvasBadge(`MOST VOTED (${mostVotedData.maxVotes})`, '#e74c3c', 16);
+                }
+                if (isMostTotalK) {
+                    drawCanvasBadge(`MOST KILLERS (${mostTotalKillersData.maxKillers})`, '#c0392b', 16);
+                }
+                if (isMostRoundK) {
+                    drawCanvasBadge(`MOST KILLERS (ROUND: ${mostRoundKillersData.maxKillers})`, '#8e44ad', 16);
+                }
                 
                 ctx.fillStyle = isWinner ? '#2ecc71' : (p.isEliminated ? '#7f8c8d' : '#bdc3c7');
+                ctx.font = 'bold 28px "Arial Black", Impact, sans-serif';
                 ctx.textAlign = 'right';
-                ctx.fillText(`$${p.score.toLocaleString()}`, width - padding - 25, startY + (rowHeight / 2));
+                ctx.fillText(`£${p.score.toLocaleString()}`, width - padding - 25, startY + (rowHeight / 2));
                 
                 startY += rowHeight + rowGap;
             });
@@ -779,12 +1118,20 @@
             updateScoreboard();
         }
 
+        function handlePlayerNameKey(e) {
+            if (e.key === "Enter" || e.keyCode === 13) {
+                e.preventDefault();
+                addPlayer();
+            }
+        }
+
         function addPlayer() {
             const input = document.getElementById('new-player-name');
             const name = input.value.trim();
             if (name !== "") {
                 players.push({ name: name, score: 0 });
                 input.value = ""; 
+                input.focus();
                 renderAdminPlayerList();
                 updateScoreboard();
             }
@@ -806,12 +1153,10 @@
 
         function updateScoreboard() {
             const list1 = document.getElementById('scoreboard-list');
-            const list2 = document.getElementById('persistent-scoreboard-list');
-            list1.innerHTML = ""; if (list2) list2.innerHTML = "";
+            list1.innerHTML = "";
             
             if (players.length === 0) {
                 list1.innerHTML = `<div style="color: #bdc3c7; font-style: italic; text-align: center;">No players added yet.</div>`;
-                if (list2) list2.innerHTML = list1.innerHTML;
                 updateCheatSheet();
                 return;
             }
@@ -821,12 +1166,11 @@
                     <div class="scoreboard-item">
                         <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
                             <span>${player.name}</span>
-                            <div class="score-value" onclick="editScore(${index})">$${player.score}</div>
+                            <div class="score-value" onclick="editScore(${index})">£${player.score}</div>
                         </div>
                     </div>
                 `;
                 list1.innerHTML += itemHTML;
-                if (list2) list2.innerHTML += itemHTML;
             });
             updateCheatSheet();
         }
@@ -840,7 +1184,7 @@
         }
 
         function resetScores() {
-            if(confirm("Reset all player scores to 0?")) {
+            if(confirm("Reset all player scores to £0?")) {
                 players.forEach(p => p.score = 0);
                 updateScoreboard();
             }
@@ -872,8 +1216,15 @@
             gameData.jackpot = 0;
             gameData.roundNum = 1;
             gameData.finalPotBallsKept = 0;
+            eliminationVotesTracker = {};
+            totalKillersTracker = {};
+            maxKillersInRoundTracker = {};
             eliminatedPlayerName = "";
             eliminatedRankings = [];
+            postEliminationRevealDone = false;
+            isAutoRevealing = false;
+            isVoteSequenceRunning = false;
+            roundCardsDownloaded = false;
             dealInitialRoundBalls();
 
             document.getElementById('admin-screen').style.display = 'none';
@@ -883,14 +1234,25 @@
 
         function dealInitialRoundBalls() {
             vaultBalls = [];
-            let possibleValues = [1000, 2500, 5000, 10000, 15000, 20000, 25000, 50000];
             let ballsPerPlayer = 4;
             let maxKillers = 4;
 
             players.forEach(p => {
                 for (let i = 0; i < ballsPerPlayer; i++) {
-                    let val = possibleValues[Math.floor(Math.random() * possibleValues.length)];
-                    vaultBalls.push({ id: Math.random(), owner: p.name, value: val, label: `$${val.toLocaleString()}`, revealed: false, binned: false, isKiller: false });
+                    let val = generateOrganicBallValue();
+                    let rowType = (i < 2) ? 'front' : 'back';
+                    vaultBalls.push({
+                        id: Math.random(),
+                        owner: p.name,
+                        value: val,
+                        label: `£${val.toLocaleString()}`,
+                        revealed: false,
+                        binned: false,
+                        isKiller: false,
+                        lost: false,
+                        previewCarry: false,
+                        row: rowType
+                    });
                 }
             });
 
@@ -904,53 +1266,84 @@
                 target.isKiller = true;
                 killersAdded++;
             }
+
+            trackRoundKillers();
         }
 
         function reshuffleAndRedealRemainingBalls() {
             let survivingNames = players.map(p => p.name.toLowerCase());
-            let unrevealedPool = vaultBalls.filter(b => !b.revealed && !b.binned && survivingNames.includes(b.owner.toLowerCase()));
             
+            let survivingCarriedBalls = vaultBalls.filter(b => 
+                survivingNames.includes(b.owner.toLowerCase()) && 
+                (b.previewCarry === true || (!b.revealed && !b.binned))
+            );
+
+            let unrevealedPool = survivingCarriedBalls.map(b => ({
+                id: b.id,
+                value: b.value,
+                label: b.label,
+                isKiller: b.isKiller,
+                owner: "",
+                revealed: false,
+                binned: false,
+                lost: false,
+                previewCarry: false,
+                row: ""
+            }));
+
             let targetBallsPerPlayer = (players.length === 3) ? 5 : (players.length === 2 ? 5 : 4);
             let targetTotalBalls = players.length * targetBallsPerPlayer;
-
-            let possibleValues = [1000, 2500, 5000, 10000, 15000, 20000, 25000, 50000];
-            while (unrevealedPool.length < targetTotalBalls) {
-                let val = possibleValues[Math.floor(Math.random() * possibleValues.length)];
-                unrevealedPool.push({ id: Math.random(), owner: "", value: val, label: `$${val.toLocaleString()}`, revealed: false, binned: false, isKiller: false });
-            }
-
-            if (unrevealedPool.length > targetTotalBalls) {
-                unrevealedPool = unrevealedPool.slice(0, targetTotalBalls);
-            }
-
-            let currentKillers = unrevealedPool.filter(b => b.isKiller).length;
             let targetMaxKillers = (players.length === 3) ? 5 : (players.length === 2 ? 6 : 4);
 
-            while (currentKillers < targetMaxKillers) {
-                let nonKillers = unrevealedPool.filter(b => !b.isKiller);
-                if(nonKillers.length > 0) {
-                    let kTarget = nonKillers[Math.floor(Math.random() * nonKillers.length)];
-                    kTarget.value = 0;
-                    kTarget.label = "KILLER 💀";
-                    kTarget.isKiller = true;
-                    currentKillers++;
-                } else {
-                    break;
-                }
+            let currentKillers = unrevealedPool.filter(b => b.isKiller).length;
+            let killersNeeded = Math.max(0, targetMaxKillers - currentKillers);
+
+            for (let k = 0; k < killersNeeded && unrevealedPool.length < targetTotalBalls; k++) {
+                unrevealedPool.push({
+                    id: Math.random(),
+                    owner: "",
+                    value: 0,
+                    label: "KILLER 💀",
+                    revealed: false,
+                    binned: false,
+                    isKiller: true,
+                    lost: false,
+                    previewCarry: false,
+                    row: ""
+                });
+            }
+
+            while (unrevealedPool.length < targetTotalBalls) {
+                let val = generateOrganicBallValue();
+                unrevealedPool.push({
+                    id: Math.random(),
+                    owner: "",
+                    value: val,
+                    label: `£${val.toLocaleString()}`,
+                    revealed: false,
+                    binned: false,
+                    isKiller: false,
+                    lost: false,
+                    previewCarry: false,
+                    row: ""
+                });
             }
 
             unrevealedPool.sort(() => Math.random() - 0.5);
 
             vaultBalls = []; 
             let poolIndex = 0;
-            if(players.length > 2) {
+            if (players.length > 2) {
+                let frontCount = (players.length === 3) ? 2 : 2;
                 players.forEach(p => {
                     for (let i = 0; i < targetBallsPerPlayer; i++) {
                         let ball = unrevealedPool[poolIndex++];
                         ball.owner = p.name; 
+                        ball.row = (i < frontCount) ? 'front' : 'back';
                         vaultBalls.push(ball);
                     }
                 });
+                trackRoundKillers();
             } else {
                 for (let i = 0; i < 10; i++) {
                     let ball = unrevealedPool[poolIndex++];
@@ -961,7 +1354,7 @@
         }
 
         function renderGamePhase() {
-            document.getElementById('jackpot-display').innerText = `JACKPOT: $${gameData.jackpot.toLocaleString()}`;
+            document.getElementById('jackpot-display').innerText = `JACKPOT:\n£${gameData.jackpot.toLocaleString()}`;
             document.getElementById('active-players-count').innerText = players.length;
 
             let phaseTitle = `Round ${gameData.roundNum}: Building the Bank`;
@@ -972,41 +1365,74 @@
             wrapper.innerHTML = "";
 
             if (players.length > 2) {
-                players.forEach(p => {
-                    let pBalls = vaultBalls.filter(b => b.owner.toLowerCase() === p.name.toLowerCase());
-                    let pod = document.createElement('div');
-                    pod.className = 'player-pod';
+                let row1Count = Math.ceil(players.length / 2);
+                let row1Players = players.slice(0, row1Count);
+                let row2Players = players.slice(row1Count);
 
-                    let podName = document.createElement('div');
-                    podName.className = 'player-pod-name';
-                    podName.innerText = p.name;
-                    pod.appendChild(podName);
+                let tiers = [row1Players];
+                if (row2Players.length > 0) {
+                    tiers.push(row2Players);
+                }
 
-                    let ballsGrid = document.createElement('div');
-                    ballsGrid.className = 'pod-balls-grid';
+                tiers.forEach(tierPlayers => {
+                    let rowContainer = document.createElement('div');
+                    rowContainer.className = 'pods-tier-row';
 
-                    pBalls.forEach(ball => {
-                        let globalIdx = vaultBalls.indexOf(ball);
-                        let ballEl = document.createElement('div');
-                        ballEl.className = `golden-ball ${ball.revealed ? 'revealed' : ''} ${ball.revealed && ball.isKiller ? 'killer' : ''} ${ball.binned ? 'binned' : ''}`;
-                        
-                        if (ball.binned) {
-                            ballEl.innerHTML = `<div class="ball-label">BINNED</div>`;
-                        } else if (ball.revealed) {
-                            ballEl.innerHTML = `<div class="ball-label">${ball.label}</div>`;
-                        } else {
-                            ballEl.innerHTML = `<div class="ball-label">🔒</div>`;
-                            if(players.length > 2) {
-                                ballEl.onclick = () => revealBall(globalIdx);
-                            }
+                    tierPlayers.forEach(p => {
+                        let pBalls = vaultBalls.filter(b => b.owner.toLowerCase() === p.name.toLowerCase());
+                        let isElim = eliminatedPlayerName && (p.name.toLowerCase() === eliminatedPlayerName.toLowerCase());
+
+                        let pod = document.createElement('div');
+                        pod.className = `player-pod ${isElim ? 'pod-eliminated' : ''}`;
+
+                        let podName = document.createElement('div');
+                        podName.className = 'player-pod-name';
+                        podName.innerText = isElim ? `${p.name} (Voted Out)` : p.name;
+                        pod.appendChild(podName);
+
+                        let tieredContainer = document.createElement('div');
+                        tieredContainer.className = 'pod-tiered-container';
+
+                        let backBalls = pBalls.filter(b => b.row === 'back');
+                        let frontBalls = pBalls.filter(b => b.row === 'front');
+
+                        function buildRow(balls) {
+                            let rowEl = document.createElement('div');
+                            rowEl.className = 'pod-row';
+
+                            balls.forEach(ball => {
+                                let isLost = ball.lost || false;
+                                let isCarrying = ball.previewCarry || false;
+                                let ballEl = document.createElement('div');
+                                ballEl.className = `golden-ball ${ball.revealed ? 'revealed' : ''} ${ball.revealed && ball.isKiller ? 'killer' : ''} ${ball.binned ? 'binned' : ''} ${isLost ? 'lost' : ''} ${isCarrying ? 'carrying' : ''}`;
+                                
+                                if (isLost || isCarrying || ball.revealed) {
+                                    ballEl.innerHTML = `<div class="ball-label">${ball.label}</div>`;
+                                } else if (ball.binned) {
+                                    ballEl.innerHTML = `<div class="ball-label">BINNED</div>`;
+                                } else {
+                                    ballEl.innerHTML = `<div class="ball-label">🔒</div>`;
+                                }
+                                rowEl.appendChild(ballEl);
+                            });
+
+                            return rowEl;
                         }
-                        ballsGrid.appendChild(ballEl);
+
+                        tieredContainer.appendChild(buildRow(backBalls));
+                        tieredContainer.appendChild(buildRow(frontBalls));
+
+                        pod.appendChild(tieredContainer);
+                        rowContainer.appendChild(pod);
                     });
 
-                    pod.appendChild(ballsGrid);
-                    wrapper.appendChild(pod);
+                    wrapper.appendChild(rowContainer);
                 });
             } else {
+                wrapper.style.display = 'flex';
+                wrapper.style.justifyContent = 'center';
+                wrapper.style.alignItems = 'center';
+
                 let finalGrid = document.createElement('div');
                 finalGrid.className = 'final-grid-wrapper';
 
@@ -1032,7 +1458,7 @@
 
         function revealBall(index) {
             let ball = vaultBalls[index];
-            if (!ball || ball.revealed || ball.binned) return;
+            if (!ball || ball.revealed || ball.binned || ball.lost || ball.previewCarry) return;
 
             ball.revealed = true;
             if (ball.isKiller) {
@@ -1044,6 +1470,34 @@
             }
             renderGamePhase();
             updateScoreboard();
+        }
+
+        function autoRevealFrontBalls() {
+            if (isAutoRevealing) return;
+            
+            let revealSequence = [];
+
+            players.forEach(p => {
+                let pFrontBalls = vaultBalls.filter(b => b.owner.toLowerCase() === p.name.toLowerCase() && b.row === 'front' && !b.revealed && !b.binned);
+                pFrontBalls.forEach(ball => {
+                    revealSequence.push(vaultBalls.indexOf(ball));
+                });
+            });
+
+            if (revealSequence.length === 0) return;
+
+            isAutoRevealing = true;
+            updateCheatSheet();
+
+            revealSequence.forEach((idx, i) => {
+                setTimeout(() => {
+                    revealBall(idx);
+                    if (i === revealSequence.length - 1) {
+                        isAutoRevealing = false;
+                        updateCheatSheet();
+                    }
+                }, i * 1400);
+            });
         }
 
         function keepBall(index) {
@@ -1079,7 +1533,7 @@
             updateScoreboard();
         }
 
-        // --- HOST DASHBOARD ELIMINATION LOGIC ---
+        // --- SUSPENSE VOTING SEQUENCE ---
         function runEliminationFromDashboard() {
             if (cheatSheetWindow && !cheatSheetWindow.closed) {
                 let votes = [];
@@ -1094,6 +1548,10 @@
                     }
                     votes.push(target);
                     tallies[target] = (tallies[target] || 0) + 1;
+                    
+                    if (target) {
+                        eliminationVotesTracker[target] = (eliminationVotesTracker[target] || 0) + 1;
+                    }
                 });
 
                 if (hasError) {
@@ -1101,61 +1559,133 @@
                     return;
                 }
 
+                isVoteSequenceRunning = true;
+                updateCheatSheet();
+
+                let shuffledVotes = [...votes].sort(() => Math.random() - 0.5);
+
                 const display = document.getElementById('vote-cards-display');
+                const banner = document.getElementById('vote-outcome-banner');
+                const title = document.getElementById('vote-modal-title');
+                const tieInstructions = document.getElementById('tie-instructions');
+                const waitingLabel = document.getElementById('vote-waiting-label');
+
+                title.style.display = 'block';
+                display.style.display = 'flex';
                 display.innerHTML = "";
-                votes.forEach(vName => {
-                    display.innerHTML += `<div class="vote-card" id="vcard-${vName}">${vName}</div>`;
+                banner.innerHTML = "";
+                tieInstructions.style.display = "none";
+                waitingLabel.style.display = "none";
+
+                shuffledVotes.forEach((vName, idx) => {
+                    display.innerHTML += `<div class="vote-card" id="vcard-${idx}">${vName}</div>`;
                 });
 
-                let maxVotes = -1;
-                let topTargets = [];
-                for (let target in tallies) {
-                    if (tallies[target] > maxVotes) {
-                        maxVotes = tallies[target];
-                        topTargets = [target];
-                    } else if (tallies[target] === maxVotes) {
-                        topTargets.push(target);
+                document.getElementById('elimination-reveal-modal').style.display = 'flex';
+
+                shuffledVotes.forEach((_, i) => {
+                    setTimeout(() => {
+                        let card = document.getElementById(`vcard-${i}`);
+                        if (card) {
+                            card.classList.add('visible-card');
+                            playRevealDrum();
+                        }
+                    }, (i + 1) * 1200);
+                });
+
+                let totalRevealTime = (shuffledVotes.length + 1) * 1200;
+
+                setTimeout(() => {
+                    let maxVotes = -1;
+                    let topTargets = [];
+                    for (let target in tallies) {
+                        if (tallies[target] > maxVotes) {
+                            maxVotes = tallies[target];
+                            topTargets = [target];
+                        } else if (tallies[target] === maxVotes) {
+                            topTargets.push(target);
+                        }
+                    }
+
+                    if (topTargets.length === 1) {
+                        eliminatedPlayerName = topTargets[0];
+                        postEliminationRevealDone = false;
+
+                        document.querySelectorAll('.vote-card').forEach(card => {
+                            if (card.innerText.trim().toLowerCase() === eliminatedPlayerName.toLowerCase()) {
+                                card.classList.add('eliminated-target');
+                            }
+                        });
+
+                        banner.innerText = `${eliminatedPlayerName} received the most votes and will be eliminated!`;
+                        banner.style.color = "#e74c3c";
+                        playKillerSound();
+
+                        setTimeout(() => {
+                            document.getElementById('elimination-reveal-modal').style.display = 'none';
+                            isVoteSequenceRunning = false;
+                            renderGamePhase();
+                            updateCheatSheet();
+                        }, 5000);
+
+                    } else {
+                        eliminatedPlayerName = "";
+                        postEliminationRevealDone = false;
+                        banner.innerText = `DEADLOCK TIE: ${topTargets.join(" and ")} tied with ${maxVotes} votes each!`;
+                        banner.style.color = "#f1c40f";
+                        tieInstructions.style.display = "block";
+                        waitingLabel.style.display = "block";
+                        isVoteSequenceRunning = false;
+                        updateCheatSheet();
+                    }
+                }, totalRevealTime + 800);
+            }
+        }
+
+        // Reveal a single player's unrevealed secret balls for discussion
+        function revealSinglePlayerRemainingBalls(playerName) {
+            document.getElementById('elimination-reveal-modal').style.display = 'none';
+
+            let isElim = eliminatedPlayerName && (playerName.toLowerCase() === eliminatedPlayerName.toLowerCase());
+
+            vaultBalls.forEach(ball => {
+                if (ball.owner.toLowerCase() === playerName.toLowerCase() && !ball.revealed && !ball.binned && !ball.previewCarry && !ball.lost) {
+                    if (isElim) {
+                        ball.lost = true;
+                    } else {
+                        ball.previewCarry = true;
                     }
                 }
+            });
 
-                const banner = document.getElementById('vote-outcome-banner');
-                const tieInstructions = document.getElementById('tie-instructions');
-                const btnFinalize = document.getElementById('btn-finalize-elimination');
-
-                if (topTargets.length === 1) {
-                    eliminatedPlayerName = topTargets[0];
-                    banner.innerText = `${eliminatedPlayerName} received the most votes and will be eliminated!`;
-                    banner.style.color = "#e74c3c";
-                    tieInstructions.style.display = "none";
-                    btnFinalize.style.display = "inline-block";
-
-                    document.querySelectorAll(`.vote-card`).forEach(card => {
-                        if (card.innerText.trim().toLowerCase() === eliminatedPlayerName.toLowerCase()) {
-                            card.classList.add('eliminated-target');
-                        }
-                    });
-                } else {
-                    eliminatedPlayerName = "";
-                    banner.innerText = `DEADLOCK TIE: ${topTargets.join(" and ")} tied with ${maxVotes} votes each!`;
-                    banner.style.color = "#f1c40f";
-                    tieInstructions.style.display = "block";
-                    btnFinalize.style.display = "none";
-                }
-
-                playRevealDrum();
-                document.getElementById('elimination-reveal-modal').style.display = 'flex';
-                updateCheatSheet();
-            }
+            playTone(440, 'triangle', 0.4, 0.3);
+            renderGamePhase();
+            updateScoreboard();
+            updateCheatSheet();
         }
 
         function finalizeElimination() {
             if (eliminatedPlayerName === "") return;
             document.getElementById('elimination-reveal-modal').style.display = 'none';
 
+            vaultBalls.forEach(ball => {
+                if (!ball.revealed && !ball.binned && !ball.previewCarry && !ball.lost) {
+                    if (ball.owner.toLowerCase() === eliminatedPlayerName.toLowerCase()) {
+                        ball.lost = true;
+                    } else {
+                        ball.previewCarry = true;
+                    }
+                }
+            });
+
             eliminatedRankings.push(eliminatedPlayerName);
             players = players.filter(p => p.name.toLowerCase() !== eliminatedPlayerName.toLowerCase());
             gameData.roundNum++;
             eliminatedPlayerName = "";
+            postEliminationRevealDone = false;
+            isAutoRevealing = false;
+            isVoteSequenceRunning = false;
+            roundCardsDownloaded = false;
 
             reshuffleAndRedealRemainingBalls();
             renderGamePhase();
@@ -1166,7 +1696,7 @@
         // --- SPLIT OR STEAL STREAM REVEAL SEQUENCE ---
         function openSplitStealStreamModal() {
             if (players.length < 2) return;
-            document.getElementById('stream-prize-fund').innerText = `PRIZE FUND: $${gameData.jackpot.toLocaleString()}`;
+            document.getElementById('stream-prize-fund').innerText = `PRIZE FUND: £${gameData.jackpot.toLocaleString()}`;
             document.getElementById('finalist-1-name').innerText = players[0].name;
             document.getElementById('finalist-2-name').innerText = players[1].name;
             
@@ -1207,19 +1737,19 @@
                 let share = Math.floor(gameData.jackpot / 2);
                 p1.score = share;
                 p2.score = share;
-                outcomeText = `🤝 BOTH PLAYERS CHOSE SPLIT!<br><br>${p1.name} and ${p2.name} share the bank equally!<br><span style="color:#2ecc71; font-size:1.3em;">Winning $${share.toLocaleString()} each</span>`;
+                outcomeText = `🤝 BOTH PLAYERS CHOSE SPLIT!<br><br>${p1.name} and ${p2.name} share the bank equally!<br><span style="color:#2ecc71; font-size:1.3em;">Winning £${share.toLocaleString()} each</span>`;
             } else if (c1 === "STEAL" && c2 === "SPLIT") {
                 p1.score = gameData.jackpot;
                 p2.score = 0;
-                outcomeText = `😈 ${p1.name.toUpperCase()} CHOSE STEAL!<br><br>${p1.name} takes home the entire jackpot!<br><span style="color:#2ecc71; font-size:1.3em;">Winning $${gameData.jackpot.toLocaleString()}</span>`;
+                outcomeText = `😈 ${p1.name.toUpperCase()} CHOSE STEAL!<br><br>${p1.name} takes home the entire jackpot!<br><span style="color:#2ecc71; font-size:1.3em;">Winning £${gameData.jackpot.toLocaleString()}</span>`;
             } else if (c1 === "SPLIT" && c2 === "STEAL") {
                 p1.score = 0;
                 p2.score = gameData.jackpot;
-                outcomeText = `😈 ${p2.name.toUpperCase()} CHOSE STEAL!<br><br>${p2.name} takes home the entire jackpot!<br><span style="color:#2ecc71; font-size:1.3em;">Winning $${gameData.jackpot.toLocaleString()}</span>`;
+                outcomeText = `😈 ${p2.name.toUpperCase()} CHOSE STEAL!<br><br>${p2.name} takes home the entire jackpot!<br><span style="color:#2ecc71; font-size:1.3em;">Winning £${gameData.jackpot.toLocaleString()}</span>`;
             } else {
                 p1.score = 0;
                 p2.score = 0;
-                outcomeText = `💥 BOTH PLAYERS CHOSE STEAL!<br><br>Greed destroyed the jackpot!<br><span style="color:#e74c3c; font-size:1.3em;">Both players walk away with $0</span>`;
+                outcomeText = `💥 BOTH PLAYERS CHOSE STEAL!<br><br>Greed destroyed the jackpot!<br><span style="color:#e74c3c; font-size:1.3em;">Both players walk away with £0</span>`;
             }
 
             updateScoreboard();
@@ -1259,21 +1789,41 @@
             fullRoster.push(...activeSorted);
 
             let maxScore = fullRoster.length > 0 ? fullRoster[fullRoster.length - 1].score : 0;
+            let mostVotedData = getMostVotedPlayers();
+            let mostTotalKillersData = getMostTotalKillersPlayers();
+            let mostRoundKillersData = getMostRoundKillersPlayers();
 
             fullRoster.forEach((p, index) => {
                 setTimeout(() => {
                     playRevealDrum();
                     let isWinner = (p.score === maxScore && maxScore > 0);
+                    let pNameLower = p.name.toLowerCase();
+
+                    let isMostVoted = mostVotedData.names.includes(pNameLower) && mostVotedData.maxVotes > 0;
+                    let isMostTotalK = mostTotalKillersData.names.includes(pNameLower) && mostTotalKillersData.maxKillers > 0;
+                    let isMostRoundK = mostRoundKillersData.names.includes(pNameLower) && mostRoundKillersData.maxKillers > 0;
                     
+                    let tagsHTML = '';
+                    if (isMostVoted) {
+                        tagsHTML += `<span style="background: #e74c3c; color: #fff; font-size: 0.45em; padding: 3px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.5px;">🎯 MOST VOTED (${mostVotedData.maxVotes})</span>`;
+                    }
+                    if (isMostTotalK) {
+                        tagsHTML += `<span style="background: #c0392b; color: #fff; font-size: 0.45em; padding: 3px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.5px;">💀 MOST KILLERS (${mostTotalKillersData.maxKillers})</span>`;
+                    }
+                    if (isMostRoundK) {
+                        tagsHTML += `<span style="background: #8e44ad; color: #fff; font-size: 0.45em; padding: 3px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.5px;">⚡ MOST KILLERS (ROUND: ${mostRoundKillersData.maxKillers})</span>`;
+                    }
+
                     let row = document.createElement('div');
                     row.className = `finale-row ${isWinner ? 'finale-winner' : ''}`;
                     row.style.animation = "revealUp 0.8s ease forwards";
                     row.innerHTML = `
-                        <span class="retro-title" style="font-size: ${isWinner ? '2.2em' : '1.8em'}; color: ${isWinner ? '#f1c40f' : '#FFF'}; display: flex; align-items: center;">
-                            ${isWinner ? '🏆 ' : ''}${p.name} ${p.isEliminated ? '<span style="color:#7f8c8d; font-size:0.6em; margin-left:10px;">(Eliminated)</span>' : ''}
+                        <span class="retro-title" style="font-size: ${isWinner ? '2em' : '1.6em'}; color: ${isWinner ? '#f1c40f' : '#FFF'}; display: flex; align-items: center; flex-wrap: wrap;">
+                            ${isWinner ? '🏆 ' : ''}${p.name} ${p.isEliminated ? '<span style="color:#7f8c8d; font-size:0.6em; margin-left:8px;">(Eliminated)</span>' : ''}
+                            ${tagsHTML}
                         </span>
                         <span style="font-size: ${isWinner ? '2.2em' : '1.8em'}; color: ${isWinner ? '#2ecc71' : '#bdc3c7'}; font-weight: bold;">
-                            $${p.score.toLocaleString()}
+                            £${p.score.toLocaleString()}
                         </span>
                     `;
                     listContainer.appendChild(row);
