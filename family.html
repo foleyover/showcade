@@ -1500,40 +1500,48 @@
             document.getElementById('preset-modal').style.display = 'none';
         }
 
-        async function loadPresetSurvey(event, filename) {
-            const btn = event.target;
-            const originalText = btn.innerText;
+async function loadPresetSurvey(event, filename) {
+    const btn = event.target;
+    const originalText = btn.innerText;
 
-            try {
-                btn.innerText = "Loading...";
-                btn.disabled = true;
+    try {
+        btn.innerText = "Loading...";
+        btn.disabled = true;
 
-                const response = await fetch(SURVEYS_BASE_URL + filename + '?v=' + new Date().getTime());
-                if (!response.ok) throw new Error("Failed to load " + filename);
+        const response = await fetch(SURVEYS_BASE_URL + filename + '?v=' + new Date().getTime());
+        if (!response.ok) throw new Error("Failed to load " + filename);
 
-                const importedData = await response.json();
-                if (importedData.rounds) {
-                    gameData.rounds = importedData.rounds;
-                    if (importedData.fastMoney) gameData.fastMoney = importedData.fastMoney;
-                    if (importedData.fastMoneyEnabled !== undefined) gameData.fastMoneyEnabled = importedData.fastMoneyEnabled;
-                    if (importedData.fastMoneyThreshold !== undefined) gameData.fastMoneyThreshold = importedData.fastMoneyThreshold;
+        const importedData = await response.json();
+        if (importedData.rounds) {
+            // Completely override game data with the preset pack
+            gameData.rounds = importedData.rounds;
+            gameData.fastMoney = importedData.fastMoney ? importedData.fastMoney : JSON.parse(JSON.stringify(FALLBACK_FAST_MONEY));
+            gameData.fastMoneyEnabled = importedData.fastMoneyEnabled !== undefined ? importedData.fastMoneyEnabled : true;
+            gameData.fastMoneyThreshold = importedData.fastMoneyThreshold !== undefined ? importedData.fastMoneyThreshold : 300;
 
-                    currentEditRound = 0;
-                    currentPlayRound = 0;
-                    initGame();
-                    closePresetModal();
-                    alert(`Loaded survey pack: ${filename}!`);
-                } else {
-                    throw new Error("Invalid survey schema");
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Failed to load the selected survey file. Make sure it exists in your surveys/ folder.");
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
+            // Reset all active session variables to prevent old states from lingering
+            currentEditRound = 0;
+            currentPlayRound = 0;
+            currentRoundBank = 0;
+            currentStrikes = 0;
+            isFastMoneyUnlocked = false;
+            fastMoneyWinningFamily = null;
+            historyStack = [];
+
+            initGame();
+            closePresetModal();
+            alert(`Loaded survey pack: ${filename}!`);
+        } else {
+            throw new Error("Invalid survey schema");
         }
+    } catch (err) {
+        console.error(err);
+        alert("Failed to load the selected survey file. Make sure it exists in your surveys/ folder.");
+    } finally {
+        btn.innerText = originalText;
+        btn.disabled = false;
+    }
+}
 
         // --- ADMIN ROUNDS & FAST MONEY EDITORS ---
         function renderAdminRound() {
