@@ -1,0 +1,69 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name a popular playground game.",
+"multiplier": 1,
+"answers": [
+{ "text": "Tag / Tig", "points": 46, "revealed": false },
+{ "text": "Hide and Seek", "points": 32, "revealed": false },
+{ "text": "Hopscotch", "points": 12, "revealed": false },
+{ "text": "Dodgeball", "points": 6, "revealed": false },
+{ "text": "Jump Rope", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name an excuse children use to stay up past bedtime.",
+"multiplier": 1,
+"answers": [
+{ "text": "Need a Glass of Water", "points": 48, "revealed": false },
+{ "text": "Not Tired / Sleepy", "points": 26, "revealed": false },
+{ "text": "One More Episode / Game", "points": 14, "revealed": false },
+{ "text": "Scared of the Dark / Monsters", "points": 8, "revealed": false },
+{ "text": "Have to Pee", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name something kids eat that adults find gross.",
+"multiplier": 1,
+"answers": [
+{ "text": "Boogers", "points": 48, "revealed": false },
+{ "text": "Dirt / Mud", "points": 24, "revealed": false },
+{ "text": "Bugs / Worms", "points": 16, "revealed": false },
+{ "text": "Play-Doh", "points": 8, "revealed": false },
+{ "text": "Glue", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name a toy every kid had in the 90s.",
+"multiplier": 2,
+"answers": [
+{ "text": "Game Boy", "points": 44, "revealed": false },
+{ "text": "Tamagotchi", "points": 34, "revealed": false },
+{ "text": "Furby", "points": 14, "revealed": false },
+{ "text": "Beanie Babies", "points": 8, "revealed": false }
+]
+},
+{
+"question": "Name something kids hide from their parents.",
+"multiplier": 3,
+"answers": [
+{ "text": "Bad Grades / Report Card", "points": 58, "revealed": false },
+{ "text": "Candy / Sweets", "points": 24, "revealed": false },
+{ "text": "Broken Items", "points": 12, "revealed": false },
+{ "text": "A Pet / Insect", "points": 6, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name a cartoon character with yellow skin.", "answers": [{ "text": "HOMER SIMPSON / BART", "points": 58 }, { "text": "SPONGEBOB", "points": 34 }, { "text": "PIKACHU", "points": 8 }] },
+{ "question": "Name something you find in a school playground.", "answers": [{ "text": "SWINGS", "points": 48 }, { "text": "SLIDE", "points": 32 }, { "text": "SEESAW", "points": 12 }, { "text": "SANDPIT", "points": 8 }] },
+{ "question": "Name a flavor of ice cream kids love.", "answers": [{ "text": "CHOCOLATE", "points": 48 }, { "text": "VANILLA", "points": 28 }, { "text": "STRAWBERRY", "points": 16 }, { "text": "BUBBLEGUM", "points": 8 }] },
+{ "question": "At what age do kids stop believing in Santa Claus?", "answers": [{ "text": "8 YEARS OLD", "points": 46 }, { "text": "10 YEARS OLD", "points": 34 }, { "text": "9 YEARS OLD", "points": 20 }] },
+{ "question": "Name a board game played by the whole family.", "answers": [{ "text": "MONOPOLY", "points": 62 }, { "text": "SCRABBLE", "points": 22 }, { "text": "CLUE", "points": 16 }] }
+]
+}

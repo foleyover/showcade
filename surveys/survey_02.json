@@ -1,0 +1,72 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name something people always forget to pack when going on holiday.",
+"multiplier": 1,
+"answers": [
+{ "text": "Toothbrush / Paste", "points": 36, "revealed": false },
+{ "text": "Phone Charger", "points": 28, "revealed": false },
+{ "text": "Sunscreen / Sunblock", "points": 16, "revealed": false },
+{ "text": "Underwear / Socks", "points": 11, "revealed": false },
+{ "text": "Passport / Tickets", "points": 5, "revealed": false },
+{ "text": "Sunglasses", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name something you might find under your bed.",
+"multiplier": 1,
+"answers": [
+{ "text": "Dust / Dust Bunnies", "points": 38, "revealed": false },
+{ "text": "Shoes / Slippers", "points": 24, "revealed": false },
+{ "text": "Monsters / Boogeyman", "points": 14, "revealed": false },
+{ "text": "Storage Boxes / Clothes", "points": 11, "revealed": false },
+{ "text": "Lost Socks", "points": 8, "revealed": false },
+{ "text": "Coins / Money", "points": 5, "revealed": false }
+]
+},
+{
+"question": "Name a chore people procrastinate on the most.",
+"multiplier": 1,
+"answers": [
+{ "text": "Dishes / Dishwasher", "points": 35, "revealed": false },
+{ "text": "Folding Laundry", "points": 30, "revealed": false },
+{ "text": "Cleaning The Toilet", "points": 17, "revealed": false },
+{ "text": "Vacuuming / Mopping", "points": 11, "revealed": false },
+{ "text": "Taking Out Trash", "points": 7, "revealed": false }
+]
+},
+{
+"question": "Name an excuse people give for being late to work.",
+"multiplier": 2,
+"answers": [
+{ "text": "Traffic / Roadwork", "points": 46, "revealed": false },
+{ "text": "Overslept / Alarm", "points": 31, "revealed": false },
+{ "text": "Car Trouble / Flat", "points": 12, "revealed": false },
+{ "text": "Bus / Train Delay", "points": 7, "revealed": false },
+{ "text": "Bad Weather", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name something that gets passed around at a party.",
+"multiplier": 3,
+"answers": [
+{ "text": "Drinks / Shots", "points": 48, "revealed": false },
+{ "text": "Snacks / Food", "points": 29, "revealed": false },
+{ "text": "Photos / Phone", "points": 14, "revealed": false },
+{ "text": "Aux Cord / Remote", "points": 9, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name an animal you'd see at the zoo.", "answers": [{ "text": "LION", "points": 34 }, { "text": "ELEPHANT", "points": 26 }, { "text": "MONKEY", "points": 18 }, { "text": "GIRAFFE", "points": 12 }, { "text": "TIGER", "points": 10 }] },
+{ "question": "Name a day of the week people look forward to.", "answers": [{ "text": "FRIDAY", "points": 58 }, { "text": "SATURDAY", "points": 32 }, { "text": "SUNDAY", "points": 10 }] },
+{ "question": "Name something you find on a breakfast menu.", "answers": [{ "text": "EGGS", "points": 44 }, { "text": "PANCAKES", "points": 25 }, { "text": "BACON", "points": 19 }, { "text": "TOAST", "points": 12 }] },
+{ "question": "Name a sport where players wear a helmet.", "answers": [{ "text": "AMERICAN FOOTBALL", "points": 52 }, { "text": "BASEBALL", "points": 24 }, { "text": "HOCKEY", "points": 16 }, { "text": "CYCLING", "points": 8 }] },
+{ "question": "Name something people complain about in the summer.", "answers": [{ "text": "THE HEAT / HUMIDITY", "points": 62 }, { "text": "MOSQUITOES / BUGS", "points": 21 }, { "text": "SUNBURN", "points": 11 }, { "text": "SWEAT", "points": 6 }] }
+]
+}

@@ -1,0 +1,70 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name an animal that hibernates in the winter.",
+"multiplier": 1,
+"answers": [
+{ "text": "Bear", "points": 68, "revealed": false },
+{ "text": "Hedgehog", "points": 12, "revealed": false },
+{ "text": "Bat", "points": 8, "revealed": false },
+{ "text": "Squirrel", "points": 6, "revealed": false },
+{ "text": "Snake", "points": 4, "revealed": false },
+{ "text": "Frog", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name a wild animal you would never want as a pet.",
+"multiplier": 1,
+"answers": [
+{ "text": "Tiger / Lion", "points": 44, "revealed": false },
+{ "text": "Bear", "points": 26, "revealed": false },
+{ "text": "Crocodile / Alligator", "points": 16, "revealed": false },
+{ "text": "Snake", "points": 10, "revealed": false },
+{ "text": "Skunk", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name a dog breed known for being friendly.",
+"multiplier": 1,
+"answers": [
+{ "text": "Golden Retriever", "points": 54, "revealed": false },
+{ "text": "Labrador", "points": 28, "revealed": false },
+{ "text": "Poodle", "points": 8, "revealed": false },
+{ "text": "Beagle", "points": 6, "revealed": false },
+{ "text": "Spaniel", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name an insect that people are terrified of.",
+"multiplier": 2,
+"answers": [
+{ "text": "Spider", "points": 58, "revealed": false },
+{ "text": "Wasp / Hornet", "points": 24, "revealed": false },
+{ "text": "Cockroach", "points": 12, "revealed": false },
+{ "text": "Centipede", "points": 6, "revealed": false }
+]
+},
+{
+"question": "Name a natural disaster that causes widespread damage.",
+"multiplier": 3,
+"answers": [
+{ "text": "Earthquake", "points": 46, "revealed": false },
+{ "text": "Hurricane / Tornado", "points": 34, "revealed": false },
+{ "text": "Flood / Tsunami", "points": 14, "revealed": false },
+{ "text": "Wildfire", "points": 6, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name a bird that cannot fly.", "answers": [{ "text": "PENGUIN", "points": 56 }, { "text": "OSTRICH", "points": 32 }, { "text": "EMU", "points": 8 }, { "text": "KIWI", "points": 4 }] },
+{ "question": "Name a farm animal with four legs.", "answers": [{ "text": "COW", "points": 52 }, { "text": "HORSE", "points": 24 }, { "text": "SHEEP", "points": 14 }, { "text": "PIG", "points": 10 }] },
+{ "question": "Name a fish people keep in home aquariums.", "answers": [{ "text": "GOLDFISH", "points": 68 }, { "text": "BETTA / FIGHTING FISH", "points": 18 }, { "text": "GUPPY", "points": 14 }] },
+{ "question": "Name something you find on the beach after a storm.", "answers": [{ "text": "SHELLS", "points": 46 }, { "text": "DRIFTWOOD", "points": 32 }, { "text": "SEAWEED", "points": 22 }] },
+{ "question": "What is the lifespan of an average house cat?", "answers": [{ "text": "15 YEARS", "points": 54 }, { "text": "12 YEARS", "points": 28 }, { "text": "18 YEARS", "points": 18 }] }
+]
+}

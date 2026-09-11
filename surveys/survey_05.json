@@ -1,0 +1,70 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name something you must show before boarding an airplane.",
+"multiplier": 1,
+"answers": [
+{ "text": "Boarding Pass / Ticket", "points": 56, "revealed": false },
+{ "text": "Passport", "points": 32, "revealed": false },
+{ "text": "ID / Driver's License", "points": 8, "revealed": false },
+{ "text": "Luggage Tag", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name something people pack in their carry-on luggage.",
+"multiplier": 1,
+"answers": [
+{ "text": "Laptop / Tablet", "points": 38, "revealed": false },
+{ "text": "Change of Clothes", "points": 24, "revealed": false },
+{ "text": "Medication", "points": 16, "revealed": false },
+{ "text": "Headphones", "points": 12, "revealed": false },
+{ "text": "Book / Kindle", "points": 6, "revealed": false },
+{ "text": "Passport / Wallet", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name something you do when you first arrive in a hotel room.",
+"multiplier": 1,
+"answers": [
+{ "text": "Jump on the Bed", "points": 38, "revealed": false },
+{ "text": "Drop the Luggage", "points": 29, "revealed": false },
+{ "text": "Check the Bathroom", "points": 18, "revealed": false },
+{ "text": "Look Out the Window / View", "points": 10, "revealed": false },
+{ "text": "Turn on the TV", "points": 5, "revealed": false }
+]
+},
+{
+"question": "Name something you need for a beach vacation.",
+"multiplier": 2,
+"answers": [
+{ "text": "Swimsuit / Trunks", "points": 46, "revealed": false },
+{ "text": "Sunscreen", "points": 28, "revealed": false },
+{ "text": "Towel", "points": 14, "revealed": false },
+{ "text": "Flip Flops", "points": 8, "revealed": false },
+{ "text": "Sunglasses", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name a country famous for its food.",
+"multiplier": 3,
+"answers": [
+{ "text": "Italy", "points": 54, "revealed": false },
+{ "text": "France", "points": 21, "revealed": false },
+{ "text": "Mexico", "points": 14, "revealed": false },
+{ "text": "Japan", "points": 11, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name a mode of public transportation.", "answers": [{ "text": "BUS", "points": 52 }, { "text": "TRAIN / SUBWAY", "points": 36 }, { "text": "TRAM", "points": 8 }, { "text": "FERRY", "points": 4 }] },
+{ "question": "Name a European capital city.", "answers": [{ "text": "PARIS", "points": 48 }, { "text": "LONDON", "points": 32 }, { "text": "ROME", "points": 14 }, { "text": "BERLIN", "points": 6 }] },
+{ "question": "Name an item you buy at the airport duty-free.", "answers": [{ "text": "PERFUME / AFTERSHAVE", "points": 44 }, { "text": "ALCOHOL / LIQUOR", "points": 36 }, { "text": "CHOCOLATE", "points": 20 }] },
+{ "question": "Name a famous US landmark.", "answers": [{ "text": "STATUE OF LIBERTY", "points": 55 }, { "text": "GRAND CANYON", "points": 22 }, { "text": "GOLDEN GATE BRIDGE", "points": 13 }, { "text": "WHITE HOUSE", "points": 10 }] },
+{ "question": "How many suitcases does a family pack for a week away?", "answers": [{ "text": "3 SUITCASES", "points": 44 }, { "text": "4 SUITCASES", "points": 38 }, { "text": "2 SUITCASES", "points": 18 }] }
+]
+}

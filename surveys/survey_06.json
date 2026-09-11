@@ -1,0 +1,69 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name a classic first date activity.",
+"multiplier": 1,
+"answers": [
+{ "text": "Dinner / Restaurant", "points": 52, "revealed": false },
+{ "text": "Cinema / Movies", "points": 28, "revealed": false },
+{ "text": "Coffee Date", "points": 11, "revealed": false },
+{ "text": "Drinks at a Bar", "points": 6, "revealed": false },
+{ "text": "Walk in the Park", "points": 3, "revealed": false }
+]
+},
+{
+"question": "Name a gift people give on Valentine's Day.",
+"multiplier": 1,
+"answers": [
+{ "text": "Chocolates / Candy", "points": 48, "revealed": false },
+{ "text": "Flowers / Roses", "points": 36, "revealed": false },
+{ "text": "Jewelry", "points": 10, "revealed": false },
+{ "text": "Teddy Bear", "points": 4, "revealed": false },
+{ "text": "Card", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name something couples fight over the most.",
+"multiplier": 1,
+"answers": [
+{ "text": "Money / Finances", "points": 44, "revealed": false },
+{ "text": "Chores / Cleaning", "points": 28, "revealed": false },
+{ "text": "Where to Eat", "points": 14, "revealed": false },
+{ "text": "In-Laws / Family", "points": 9, "revealed": false },
+{ "text": "The TV Remote", "points": 5, "revealed": false }
+]
+},
+{
+"question": "Name a tradition at a wedding reception.",
+"multiplier": 2,
+"answers": [
+{ "text": "First Dance", "points": 46, "revealed": false },
+{ "text": "Cutting the Cake", "points": 32, "revealed": false },
+{ "text": "Bouquet Toss", "points": 14, "revealed": false },
+{ "text": "Speeches / Toasts", "points": 8, "revealed": false }
+]
+},
+{
+"question": "Name an annoying habit a partner might have in bed.",
+"multiplier": 3,
+"answers": [
+{ "text": "Snoring", "points": 62, "revealed": false },
+{ "text": "Stealing Blankets", "points": 24, "revealed": false },
+{ "text": "Tossing and Turning", "points": 8, "revealed": false },
+{ "text": "Cold Feet", "points": 6, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name a flower other than a rose.", "answers": [{ "text": "TULIP", "points": 42 }, { "text": "DAISY", "points": 28 }, { "text": "LILY", "points": 16 }, { "text": "SUNFLOWER", "points": 14 }] },
+{ "question": "Name a piece of jewelry people wear every day.", "answers": [{ "text": "WEDDING RING", "points": 64 }, { "text": "WATCH", "points": 21 }, { "text": "EARRINGS", "points": 15 }] },
+{ "question": "Name something you find on a wedding cake.", "answers": [{ "text": "BRIDE & GROOM TOPPER", "points": 52 }, { "text": "ICING / FROSTING", "points": 34 }, { "text": "FLOWERS", "points": 14 }] },
+{ "question": "How long does the average couple date before getting married?", "answers": [{ "text": "2 YEARS", "points": 46 }, { "text": "3 YEARS", "points": 32 }, { "text": "1 YEAR", "points": 22 }] },
+{ "question": "Name an anniversary gift material.", "answers": [{ "text": "SILVER", "points": 48 }, { "text": "GOLD", "points": 36 }, { "text": "PAPER", "points": 16 }] }
+]
+}

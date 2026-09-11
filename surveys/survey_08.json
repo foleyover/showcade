@@ -1,0 +1,70 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name an item people buy in bulk at the supermarket.",
+"multiplier": 1,
+"answers": [
+{ "text": "Toilet Paper", "points": 58, "revealed": false },
+{ "text": "Paper Towels", "points": 18, "revealed": false },
+{ "text": "Bottled Water", "points": 12, "revealed": false },
+{ "text": "Rice / Pasta", "points": 6, "revealed": false },
+{ "text": "Laundry Detergent", "points": 4, "revealed": false },
+{ "text": "Canned Goods", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name an impulse buy near the cash register.",
+"multiplier": 1,
+"answers": [
+{ "text": "Chewing Gum", "points": 44, "revealed": false },
+{ "text": "Chocolate Bar / Candy", "points": 36, "revealed": false },
+{ "text": "Magazines", "points": 10, "revealed": false },
+{ "text": "Battery Packs", "points": 6, "revealed": false },
+{ "text": "Lip Balm", "points": 4, "revealed": false }
+]
+},
+{
+"question": "Name something you find in an old winter coat pocket.",
+"multiplier": 1,
+"answers": [
+{ "text": "Money / Banknote", "points": 56, "revealed": false },
+{ "text": "Used Tissue", "points": 24, "revealed": false },
+{ "text": "Gloves", "points": 11, "revealed": false },
+{ "text": "Old Receipt", "points": 6, "revealed": false },
+{ "text": "Lip Balm", "points": 3, "revealed": false }
+]
+},
+{
+"question": "Name something people look for when buying a new home.",
+"multiplier": 2,
+"answers": [
+{ "text": "Good Location / Neighborhood", "points": 48, "revealed": false },
+{ "text": "Big Kitchen", "points": 26, "revealed": false },
+{ "text": "Garden / Backyard", "points": 16, "revealed": false },
+{ "text": "Number of Bedrooms", "points": 10, "revealed": false }
+]
+},
+{
+"question": "Name an expensive brand of luxury clothing.",
+"multiplier": 3,
+"answers": [
+{ "text": "Gucci", "points": 48, "revealed": false },
+{ "text": "Louis Vuitton", "points": 32, "revealed": false },
+{ "text": "Chanel", "points": 12, "revealed": false },
+{ "text": "Prada", "points": 8, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name something you carry your money in.", "answers": [{ "text": "WALLET", "points": 68 }, { "text": "PURSE / HANDBAG", "points": 24 }, { "text": "POCKET", "points": 8 }] },
+{ "question": "Name a monthly utility bill.", "answers": [{ "text": "ELECTRICITY", "points": 52 }, { "text": "GAS", "points": 26 }, { "text": "WATER", "points": 14 }, { "text": "INTERNET", "points": 8 }] },
+{ "question": "Name a coin that is smaller than a dollar.", "answers": [{ "text": "DIME", "points": 48 }, { "text": "PENNY", "points": 32 }, { "text": "NICKEL", "points": 14 }, { "text": "QUARTER", "points": 6 }] },
+{ "question": "Name a store where you can buy a TV.", "answers": [{ "text": "BEST BUY", "points": 54 }, { "text": "WALMART", "points": 32 }, { "text": "TARGET", "points": 14 }] },
+{ "question": "How many credit cards does an average adult carry?", "answers": [{ "text": "2 CARDS", "points": 46 }, { "text": "3 CARDS", "points": 36 }, { "text": "1 CARD", "points": 18 }] }
+]
+}

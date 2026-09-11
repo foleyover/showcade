@@ -1,0 +1,70 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name a famous superhero.",
+"multiplier": 1,
+"answers": [
+{ "text": "Spider-Man", "points": 39, "revealed": false },
+{ "text": "Batman", "points": 31, "revealed": false },
+{ "text": "Superman", "points": 18, "revealed": false },
+{ "text": "Iron Man", "points": 7, "revealed": false },
+{ "text": "Wonder Woman", "points": 3, "revealed": false },
+{ "text": "Captain America", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name something people buy at the movie theater.",
+"multiplier": 1,
+"answers": [
+{ "text": "Popcorn", "points": 64, "revealed": false },
+{ "text": "Soda / Fountain Drink", "points": 21, "revealed": false },
+{ "text": "Candy / Sweets", "points": 9, "revealed": false },
+{ "text": "Nachos", "points": 4, "revealed": false },
+{ "text": "Hot Dog", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name a classic movie monster.",
+"multiplier": 1,
+"answers": [
+{ "text": "Dracula / Vampire", "points": 41, "revealed": false },
+{ "text": "Frankenstein", "points": 29, "revealed": false },
+{ "text": "Werewolf", "points": 15, "revealed": false },
+{ "text": "Zombie", "points": 9, "revealed": false },
+{ "text": "Mummy", "points": 6, "revealed": false }
+]
+},
+{
+"question": "Name an instrument in a rock band.",
+"multiplier": 2,
+"answers": [
+{ "text": "Electric Guitar", "points": 52, "revealed": false },
+{ "text": "Drums", "points": 33, "revealed": false },
+{ "text": "Bass Guitar", "points": 10, "revealed": false },
+{ "text": "Keyboard / Synth", "points": 5, "revealed": false }
+]
+},
+{
+"question": "Name a film genre people watch on Halloween.",
+"multiplier": 3,
+"answers": [
+{ "text": "Horror / Slasher", "points": 68, "revealed": false },
+{ "text": "Thriller / Suspense", "points": 18, "revealed": false },
+{ "text": "Animation / Family", "points": 9, "revealed": false },
+{ "text": "Comedy / Spoof", "points": 5, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name a streaming service people subscribe to.", "answers": [{ "text": "NETFLIX", "points": 66 }, { "text": "DISNEY+", "points": 17 }, { "text": "AMAZON PRIME", "points": 12 }, { "text": "MAX / HBO", "points": 5 }] },
+{ "question": "Name a fairy tale character who was a princess.", "answers": [{ "text": "CINDERELLA", "points": 48 }, { "text": "SNOW WHITE", "points": 31 }, { "text": "RAPUNZEL", "points": 11 }, { "text": "AURORA / SLEEPING BEAUTY", "points": 10 }] },
+{ "question": "Name an actor who has played James Bond.", "answers": [{ "text": "DANIEL CRAIG", "points": 49 }, { "text": "SEAN CONNERY", "points": 33 }, { "text": "PIERCE BROSNAN", "points": 12 }, { "text": "ROGER MOORE", "points": 6 }] },
+{ "question": "Name a brass musical instrument.", "answers": [{ "text": "TRUMPET", "points": 58 }, { "text": "TROMBONE", "points": 24 }, { "text": "TUBA", "points": 12 }, { "text": "FRENCH HORN", "points": 6 }] },
+{ "question": "How many minutes long is a typical movie?", "answers": [{ "text": "90 MINUTES", "points": 48 }, { "text": "120 MINUTES / 2 HOURS", "points": 40 }, { "text": "100 MINUTES", "points": 12 }] }
+]
+}

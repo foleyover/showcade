@@ -1,0 +1,69 @@
+{
+"persistentScoreboard": false,
+"fastMoneyEnabled": true,
+"fastMoneyThreshold": 300,
+"chudEnabled": false,
+"sfx": { "enabled": true, "volume": 50 },
+"rounds": [
+{
+"question": "Name an item you pack for a camping trip.",
+"multiplier": 1,
+"answers": [
+{ "text": "Tent", "points": 48, "revealed": false },
+{ "text": "Sleeping Bag", "points": 31, "revealed": false },
+{ "text": "Flashlight / Torch", "points": 11, "revealed": false },
+{ "text": "Bug Spray", "points": 5, "revealed": false },
+{ "text": "Matches / Lighter", "points": 3, "revealed": false },
+{ "text": "First Aid Kit", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name something people do to relax on the weekend.",
+"multiplier": 1,
+"answers": [
+{ "text": "Watch TV / Movies", "points": 46, "revealed": false },
+{ "text": "Sleep In / Nap", "points": 28, "revealed": false },
+{ "text": "Read a Book", "points": 12, "revealed": false },
+{ "text": "Go for a Walk", "points": 8, "revealed": false },
+{ "text": "Play Video Games", "points": 6, "revealed": false }
+]
+},
+{
+"question": "Name an outdoor hobby that requires a license.",
+"multiplier": 1,
+"answers": [
+{ "text": "Fishing", "points": 61, "revealed": false },
+{ "text": "Hunting", "points": 32, "revealed": false },
+{ "text": "Boating", "points": 5, "revealed": false },
+{ "text": "Driving", "points": 2, "revealed": false }
+]
+},
+{
+"question": "Name an instrument that is hard to transport to gigs.",
+"multiplier": 2,
+"answers": [
+{ "text": "Drum Kit", "points": 54, "revealed": false },
+{ "text": "Piano / Keyboard", "points": 26, "revealed": false },
+{ "text": "Double Bass / Cello", "points": 14, "revealed": false },
+{ "text": "Tuba", "points": 6, "revealed": false }
+]
+},
+{
+"question": "Name a workout machine found in every commercial gym.",
+"multiplier": 3,
+"answers": [
+{ "text": "Treadmill", "points": 58, "revealed": false },
+{ "text": "Stationary Bike", "points": 22, "revealed": false },
+{ "text": "Elliptical", "points": 12, "revealed": false },
+{ "text": "Rowing Machine", "points": 8, "revealed": false }
+]
+}
+],
+"fastMoney": [
+{ "question": "Name a sport where you hit a ball with a racket.", "answers": [{ "text": "TENNIS", "points": 62 }, { "text": "BADMINTON", "points": 22 }, { "text": "SQUASH", "points": 16 }] },
+{ "question": "Name an item worn by cyclists.", "answers": [{ "text": "HELMET", "points": 68 }, { "text": "LYCRA SHORTS", "points": 22 }, { "text": "GLOVES", "points": 10 }] },
+{ "question": "Name something you need to build a campfire.", "answers": [{ "text": "WOOD / LOGS", "points": 58 }, { "text": "MATCHES / LIGHTER", "points": 32 }, { "text": "KINDLING", "points": 10 }] },
+{ "question": "Name a craft hobby that uses yarn.", "answers": [{ "text": "KNITTING", "points": 64 }, { "text": "CROCHET", "points": 31 }, { "text": "WEAVING", "points": 5 }] },
+{ "question": "How many miles is a standard marathon?", "answers": [{ "text": "26 MILES", "points": 74 }, { "text": "26.2 MILES", "points": 18 }, { "text": "25 MILES", "points": 8 }] }
+]
+}
