@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAMILY FORTUNES</title>
+    <title>FINAL FAMILY</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -388,7 +388,7 @@
 
     <!-- GAME SCREEN -->
     <div id="game-screen">
-        <h1 style="margin: 0 0 4px 0; color: #FFCC00; font-size: 3.2em; text-shadow: 3px 3px #000; text-align: center; letter-spacing: 2px;" class="retro-title">FAMILY FORTUNES</h1>
+        <h1 style="margin: 0 0 4px 0; color: #FFCC00; font-size: 3.2em; text-shadow: 3px 3px #000; text-align: center; letter-spacing: 2px;" class="retro-title">FINAL FAMILY</h1>
         <div id="round-indicator" class="retro-title" style="color: #3498db; font-size: 1.1em; margin-bottom: 15px;">Round 1 (Single Points)</div>
 
         <div class="game-layout">
@@ -518,7 +518,7 @@
             <button class="btn btn-success" style="font-size: 1.4em; padding: 10px 25px; flex: 1.5;" onclick="promptSaveAndPlay()">💾 Save & Play</button>
         </div>
 
-        <h2 style="margin-top: 0; text-align: center; font-size: 2em; margin-bottom: 20px; color: #FFCC00;">⚙️ Family Fortunes Setup</h2>
+        <h2 style="margin-top: 0; text-align: center; font-size: 2em; margin-bottom: 20px; color: #FFCC00;">⚙️ Final Family Setup</h2>
 
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
             <!-- Save & Load Block -->
@@ -643,7 +643,7 @@
     <!-- RULES MODAL -->
     <div id="rules-modal" class="modal-overlay">
         <div class="modal-content" style="max-width: 900px; text-align: left;">
-            <h2 class="retro-title" style="color: #FFCC00; text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px;">📜 Family Fortunes Game Rules</h2>
+            <h2 class="retro-title" style="color: #FFCC00; text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px;">📜 Final Family Game Rules</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-top: 15px;">
                 <div style="background: #161b22; padding: 15px; border-radius: 8px; border: 1px solid #30363d;">
                     <h4 style="color: #7ee787; margin-top: 0;">🎮 Main Board Round</h4>
@@ -1337,7 +1337,7 @@
             ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, width, height);
 
             ctx.fillStyle = '#FFCC00'; ctx.font = 'bold 46px "Arial Black", Impact, sans-serif'; ctx.textAlign = 'center';
-            ctx.fillText('FAMILY FORTUNES', width / 2, 80);
+            ctx.fillText('FINAL FAMILY', width / 2, 80);
 
             const dateStr = new Date().toLocaleDateString();
             ctx.fillStyle = '#bdc3c7'; ctx.font = '22px sans-serif';
@@ -1475,7 +1475,7 @@
                             <div>
                                 <h4 style="margin: 0 0 5px 0; color: #FFCC00; font-size: 1.15em;">${preset.title}</h4>
                                 <p style="margin: 0; font-size: 0.85em; color: #bdc3c7;">
-                                    ${preset.description || 'Survey pack for Family Fortunes.'} 
+                                    ${preset.description || 'Survey pack for Final Family.'} 
                                     <br><span style="color: #7f8c8d; font-size: 0.85em;">Author: ${preset.author || 'Unknown'}</span>
                                 </p>
                             </div>
